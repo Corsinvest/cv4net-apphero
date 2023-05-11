@@ -1,6 +1,6 @@
 # cv4net-apphero
 
-[![License](https://img.shields.io/github/license/Corsinvest/# cv4net-apphero.svg)](LICENSE.md) [![Release](https://img.shields.io/github/release/Corsinvest/# cv4net-apphero.svg)](https://github.com/Corsinvest/# cv4net-apphero/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/Corsinvest/# cv4net-apphero/total.svg)
+[![License](https://img.shields.io/github/license/Corsinvest/cv4net-apphero.svg)](LICENSE.md) [![Release](https://img.shields.io/github/release/Corsinvest/cv4net-apphero.svg)](https://github.com/Corsinvest/cv4net-apphero/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/Corsinvest/cv4net-apphero/total.svg)
 [![.NET C#](https://img.shields.io/badge/.NET-C%23-blue)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 
 Framework for fast application.

@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{55F1BF
 		icon.png = icon.png
 		LICENSE = LICENSE
 		src\Todo.txt = src\Todo.txt
-		README.MD = README.MD
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MudBlazor", "MudBlazor", "{B8982632-BB29-413F-9B7C-E6BF6FAD2D7D}"
