@@ -1,0 +1,24 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+<MudTreeView Items="TreeData">
+    <ItemTemplate>
+        <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Childs">
+            <Content>
+                <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild" />
+                <MudCheckBox T="bool?" Checked="@context.IsChecked"
+                             CheckedChanged="@((e) => CheckedChangedAsync(context))"
+                             Color="@context.Color" Dense />
+
+                <div class="d-flex gap-2">
+                    @if (!string.IsNullOrWhiteSpace(context.Icon))
+                    {
+                        <MudIcon Icon="@context.Icon" Color="@context.Color" Size="Size.Small" />
+                    }
+                    <MudText>@context.Description</MudText>
+                </div>
+            </Content>
+        </MudTreeViewItem>
+    </ItemTemplate>
+</MudTreeView>

@@ -1,0 +1,26 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Options;
+@using Microsoft.JSInterop;
+@using MudBlazor.Extensions.Components.ObjectEdit
+@using MudBlazor.Extensions.Components.ObjectEdit.Options;
+
+@inherits AHModuleOptionsBase<T>
+
+@typeparam T
+
+<MudExObjectEditForm T="T"
+                     Value="@Options"
+                     ShowCancelButton="false"
+                     ShowSaveButton="false"
+                     Localizer="L"
+                              AutoHideDisabledFields
+                     GroupingStyle="GroupingStyle.DefaultExpansionPanel"
+                     GroupElevation="1"
+                     DefaultGroupName="@DefaultGroupName"
+                              AutoSkeletonOnLoad
+                     AddScrollToTop="false"
+                              ConfigureMetaInformationAlways
+                     MetaConfiguration="@Configure" />

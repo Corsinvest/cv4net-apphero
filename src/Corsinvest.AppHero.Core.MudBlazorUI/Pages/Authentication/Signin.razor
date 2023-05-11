@@ -1,0 +1,77 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@page "/auth/user/signin"
+
+@inherits Corsinvest.AppHero.Core.BaseUI.Pages.Authentication.SigninPageBase
+
+@inject IOptionsSnapshot<UIOptions> UIOptions
+
+<PageTitle>@L["Login"]</PageTitle>
+
+@if (!string.IsNullOrEmpty(UIOptions.Value.LoginBackgroundImage))
+{
+    <style>
+        body {
+            background-image: url(@(UIOptions.Value.LoginBackgroundImage));
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+}
+
+<AuthorizeView>
+    <NotAuthorized Context="Auth">
+        @if (Loggins.Count() > 1)
+        {
+            <MudSelect T="LoginDef" @bind-Value="@LoginItem" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in Loggins)
+                {
+                    <MudSelectItem Value="@item">
+                        <div class="d-flex gap-1">
+                            <MudIcon Icon="@MudBlazorHelper.ToMBIcon(item.Icon)" />
+                            @item.Description
+                        </div>
+                    </MudSelectItem>
+                }
+            </MudSelect>
+        }
+
+        @if (LoginItem != null)
+        {
+            <DynamicComponent Type="@LoginItem.Render" />
+        }
+
+        @if (GetExternalProviders(AutenticationType.External).Any())
+        {
+            <br />
+
+            <div style="text-align:center;">
+                @foreach (var item in GetExternalProviders(AutenticationType.External).OrderBy(a => a.Description))
+                {
+                    <MudIconButton Icon="@item.ToMBIcon()" Href="@item?.Link?.RealUrl" Title="@item!.Description" />
+                }
+            </div>
+        }
+    </NotAuthorized>
+    <Authorized>
+        <AHRedirectToHome />
+        <MudAlert Severity="MudBlazor.Severity.Info" Class="mt-8 mud-width-full" Style="max-width:500px;">
+            @L["You are already logged in."]
+        </MudAlert>
+    </Authorized>
+</AuthorizeView>
+
+@code
+{
+    private LoginDef[] Loggins { get; set; } = default!;
+    protected override Type GetDefaultLoginRender() => typeof(DefaultLogin);
+    private LoginDef LoginItem { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        Loggins = GetLogins().ToArray();
+        if (Loggins.Any()) { LoginItem = Loggins[0]; }
+    }
+}

@@ -1,0 +1,82 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.Modularity.Packages;
+@using Permissions = Core.Modularity.Module.Permissions.PackagesSource;
+
+@inherits Corsinvest.AppHero.Core.BaseUI.Modularity.PackagesSourceBase
+
+<AHDataGrid T="PackageSourceOptions"
+            Permissions="Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            Filterable
+            MultiSelection
+            Groupable
+            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+            ShowFilterIcons="false"
+            Height="calc(100vh - 365px)">
+    <ToolBarContent>
+        <AHDataGridToolBarCrud T="PackageSourceOptions" DataGridManager="DataGridManager" />
+    </ToolBarContent>
+    <Columns>
+        <SelectColumn T="PackageSourceOptions" ShowInFooter="false" />
+
+        <AHPropertyColumn T="PackageSourceOptions" TProperty="string" Property="a => a.Name" />
+        <AHPropertyColumn T="PackageSourceOptions" TProperty="string" Property="a => a.Feed" />
+        <AHPropertyColumn T="PackageSourceOptions" TProperty="string" Property="a => a.Username" />
+
+        <TemplateColumn T="PackageSourceOptions" Field="@nameof(PackageSourceOptions.Packages)">
+            <CellTemplate>
+                @context.Item.Packages.JoinAsString(", ")
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="PackageSourceOptions" CellClass="justify-end">
+            <CellTemplate>
+                <MudButtonGroup Variant="Variant.Text">
+                    <AHDataGridColumnEdit T="PackageSourceOptions" DataGridManager="DataGridManager" Context="@context" />
+                </MudButtonGroup>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+    <EditTemplate>
+        <MudGrid>
+            <MudItem md="6">
+                <MudTextField @bind-Value="@context.Name" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Name)])" For="@(() => context.Name)" />
+            </MudItem>
+
+            <MudItem md="6">
+                <MudTextField @bind-Value="@context.Feed" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Feed)])" For="@(() => context.Feed)" />
+            </MudItem>
+
+            <MudItem md="6">
+                <MudTextField @bind-Value="@context.Username" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Username)])" For="@(() => context.Username)" />
+            </MudItem>
+
+            <MudItem md="6">
+                <MudPasswordField @bind-Value="@context.Password" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Password)])" For="@(() => context.Password)" />
+            </MudItem>
+
+            <MudItem md="12">
+                <MudTextField @bind-Value="@context.PackagesToString" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.PackagesToString)])"
+                              Lines="5" For="@(() => context.PackagesToString)" />
+            </MudItem>
+        </MudGrid>
+    </EditTemplate>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="PackageSourceOptions" />
+    </PagerContent>
+</AHDataGrid>

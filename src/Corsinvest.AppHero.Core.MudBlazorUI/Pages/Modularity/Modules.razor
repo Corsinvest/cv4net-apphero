@@ -1,0 +1,71 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.BaseUI.Modularity;
+@using Permissions = Core.Modularity.Module.Permissions.Module;
+
+@inherits ModulesBase
+
+<AHDataGrid T="Data"
+            Permissions="Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            Filterable
+            Groupable
+            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+            ShowFilterIcons="false"
+            Height="calc(100vh - 365px)">
+    <ToolBarContent>
+        <AHDataGridToolBarRead T="Data" DataGridManager="DataGridManager">
+            <ToolBarContentBefore>
+                <AHPermissionButtonIcon Permission="Permissions.Save" OnClick="@Save"
+                                        Disabled="!Items.Any(a => a.IsChanged) || DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+            </ToolBarContentBefore>
+        </AHDataGridToolBarRead>
+    </ToolBarContent>
+    <Columns>
+        <AHPropertyColumn T="Data" TProperty="bool" Property="x=> x.IsSystem" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="string" Property="a => a.Category" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="ModuleType" Property="a => a.Type" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="string" Property="a => a.Class" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="string" Property="a => a.Description" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="string" Property="a => a.Keywords" ShowColumnOptions="false" />
+        <AHPropertyColumn T="Data" TProperty="string" Property="a => a.Version" ShowColumnOptions="false" />
+
+        <TemplateColumn T="Data" CellClass="justify-end">
+            <CellTemplate>
+                <MudButtonGroup Variant="Variant.Text">
+                    <AHPermissionButtonIcon Permission="Permissions.Info" />
+
+                    <AHPermissionButtonIcon Permission="Permissions.Options" OnClick="@(() => ShowOptionsAsync(context.Item.Class))"
+                                            Disabled="@(!context.Item.ExistRenderOptions || !context.Item.IsAvailable)" />
+
+                    <AHPermission Permission="Permissions.EnableDisable" >
+                        <ChildContent>
+                            <MudToggleIconButton @bind-Toggled="@context.Item.Enabled" Size="Size.Medium"
+                                                 Icon="@Icons.Material.Outlined.ToggleOff" Color="@Color.Error" Title="Off"
+                                                 ToggledIcon="@Icons.Material.Outlined.ToggleOn" ToggledColor="@Color.Success" ToggledTitle="On"
+                                                 ToggledSize="Size.Large"
+                                                 Disabled="@context.Item.IsSystem" />
+                        </ChildContent>
+                    </AHPermission>
+                </MudButtonGroup>
+
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="Data" />
+    </PagerContent>
+</AHDataGrid>

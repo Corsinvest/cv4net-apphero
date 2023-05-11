@@ -1,0 +1,20 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits MudComponentBase
+
+<MudAvatar Style="@Style" Class="@Class">
+    <MudImage @ref="@RefImage" Src="@User?.ProfileImageUrl" />
+
+    @if (string.IsNullOrEmpty(User?.ProfileImageUrl))
+    {
+        @User?.AvatarName
+    }
+</MudAvatar>
+
+@code {
+    [Parameter] public ApplicationUser User { get; set; } = default!;
+
+    private MudImage RefImage { get; set; } = default!;
+}

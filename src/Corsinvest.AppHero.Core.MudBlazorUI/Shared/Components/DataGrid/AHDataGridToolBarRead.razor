@@ -1,0 +1,42 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+@typeparam T
+
+@if (ToolBarContentBefore != null)
+{
+    @ToolBarContentBefore
+}
+
+<MudIconButton Title="@L["Refresh"]" Icon="@Icons.Material.Outlined.Refresh" OnClick="@DataGridManager.Refresh"
+               Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+
+@if (PermissionExport != null)
+{
+    <AHPermissionButtonIcon Permission="PermissionExport" OnClick="@DataGridManager.ExportToExcel"
+                        Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+}
+
+@if (ToolBarContentAfter != null)
+{
+    @ToolBarContentAfter
+}
+
+<MudSpacer />
+
+@if (PermissionSearch != null)
+{
+    <AHPermission Permission="PermissionSearch">
+        <MudTextField @bind-Value="@DataGridManager.ToDataGridManager().Search"
+                  Placeholder="@L[PermissionSearch.Description]" Clearable
+                  Adornment="Adornment.Start"
+                  AdornmentColor="@PermissionSearch.Color.ToMBColor()"
+                  AdornmentIcon="@PermissionSearch.ToMBIcon()"
+                  IconSize="Size.Medium"
+                  Class="mt-0"
+                  Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+        </AHPermission>
+}

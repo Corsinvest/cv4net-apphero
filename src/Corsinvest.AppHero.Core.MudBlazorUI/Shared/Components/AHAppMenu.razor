@@ -1,0 +1,44 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits MudComponentBase
+
+<MudMenu AnchorOrigin="Origin.BottomRight" Class="@Class">
+    <ActivatorContent>
+        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Outlined.Apps" />
+    </ActivatorContent>
+    <ChildContent>
+        <MudPaper MaxWidth="300px" MaxHeight="480px" Elevation="0">
+            @RenderButton(Icons.Material.Outlined.Home,Color.Default,@L["Home"],"/","")
+
+            @foreach (var item in Links.Where(a => string.IsNullOrWhiteSpace(Search) || a.Module.Search(Search)).GroupBy(a => a.Module.Category).OrderBy(a => a.Key))
+            {
+                <div class="d-flex gap-2 justify-center align-center mt-5 pa-3" style="color: white; background-color: var(--mud-palette-primary)">
+                    <MudIcon Icon="@ModularityService.ToMBIcon(item.Key)" />
+                    <MudText Typo="Typo.subtitle2">@L[item.Key]</MudText>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var item1 in item.OrderBy(a => a.Order).ThenBy(a => a.Text))
+                    {
+                        @RenderButton(item1.ToMBIcon(), item1.IconColor.ToMBColor(), item1.Text,item1.RealUrl, item1.IsExternal ? "_blank" : "")
+                    }
+                </div>
+            }
+        </MudPaper>
+    </ChildContent>
+</MudMenu>
+
+@code
+{
+    private RenderFragment RenderButton(string icon, Color iconColor, string text, string url, string target) => __builder =>
+    {
+        <MudButton Href="@url" Target="@target" Class="align-start">
+            <div class="gap-2 d-flex flex-column align-center">
+                <MudIcon Icon="@icon" IconColor="@iconColor" Size="Size.Large" />
+                <MudText Style="width: 6em; text-align:center; word-break: break-word;" Typo="Typo.caption">@text</MudText>
+            </div>
+        </MudButton>
+    };
+}

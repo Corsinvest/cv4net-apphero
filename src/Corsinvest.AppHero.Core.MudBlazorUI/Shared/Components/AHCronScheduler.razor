@@ -1,0 +1,24 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudGrid>
+    <MudItem xs="12" md="@(ShowDescriptor ? Size : 12)">
+        <MudTextField @bind-Value="@Expression" Label="@L["Cron expression"]" For="@(() => Expression)"
+                      TextChanged="@TextChanged" Immediate Clearable
+                      AdornmentIcon="@Icons.Material.Outlined.Timer"
+                      Adornment="Adornment.End"
+                      AdornmentColor="Color.Info"           
+                      AdornmentAriaLabel="@L["Cron configurator"]"
+                      OnAdornmentClick="@OpenCrontabGuruAsync" />
+    </MudItem>
+
+    @if (ShowDescriptor)
+    {
+        <MudItem xs="12" md="@Size">
+            <MudField Label="@(L["Cron descriptor"])">@CronExpressionDescriptor</MudField>
+        </MudItem>
+    }
+</MudGrid>

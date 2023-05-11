@@ -1,0 +1,58 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+
+@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@*@using Email = Corsinvest.AppHero.Core.Notification.Email;
+@inherits AHModuleOptionsBase<Email.Options>
+
+<NotificationChannelsOptionsGrid T="Email.ChannelOptions" Options="Options">
+    <Row>
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.Host" Label="@L[GetDescriptionProperty((e) => context.Host)]"
+                          For="@(() => context.Host)" Variant="Variant.Text" Margin="Margin.Normal" />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudNumericField @bind-Value="context.Port" Label="@L[GetDescriptionProperty((e) => context.Port)]"
+                             Variant="Variant.Text" Margin="Margin.Normal" Min="1" Max="65535" />
+        </MudItem>
+
+        <MudItem md="6">
+            <AHEnumSelect TEnum="MailKit.Security.SecureSocketOptions" @bind-Value="@context.SslOptions"
+                          Label="@L[GetDescriptionProperty((e) => context.SslOptions)]" Required />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.Credential.Username" Label="@L[GetDescriptionProperty((e) => context.Credential.Username)]"
+                          Variant="Variant.Text" Margin="Margin.Normal"
+                          Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Person" />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudPasswordField @bind-Value="context.Credential.Password" Label="@L[GetDescriptionProperty((e) => context.Credential.Password)]"
+                              Variant="Variant.Text" Margin="Margin.Normal" />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.FromAddress" Label="@L[GetDescriptionProperty((e) => context.FromAddress)]"
+                          For="@(() => context.FromAddress)" Variant="Variant.Text" Margin="Margin.Normal"
+                          InputType="InputType.Email" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Email" />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.FromDisplayName" Label="@L[GetDescriptionProperty((e) => context.FromDisplayName)]"
+                          For="@(() => context.FromDisplayName)" Variant="Variant.Text" Margin="Margin.Normal" />
+        </MudItem>
+
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.ToAddress" Label="@L[GetDescriptionProperty((e) => context.ToAddress)]"
+                          For="@(() => context.ToAddress)" Variant="Variant.Text" Margin="Margin.Normal"
+                          InputType="InputType.Email" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Email" />
+        </MudItem>
+    </Row>
+</NotificationChannelsOptionsGrid>*@

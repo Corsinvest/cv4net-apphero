@@ -1,0 +1,2 @@
+﻿dotnet ef migrations Add Initial --startup-project ..\Corsinvest.AppHero.AppBss\ -c LocalizationDbContext -v
+dotnet ef database update --startup-project ..\Corsinvest.AppHero.AppBss\ -c LocalizationDbContext -v

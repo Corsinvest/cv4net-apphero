@@ -1,0 +1,28 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<AHPermission Permission="Permission" Loading="@Loading">
+    <ChildContent>
+        @*        <MudMenuItem OnClick="@OnClick" Icon="@Permission.ToMBIcon()" IconColor="Permission.Color.ToMBColor()" Disabled="@Disabled">
+        @L[Permission.Description]
+        </MudMenuItem>
+        *@
+        <MudMenuItem Disabled="@Disabled" OnClick="@OnClick">
+            <div class="d-flex">
+                <MudIcon Class="mx-2" Icon="@Permission.ToMBIcon()" Color="Permission.Color.ToMBColor()" />
+                <MudText>@L[Permission.Description]</MudText>
+            </div>
+        </MudMenuItem>
+    </ChildContent>
+</AHPermission>
+
+@code
+{
+    [EditorRequired][Parameter] public Permission Permission { get; set; } = default!;
+    [Parameter] public bool Loading { get; set; }
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+}

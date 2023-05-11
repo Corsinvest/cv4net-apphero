@@ -1,0 +1,85 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.Domain.Contracts;
+
+@page "/Module/{*PageRoute}"
+
+@inherits AHComponentBase
+
+@if (Authorized)
+{
+    @if (CurrentModule == null)
+    {
+        <PageTitle>@AppOptions.Value.Name - @L["Error load module."]</PageTitle>
+
+        <MudText Color="Color.Warning" Typo="Typo.h4">@L["Module slug '{0}' not exists!",ModuleSlug]</MudText>
+    }
+    else
+    {
+        <PageTitle>@AppOptions.Value.Name - @CurrentModule.Description</PageTitle>
+
+        <div class="d-flex justify-space-between">
+            <MudBreadcrumbs Items="BreadcrumbsItems" />
+
+            <div style="align-self: center;">
+                @if (typeof(IRefreshable).IsAssignableFrom(Render))
+                {
+                    <MudIconButton Icon="@Icons.Material.Outlined.Refresh" OnClick="RefreshAsync" Size="Size.Small"
+                       Style="vertical-align: baseline;" />
+                }
+
+                @if (CanOptions || MenuItems.Any())
+                {
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Dense>
+                    @if (CanOptions)
+                        {
+                            <MudMenuItem Icon="@CurrentModule.PermissionEditOptions.ToMBIcon()"
+                         IconColor="CurrentModule.PermissionEditOptions.Color.ToMBColor()"
+                         OnClick="ShowOptionsAsync">
+                                <MudText Class="ml-n5">@L[CurrentModule.PermissionEditOptions.Description]</MudText>
+                            </MudMenuItem>
+                        }
+
+                        @if (MenuItems.Any())
+                        {
+                            <MudDivider />
+                        }
+
+                        @foreach (var item in MenuItems)
+                        {
+                            @if (item.Action != null)
+                            {
+                                <MudMenuItem Icon="@item.ToMBIcon()" IconColor="item.IconColor.ToMBColor()" OnClick="item.Action" Disabled="@(!item.Enabled)">
+                                    <MudText Class="ml-n5">@L[item.Text]</MudText>
+                                </MudMenuItem>
+                            }
+                            else
+                            {
+                                <MudMenuItem Icon="@item.ToMBIcon()" IconColor="item.IconColor.ToMBColor()"
+                         Href="@item.RealUrl" Target="@(item.IsExternal ? "_blank" : null)" Disabled="@(!item.Enabled)">
+                                    <MudText Class="ml-n5">@L[item.Text]</MudText>
+                                </MudMenuItem>
+                            }
+                        }
+                    </MudMenu>
+                }
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(CurrentModule.InfoText))
+        {
+            <MudAlert Severity="Severity.Info">
+                @L[CurrentModule.InfoText]
+            </MudAlert>
+
+            <br />
+        }
+
+        @if (Render != null)
+        {
+            <DynamicComponent Type="@Render" @ref="DCRender" />
+        }
+    }
+}

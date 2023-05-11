@@ -1,0 +1,60 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudTabs Border Elevation="1" ApplyEffectsToContainer Class="mt-8" PanelClass="pa-6">
+    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Outlined.Person">
+        <MudForm Model="@User" @ref="@RefProfile" Style="display: flex; align-content: center;  align-items: center; flex-direction: column;">
+            <MudGrid Justify="Justify.Center" Style="max-width:50%;display:flex;">
+                <MudItem sm="12" xs="12">
+                    <UserDetail User="User" />
+                </MudItem>
+
+                <MudItem sm="12" xs="12" Class="d-flex justify-end">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary"
+                               Class="ml-auto" OnClick="@UpdateUserAsync">@L["Save Changes"]</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudTabPanel>
+
+    <MudTabPanel Text="@L["Change Password"]" Icon="@Icons.Material.Outlined.Password">
+        <MudForm Model="@ChangePassword" @ref="@RefChangepPassword" Validation="@(PasswordValidator.ValidateValue)"
+                 Style="display: flex; align-content: center;  align-items: center; flex-direction: column;">
+            <MudGrid Justify="Justify.Center" Style="max-width:25%;">
+                <MudItem md="12">
+                    <MudPasswordField Immediate
+                                     @bind-Value="ChangePassword.CurrentPassword"
+                                     Label="@L["Current Password"]"
+                                     For="@(() => ChangePassword.CurrentPassword)"
+                                     Variant="Variant.Text" />
+                </MudItem>
+
+                <MudItem md="12">
+                    <MudPasswordField Immediate
+                                     @bind-Value="ChangePassword.NewPassword"
+                                     Label="@L["New Password"]"
+                                     For="@(() => ChangePassword.NewPassword)"
+                                     Variant="Variant.Text" />
+                </MudItem>
+
+                <MudItem md="12">
+                    <MudPasswordField Immediate
+                                     @bind-Value="ChangePassword.ConfirmPassword"
+                                     Label="Confirm New Password"
+                                     For="@(() => ChangePassword.ConfirmPassword)"
+                                     Variant="Variant.Text" />
+                </MudItem>
+
+                <MudItem Class="d-flex justify-end">
+                    <MudButton ButtonType="ButtonType.Button"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary" Class="ml-auto"
+                               OnClick="@ChangePasswordAsync">@L["Change Password"]</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudTabPanel>
+</MudTabs>

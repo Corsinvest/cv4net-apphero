@@ -1,0 +1,19 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+
+@inherits AHModuleOptionsBase<Options>
+
+<NotificationChannelsOptionsGrid T="ChannelOptions" Options="Options">
+    <Row>
+        <MudItem md="6">
+            <MudTextField @bind-Value="context.Token" Label="@L[GetDescriptionProperty((e) => context.Token)]"
+                          For="@(() => context.Token)" Variant="Variant.Text" Margin="Margin.Normal" />
+        </MudItem>
+        <MudItem md="6">
+            <MudNumericField @bind-Value="context.ChatId" Label="@L[GetDescriptionProperty((e) => context.ChatId)]"
+                             For="@(() => context.ChatId)" Variant="Variant.Text" Margin="Margin.Normal" />
+        </MudItem>
+    </Row>
+</NotificationChannelsOptionsGrid>

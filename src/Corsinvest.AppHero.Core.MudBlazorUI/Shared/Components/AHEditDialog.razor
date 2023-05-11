@@ -1,0 +1,34 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@typeparam T
+
+@inherits AHComponentBase
+
+<EditForm Model="ModelTmp" OnValidSubmit="@OnSubmitAsync" OnInvalidSubmit="@OnSubmitAsync">
+    <DataAnnotationsValidator />
+    <FluentValidationValidator />
+    <MudDialog>
+        <TitleContent>
+            <div class="d-flex gap-2">
+                <MudIcon Icon="@Icons.Material.Outlined.Edit" />
+                <MudText>@Title</MudText>
+            </div>
+        </TitleContent>
+
+        <DialogContent>
+            @Content(ModelTmp)
+
+            <MudText Color="@Color.Error">
+                <ValidationSummary />
+            </MudText>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">@CancelText</MudButton>
+
+            <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit"
+                       Color="Color.Success">@OkText</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>

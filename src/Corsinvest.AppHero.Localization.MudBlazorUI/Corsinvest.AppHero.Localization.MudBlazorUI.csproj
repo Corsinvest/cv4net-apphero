@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<Import Project="..\common.props" />
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Corsinvest.AppHero.Core.MudBlazorUI\Corsinvest.AppHero.Core.MudBlazorUI.csproj" />
+		<ProjectReference Include="..\Corsinvest.AppHero.Localization\Corsinvest.AppHero.Localization.csproj" />
+	</ItemGroup>
+</Project>

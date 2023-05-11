@@ -1,0 +1,35 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudOverlay @bind-Visible="DisableInput" DarkBackground ZIndex="9999" />
+
+<br />
+
+<EditForm Model="@Model" OnValidSubmit="OnValidSubmitLoginAsync">
+    <DataAnnotationsValidator />
+
+    <MudSelect T="string" @bind-Value="@Model.Domain" AnchorOrigin="Origin.BottomCenter" Label="@L["Domain"]">
+        @foreach (var item in Options.Value.Domains.OrderBy(a => a.Name))
+        {
+            <MudSelectItem Value="@item.Domain">
+                <div class="d-flex gap-1">
+                    <MudIcon Icon="@Icons.Material.Outlined.Domain" />
+                    @item.Name
+                </div>
+            </MudSelectItem>
+        }
+    </MudSelect>
+
+    <MudTextField T="string" @bind-Value="Model.Username" For="@(() => Model.Username)"
+                  Label="@L["Username"]" Variant="Variant.Outlined" Required Class="my-6"></MudTextField>
+
+    <MudPasswordField @bind-Value="Model.Password" For="@(() => Model.Password)" Label="@L["Password"]"
+                     Variant="Variant.Outlined" Required />
+
+    <br />
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" FullWidth>@L["Sign In"]</MudButton>
+</EditForm>

@@ -1,0 +1,194 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHModuleOptionsBase<Corsinvest.AppHero.Core.Security.Identity.Options>
+
+<MudExpansionPanels>
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Folder" />
+                <MudText>@L["General"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="3">
+                    <MudNumericField @bind-Value="Options.LoginCookieExpirationHours" Label="@L[GetDescriptionProperty(a => a.LoginCookieExpirationHours)]"
+                                     For="@(() => Options.LoginCookieExpirationHours)" Variant="Variant.Text" Margin="Margin.Normal" Min="0" />
+                </MudItem>
+
+                <MudItem md="3">
+                    <MudSwitch @bind-Checked="@Options.CanRegister" Label="@L[GetDescriptionProperty(a => a.CanRegister)]" Color="Color.Primary"
+                               For="@(() => Options.CanRegister)" />
+                </MudItem>
+
+                <MudItem md="3">
+                    <MudSwitch @bind-Checked="@Options.LoginUseEmail" Label="@L[GetDescriptionProperty(a => a.LoginUseEmail)]" Color="Color.Primary"
+                               For="@(() => Options.LoginUseEmail)" />
+                </MudItem>
+
+                <MudItem md="3">
+                    <MudSwitch @bind-Checked="@Options.EnableLocalLogin" Label="@L[GetDescriptionProperty(a => a.EnableLocalLogin)]" Color="Color.Primary"
+                               For="@(() => Options.EnableLocalLogin)" />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Key" />
+                <MudText>@L["Password"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="4">
+                    <MudNumericField @bind-Value="Options.Password.RequiredLength" Label="@L[GetDescriptionProperty(a => a.Password.RequiredLength)]"
+                                     For="@(() => Options.Password.RequiredLength)" Variant="Variant.Text" Margin="Margin.Normal" Min="0" Max="128" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudNumericField @bind-Value="Options.Password.RequiredUniqueChars" Label="@L[GetDescriptionProperty(a => a.Password.RequiredUniqueChars)]"
+                                     For="@(() => Options.Password.RequiredUniqueChars)" Variant="Variant.Text" Margin="Margin.Normal" Min="0" Max="128" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.Password.RequireNonAlphanumeric" Label="@L[GetDescriptionProperty(a => a.Password.RequireNonAlphanumeric)]"
+                               Color="Color.Primary" For="@(() => Options.Password.RequireNonAlphanumeric)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.Password.RequireLowercase" Label="@L[GetDescriptionProperty(a => a.Password.RequireLowercase)]"
+                               Color="Color.Primary" For="@(() => Options.Password.RequireLowercase)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.Password.RequireUppercase" Label="@L[GetDescriptionProperty(a => a.Password.RequireUppercase)]"
+                               Color="Color.Primary" For="@(() => Options.Password.RequireUppercase)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.Password.RequireDigit" Label="@L[GetDescriptionProperty(a => a.Password.RequireDigit)]"
+                               Color="Color.Primary" For="@(() => Options.Password.RequireDigit)" />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Person" />
+                <MudText>@L["User"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="3">
+                    <MudSwitch @bind-Checked="@Options.User.RequireUniqueEmail" Label="@L[GetDescriptionProperty(a => a.User.RequireUniqueEmail)]"
+                               Color="Color.Primary" For="@(() => Options.User.RequireUniqueEmail)" />
+                </MudItem>
+
+                <MudItem md="9">
+                    <MudTextField @bind-Value="Options.User.AllowedUserNameCharacters" Label="@L[GetDescriptionProperty(a => a.User.AllowedUserNameCharacters)]"
+                                  For="@(() => Options.User.AllowedUserNameCharacters)" Variant="Variant.Text" Margin="Margin.Normal" />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Lock" />
+                <MudText>@L["Lockout"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="4">
+                    <MudNumericField @bind-Value="Options.Lockout.MaxFailedAccessAttempts" Label="@L[GetDescriptionProperty(a => a.Lockout.MaxFailedAccessAttempts)]"
+                                     For="@(() => Options.Lockout.MaxFailedAccessAttempts)" Variant="Variant.Text" Margin="Margin.Normal" Min="0" Max="128" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.Lockout.AllowedForNewUsers" Label="@L[GetDescriptionProperty(a => a.Lockout.AllowedForNewUsers)]"
+                               Color="Color.Primary" For="@(() => Options.Lockout.AllowedForNewUsers)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudTimePicker @bind-Time="@LockoutDefaultLockoutTimeSpan" Label="@L[GetDescriptionProperty(a => a.Lockout.DefaultLockoutTimeSpan)]"
+                                   For="@(() => LockoutDefaultLockoutTimeSpan)" Editable />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Login" />
+                <MudText>@L["SignIn"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.SignIn.RequireConfirmedEmail" Label="@L[GetDescriptionProperty(a => a.SignIn.RequireConfirmedEmail)]"
+                               Color="Color.Primary" For="@(() => Options.SignIn.RequireConfirmedEmail)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.SignIn.RequireConfirmedPhoneNumber" Label="@L[GetDescriptionProperty(a => a.SignIn.RequireConfirmedPhoneNumber)]"
+                               Color="Color.Primary" For="@(() => Options.SignIn.RequireConfirmedPhoneNumber)" />
+                </MudItem>
+
+                <MudItem md="4">
+                    <MudSwitch @bind-Checked="@Options.SignIn.RequireConfirmedAccount" Label="@L[GetDescriptionProperty(a => a.SignIn.RequireConfirmedAccount)]"
+                               Color="Color.Primary" For="@(() => Options.SignIn.RequireConfirmedAccount)" />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <div class="d-flex gap-4">
+                <MudIcon Icon="@Icons.Material.Outlined.Article" />
+                <MudText>@L["Template"]</MudText>
+            </div>
+        </TitleContent>
+
+        <ChildContent>
+            <MudGrid>
+                <MudItem md="12">
+                    <MudTextField @bind-Value="Options.Template.ResetPassword" Label="@L[GetDescriptionProperty(a => a.Template.ResetPassword)]"
+                                  For="@(() => Options.Template.ResetPassword)" Variant="Variant.Text" Margin="Margin.Normal" />
+                </MudItem>
+
+                <MudItem md="12">
+                    <MudTextField @bind-Value="Options.Template.ConfirmRegistration" Label="@L[GetDescriptionProperty(a => a.Template.ConfirmRegistration)]"
+                                  For="@(() => Options.Template.ConfirmRegistration)" Variant="Variant.Text" Margin="Margin.Normal" />
+                </MudItem>
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+@code
+{
+    private TimeSpan? LockoutDefaultLockoutTimeSpan
+    {
+        get => new Nullable<TimeSpan>(Options.Lockout.DefaultLockoutTimeSpan);
+        set => Options.Lockout.DefaultLockoutTimeSpan = value ?? TimeSpan.FromMinutes(5);
+    }
+}

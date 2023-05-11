@@ -1,0 +1,55 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.Session;
+@using Permissions = Core.Session.Module.Permissions;
+
+@inherits AHComponentBase
+
+<AHDataGrid T="SessionInfo"
+            Permissions="Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            Filterable
+            Groupable
+            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+            ShowFilterIcons="false"
+            MultiSelection
+            Height="calc(100vh - 245px)">
+    <ToolBarContent>
+        <AHDataGridToolBarRead T="SessionInfo" DataGridManager="DataGridManager">
+            <ToolBarContentBefore>
+                <AHPermissionButtonIcon Permission="Permissions.Logout" OnClick="@Logout"
+                                    Disabled="!DataGridManager.ExistsSelection || DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+            </ToolBarContentBefore>
+        </AHDataGridToolBarRead>
+    </ToolBarContent>
+    <Columns>
+        <SelectColumn T="SessionInfo" ShowInFooter="false" />
+
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.IpAddress" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.UserName" />
+        <AHPropertyColumn T="SessionInfo" TProperty="DateTime?" Property="a => a.Login" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.HttpConnectionId" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.HubConnectionId" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.Platform"  />
+        <AHPropertyColumn T="SessionInfo" TProperty="Version" Property="a => a.PlatformVersion" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.Browser" />
+        <AHPropertyColumn T="SessionInfo" TProperty="Version" Property="a => a.BrowserVersion" />
+        <AHPropertyColumn T="SessionInfo" TProperty="string" Property="a => a.Device" />
+    </Columns>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="SessionInfo" />
+    </PagerContent>
+</AHDataGrid>

@@ -1,0 +1,44 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using System.ComponentModel
+
+@typeparam TEnum
+
+@inherits MudSelect<TEnum>
+@{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Setup();
+        return base.SetParametersAsync(parameters);
+    }
+
+    void Setup()
+    {
+        Dense = true;
+        TransformOrigin = Origin.TopLeft;
+        AnchorOrigin = Origin.BottomLeft;
+        if (ChildContent == null)
+        {
+            ChildContent = __builder =>
+            {
+                @foreach (TEnum item in Enum.GetValues(typeof(TEnum)).Cast<TEnum>())
+                {
+                    <MudSelectItem Value="@item">@(GetDescriptionText(item))</MudSelectItem>
+                }
+            };
+        }
+    }
+
+    string GetDescriptionText<T>(T val)
+    {
+        if (val is null) return string.Empty;
+        var attributes = (DescriptionAttribute[])val.GetType().GetField(val!.ToString()!)!.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        return attributes.Length > 0 ? attributes[0].Description : val!.ToString()!;
+    }
+}

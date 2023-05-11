@@ -1,0 +1,90 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHModuleOptionsBase<UIOptions>
+
+<MudGrid>
+    <MudItem md="12">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <div class="d-flex gap-4">
+                        <MudIcon Icon="@Icons.Material.Outlined.ColorLens" />
+                        <MudText>@L["Theme"]</MudText>
+                    </div>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="3">
+                        <MudColorPicker @bind-Text="@Options.Theme.PrimaryColor"
+                                        Value="@Options.Theme.PrimaryColor"
+                                        DisableToolbar="false"
+                                        Label="@L["Primary Color"]"
+                                        Style="@($"color: {Options.Theme.PrimaryColor};")"
+                                        PickerVariant="PickerVariant.Dialog" />
+                    </MudItem>
+
+                    @*
+                    @oninput="@((e) =>
+                    {
+                    UIOptions.CurrentValue.Theme.DarkMode = System.Convert.ToBoolean(e.Value);
+                    StateHasChanged();
+                    })"
+                    *@
+
+                    <MudItem md="3">
+                        <MudSwitch @bind-Checked="@Options.Theme.DarkMode" Label="@L["Dark mode"]" Color="Color.Primary"                                  
+                                   ThumbIcon="@(Options.Theme.DarkMode ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode)" />
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudSlider ValueLabel @bind-Value="@Options.Theme.DefaultBorderRadius"
+                                   Min="0" Max="32" Immediate Step="1" Color="Color.Primary">
+                            @L["Border Radius:"] @Options.Theme.DefaultBorderRadius
+                        </MudSlider>
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudButton OnClick="@(() => Options.Theme.Reset())" Variant="Variant.Filled" Color="Color.Error">
+                            @L["Reset"]
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+    <MudItem md="12">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <div class="d-flex gap-4">
+                        <MudIcon Icon="@Icons.Material.Outlined.List" />
+                        <MudText>@L["Grid"]</MudText>
+                    </div>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="3">
+                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsDense" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsDense)]" Color="Color.Primary" />
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsHoverable" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsHoverable)]" Color="Color.Primary" />
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsStriped" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsStriped)]" Color="Color.Primary" />
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsBordered" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsBordered)]" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>

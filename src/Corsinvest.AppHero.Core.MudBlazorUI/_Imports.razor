@@ -1,0 +1,28 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.UI
+@using MudBlazor
+@using MudExtensions
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Routing
+@using Corsinvest.AppHero.Core.Modularity
+@using Corsinvest.AppHero.Core.Helpers
+@using Corsinvest.AppHero.Core.Options
+@using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components
+@using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components.DataGrid
+@using Corsinvest.AppHero.Core.MudBlazorUI.Shared
+@using Corsinvest.AppHero.Core.BaseUI.Shared.Components;
+@using Corsinvest.AppHero.Core.MudBlazorUI.Style;
+@using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Options;
+@using Corsinvest.AppHero.Core.Security.Auth.Permissions;
+@using Blazored.FluentValidation
+
+@inject IUINotifier UINotifier
+@inject IUIMessageBox UIMessageBox
+
+@inject IDialogService DialogService

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<Import Project="..\common.props" />
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Radzen.Blazor" Version="4.10.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Corsinvest.AppHero.Core.BaseUI\Corsinvest.AppHero.Core.BaseUI.csproj" />
+	</ItemGroup>
+</Project>

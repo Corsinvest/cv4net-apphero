@@ -1,0 +1,27 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+@typeparam T
+
+<AHDataGridToolBarRead T="T" DataGridManager="DataGridManager">
+    <ToolBarContentBefore>
+        @ToolBarContentBefore
+
+        @if (PermissionCreate != null)
+        {
+            <AHPermissionButtonIcon Permission="PermissionCreate" OnClick="@DataGridManager.NewAsync" />
+        }
+
+        @if (PermissionDelete != null)
+        {
+            <AHPermissionButtonIcon Permission="PermissionDelete"
+                            OnClick="@(async () => await DataGridManager.DeleteSelectedItemsAsync(true))"
+                            Disabled="@(!DataGridManager.ExistsSelection)" />
+        }
+
+        @ToolBarContentAfter
+    </ToolBarContentBefore>
+</AHDataGridToolBarRead>

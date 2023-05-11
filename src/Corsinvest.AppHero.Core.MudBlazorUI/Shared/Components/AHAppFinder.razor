@@ -1,0 +1,25 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudDialog DisableSidePadding>
+    <DialogContent>
+        <MudContainer>
+            <MudTextField @bind-Value="@Search"
+                          Class="mb-3"
+                          Clearable
+                          Placeholder="@L["Search..."]"
+                          Immediate />
+            <MudList Clickable Style="height: 300px; overflow-y: auto">
+                @foreach (var item in Links.Where(a => string.IsNullOrWhiteSpace(Search) || a.Module.Search(Search)))
+                {
+                    <MudListItem Icon="@item.ToMBIcon()" IconColor="@item.IconColor.ToMBColor()" OnClick="@(() => NavigationManager.NavigateTo(item.RealUrl))">
+                        <MudHighlighter  HighlightedText="@Search" Text="@item.Text" CaseSensitive="false"/>
+                    </MudListItem>
+                }
+            </MudList>
+        </MudContainer>
+    </DialogContent>
+</MudDialog>

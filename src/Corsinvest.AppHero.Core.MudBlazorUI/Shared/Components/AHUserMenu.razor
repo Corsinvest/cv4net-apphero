@@ -1,0 +1,46 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase 
+
+<MudMenu AnchorOrigin="Origin.BottomRight" Color="Color.Inherit" Class="@Class" LockScroll>
+    <ActivatorContent>
+        <AHUserAvatar User="@User" />
+    </ActivatorContent>
+    <ChildContent>
+        <div class="py-4" style="min-width: 220px">
+            <MudText Class="px-6 pb-2" Typo="Typo.body2">
+                <b>@User?.FullName</b>
+            </MudText>
+
+            <MudText Class="px-6 pb-2" Typo="Typo.body2">
+                @User?.UserName
+            </MudText>
+
+            <MudDivider Class="my-2" />
+
+            @foreach (var item in Links)
+            {
+                <MudMenuItem Href="@item.RealUrl">
+                    <div class="d-flex">
+                        <MudIcon Class="mx-2" Icon="@item.ToMBIcon()" />
+                        <MudText>@L[item.Text]</MudText>
+                    </div>
+                </MudMenuItem>
+            }
+
+            @if (Links.Any())
+            {
+                <MudDivider Class="my-2" />
+            }
+
+            <MudMenuItem OnClick="Logout">
+                <div class="d-flex">
+                    <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.Logout" />
+                    <MudText>@L["Logout"]</MudText>
+                </div>
+            </MudMenuItem>
+        </div>
+    </ChildContent>
+</MudMenu> 

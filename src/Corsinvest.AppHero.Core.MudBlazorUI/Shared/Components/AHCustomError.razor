@@ -1,0 +1,22 @@
+@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<div class="py-4 px-6 rounded-lg d-flex flex-column align-center">
+    <MudText Typo="Typo.h6" Color="Color.Error">@StatusCode</MudText>
+    <MudText><b>@Message</b>@L["For more information, contact your system administrator"]</MudText>
+
+    <AHInternalError />
+
+    <div class="d-flex align-center gap-4">
+        <MudText Typo="Typo.subtitle2">@DateTime.Now</MudText>
+        <MudButton Variant="Variant.Text" Color="Color.Error" OnClick="@(() => Showstacktrace = !Showstacktrace)">More</MudButton>
+    </div>
+
+    @if (Showstacktrace)
+    {
+        <MudText Typo="Typo.body2" Class="mt-2">@Stacktrace</MudText>
+    }
+</div> 

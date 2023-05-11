@@ -1,0 +1,41 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+@inject IOptionsSnapshot<UIOptions> UIOptions
+@inject NavigationManager NavigationManager
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@ModularityService.Assemblies">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <Authorizing>
+                    <text>@L["Please wait, we are authorizing you..."]"</text>
+                </Authorizing>
+                <NotAuthorized>
+                    @if (@context.User.Identity?.IsAuthenticated is true)
+                    {
+                        <PageTitle>@L["You are not authorized"]</PageTitle>
+                        <DynamicComponent Type="@TypeHelper.GetType(UIOptions.Value.ClassNotAuthorizedComponent, typeof(AHNotAuthorized))" />
+                    }
+                    else
+                    {
+                        try
+                        {
+                            NavigationManager.NavigateTo("/auth/user/signin");
+                        }
+                        catch { }
+                        @*<Corsinvest.AppHero.Core.MudBlazorUI.Pages.Authentication.Login/>*@
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <PageTitle>@L["Not found"]</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <DynamicComponent Type="@TypeHelper.GetType(UIOptions.Value.ClassNotFoundComponent, typeof(AHNotFound))" />
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

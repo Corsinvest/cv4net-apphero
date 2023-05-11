@@ -1,0 +1,19 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+@if (Can)
+{
+    @if (Loading)
+    {
+        <div>
+            <i class="fa-solid fa-circle-notch fa-spin fa-xl" style="vertical-align: bottom"></i>
+        </div>
+    }
+    else if (ChildContent != null)
+    {
+        @ChildContent
+    }
+}

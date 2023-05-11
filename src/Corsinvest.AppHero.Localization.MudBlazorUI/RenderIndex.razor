@@ -1,0 +1,116 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<AHDataGrid T="DomainLocalization"
+            Permissions="Localization.Module.Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            MultiSelection
+            Filterable
+            Groupable
+            ShowFilterIcons="false"
+            Height="calc(100vh - 315px)">
+    <ToolBarContent>
+        <AHDataGridToolBarCrud T="DomainLocalization" DataGridManager="DataGridManager">
+            <ToolBarContentAfter>
+                <AHPermission Permission="Localization.Module.Permissions.Translate" Loading="@LoadingLocalization">
+                    <ChildContent>
+                        <MudMenu Label="@L[Localization.Module.Permissions.Translate.Description]"
+                                 Icon="@Localization.Module.Permissions.Translate.ToMBIcon()"
+                                 Color="Localization.Module.Permissions.Translate.Color.ToMBColor()"
+                                 Disabled="!DataGridManager.ExistsSelection"
+                                 ActivationEvent="@MouseEvent.MouseOver">
+                            @foreach (var item in Translators)
+                            {
+                                <MudMenuItem OnClick="@(() => TranslateAsync(item))">
+                                    <div class="d-flex gap-2">
+                                        @if (item is ModuleBase module)
+                                        {
+                                            <MudIcon Icon="@module.ToMBIcon()" />
+                                            <MudText>@module.Description</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>UNKNOWN</MudText>
+                                        }
+                                    </div>
+                                </MudMenuItem>
+                            }
+                        </MudMenu>
+                    </ChildContent>
+                </AHPermission>
+            </ToolBarContentAfter>
+        </AHDataGridToolBarCrud>
+    </ToolBarContent>
+    <Columns>
+        <SelectColumn T="DomainLocalization" ShowInFooter="false" />
+
+        <TemplateColumn T="DomainLocalization" Field="@nameof(DomainLocalization.CultureName)" FieldType="@typeof(string)">
+            <CellTemplate>
+                <div class="d-flex gap-2">
+                    <span class="fi fi-@context.Item.CultureName.Split("-").Last().ToLower()"></span>
+                    <MudText>@context.Item.CultureName</MudText>
+                </div>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <AHPropertyColumn T="DomainLocalization" TProperty="string" Property="a => a.Key" />
+        <AHPropertyColumn T="DomainLocalization" TProperty="string" Property="a => a.Context" />
+        <AHPropertyColumn T="DomainLocalization" TProperty="string" Property="a => a.Value" />
+        <AHPropertyColumn T="DomainLocalization" TProperty="bool" Property="a => a.Enabled" />
+
+        <TemplateColumn T="DomainLocalization" CellClass="justify-end">
+            <CellTemplate>
+                <MudButtonGroup Variant="Variant.Text">
+                    <AHDataGridColumnEdit T="DomainLocalization" DataGridManager="DataGridManager" Context="@context" />
+                </MudButtonGroup>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+    <EditTemplate>
+        <MudGrid>
+            <MudItem md="6">
+                <MudSwitch @bind-Checked="context.Enabled" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Enabled)])"
+                           For="@(() => context.Enabled)" Color="Color.Primary" />
+            </MudItem>
+
+            <MudItem md="6">
+                <MudTextField @bind-Value="@context.CultureName" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.CultureName)])"
+                              For="@(() => context.CultureName)" ReadOnly="context.Id > 0" />
+            </MudItem>
+
+            <MudItem md="12">
+                <MudTextField @bind-Value="@context.Context" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Context!)])"
+                              For="@(() => context.Context)" ReadOnly="context.Id > 0" />
+            </MudItem>
+
+            <MudItem md="12">
+                <MudTextField @bind-Value="@context.Key" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Key)])"
+                              For="@(() => context.Key)" ReadOnly="context.Id > 0"
+                              Lines="5" />
+            </MudItem>
+
+            <MudItem md="12">
+                <MudTextField @bind-Value="@context.Value" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Value)])"
+                              For="@(() => context.Value)" Lines="5" />
+            </MudItem>
+        </MudGrid>
+    </EditTemplate>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="DomainLocalization" />
+    </PagerContent>
+</AHDataGrid>

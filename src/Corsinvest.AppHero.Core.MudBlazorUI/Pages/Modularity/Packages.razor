@@ -1,0 +1,126 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Corsinvest.AppHero.Core.Modularity.Packages;
+@using Humanizer;
+@using Permissions = Corsinvest.AppHero.Core.Modularity.Module.Permissions.Package;
+
+@inherits Corsinvest.AppHero.Core.BaseUI.Modularity.PackagesBase
+
+@if (ShowWait)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate />
+}
+else
+{
+    @foreach (var item in Errors)
+    {
+        <MudAlert ShowCloseIcon Severity="Severity.Error" CloseIconClicked="@(() => Errors.Remove(item))">@((MarkupString)item)</MudAlert>
+    }
+
+    <AHDataGrid T="PackageDto"
+            Permissions="Permissions.Data"
+                FixedHeader
+                FixedFooter
+            DataGridManager="DataGridManager"
+                Filterable
+                Groupable
+            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+            ShowFilterIcons="false"
+            Height="calc(100vh - 365px)">
+    <ToolBarContent>
+        <AHDataGridToolBarRead T="PackageDto" DataGridManager="DataGridManager" />
+    </ToolBarContent>
+    <Columns>
+        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Id" />
+        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Description" />
+        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Tags" />
+        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Authors" />
+        <AHPropertyColumn T="PackageDto" TProperty="bool" Property="a => a.IsInstallated" />
+
+        <TemplateColumn T="PackageDto" Title="Owners">
+            <CellTemplate>
+                <div class="d-flex gap-2 flex-column align-center">
+                    @if (string.IsNullOrEmpty(context.Item.IconUrl))
+                        {
+                            <MudImage Src="@context.Item.IconUrl" Style="height: 50px;" Elevation="25" Class="rounded-lg" />
+                        }
+
+                        <MudText>@context.Item.Owners</MudText>
+                    </div>
+                </CellTemplate>
+            </TemplateColumn>
+
+            <TemplateColumn T="PackageDto" Title="Nuget">
+                <CellTemplate>
+                    <a href="@context.Item.Url" target="_blank">
+                        @if (new Uri(context.Item.Url).Host.ToLower() == "github.com")
+                        {
+                            <MudImage Src="@($"https://img.shields.io/github/license{new Uri(context.Item.Url).LocalPath}.svg?style=flat-square")" />
+                        }
+
+                        <MudImage Src="@($"https://img.shields.io/badge/download-{Convert.ToDouble(context.Item.DownloadCount).ToMetric(decimals:0).Replace("m","")}-green.svg?style=flat-square")" />
+                        <MudImage Src="@($"https://img.shields.io/badge/version-{context.Item.CurrentVersion}-blue.svg?style=flat-square")" />
+                    </a>
+
+                    @*
+                @if (context.Item.Source.Feed.ToLower().StartsWith("https://api.nuget.org"))
+                {
+                <a href="https://www.nuget.org/packages/@(context.Package.Identity.Id)/" target="_blank">
+                @if (context.Item.Package.ProjectUrl?.Host.ToLower() == "github.com")
+                {
+                <MudImage Src="@($"https://img.shields.io/github/license{context.Item.Package.ProjectUrl.LocalPath}.svg?style=flat-square")" />
+                }
+
+                <MudImage Src="@($"https://img.shields.io/nuget/dt/{context.Item.Package.Identity.Id}.svg?style=flat-square")" />
+                <MudImage Src="@($"https://img.shields.io/nuget/v/{context.Item.Package.Identity.Id}.svg?style=flat-square")" />
+                </a>
+                }
+                *@
+                </CellTemplate>
+            </TemplateColumn>
+
+            <TemplateColumn T="PackageDto" CellClass="justify-end">
+                <CellTemplate>
+                    <MudSelect T="Version" @bind-Value="@context.Item.CurrentVersion" Clearable>
+                    @foreach (var item in context.Item.Versions)
+                        {
+                            <MudSelectItem Value="item">@item.ToString()</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                    <MudButtonGroup Variant="Variant.Text">
+                        <AHPermission Permission="Permissions.InstallUninstall">
+                            <ChildContent>
+                                @if (context.Item.CurrentVersion != null)
+                                {
+                                    <MudIconButton Icon="@Icons.Material.Outlined.FileDownload" Title="@L["Install"]"
+                                           Color="Color.Success" OnClick="@(async () => await InstallerAsync(context.Item,true))" />
+                                }
+
+                                @if (context.Item.IsInstallated)
+                                {
+                                    <MudIconButton Icon="@Icons.Material.Outlined.DeleteForever" Title="@L["Uninstall"]"
+                                           Color="Color.Error" OnClick="@(async () => await InstallerAsync(context.Item,false))" />
+                                }
+                            </ChildContent>
+                        </AHPermission>
+                    </MudButtonGroup>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+
+        <NoRecordsContent>
+            <AHNoRecordsContent />
+        </NoRecordsContent>
+
+        <LoadingContent>
+            <AHLoadingContent />
+        </LoadingContent>
+
+        <PagerContent>
+            <MudDataGridPager T="PackageDto" />
+        </PagerContent>
+    </AHDataGrid>
+}

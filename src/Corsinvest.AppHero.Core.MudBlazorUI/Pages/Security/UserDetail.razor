@@ -1,0 +1,96 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudTabs Elevation="1" ApplyEffectsToContainer Border PanelClass="pa-6" KeepPanelsAlive>
+    <MudTabPanel Text="@L["Avatar"]" Icon="@Icons.Material.Outlined.Image">
+        <div class="d-flex justify-center mb-4">
+            <AHUserAvatar User="User" Style="height:200px; width:200px;" />
+
+            <InputFile id="UploadPhoto" OnChange="@(async (e) => await UploadPhotoAsync(e))" hidden accept=".jpg, .jpeg, .png" />
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                <MudMenuItem>
+                    <div class="d-flex" onclick="document.getElementById('UploadPhoto').click()">
+                        <MudIcon Class="mx-2" Icon="@Icons.Material.Outlined.PhotoCamera" Size="Size.Small" />
+                        <MudText>@L["Upload"]</MudText>
+                    </div>
+                </MudMenuItem>
+
+                @if (!string.IsNullOrEmpty(User.ProfileImageUrl))
+                {
+                    <MudMenuItem OnClick="@ClearPhoto">
+                        <div class="d-flex">
+                            <MudIcon Class="mx-2" Icon="@Icons.Material.Outlined.DeleteForever" Size="Size.Small"
+                                 Color="Color.Error" />
+                            <MudText>@L["Clear"]</MudText>
+                        </div>
+                    </MudMenuItem>
+                }
+            </MudMenu>
+        </div>
+    </MudTabPanel>
+
+    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Outlined.Person">
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="@User.FirstName" Label="@(L[GetDescriptionProperty(a => a.FirstName!)])" For="@(() => User.FirstName)" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="@User.LastName" Label="@(L[GetDescriptionProperty(a => a.LastName!)])" For="@(() => User.LastName)" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="@User.Email" Label="@(L[GetDescriptionProperty(a => a.Email!)])" For="@(() => User.Email)"
+                              Required />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="@User.PhoneNumber" Label="@(L[GetDescriptionProperty(a => a.PhoneNumber!)])" For="@(() => User.PhoneNumber)" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudSelect T="string" @bind-Value="@User.DefaultCulture" Label="@(L[GetDescriptionProperty(a => a.DefaultCulture)])"
+                           For="@(() => User.DefaultCulture)">
+                    @foreach (var item in LocalizationOptions.Value.SupportedCultures!.ToList())
+                    {
+                        <MudSelectItem Value="@item.Name">@item.DisplayName</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+    </MudTabPanel>
+
+    <MudTabPanel Text="@L["Account"]" Icon="@Icons.Material.Outlined.Public">
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudSwitch @bind-Checked="@User.IsActive" Label="@(L[GetDescriptionProperty(a => a.IsActive)])"
+                           For="@(() => User.IsActive)" Color="Color.Primary" Disabled="!ManageAccount" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudSwitch @bind-Checked="@User.LockoutEnabled" Label="@(L[GetDescriptionProperty(a => a.LockoutEnabled)])"
+                           For="@(() => User.LockoutEnabled)" Color="Color.Primary" Disabled="!ManageAccount" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudSwitch @bind-Checked="@User.EmailConfirmed" Label="@(L[GetDescriptionProperty(a => a.EmailConfirmed)])"
+                           For="@(() => User.EmailConfirmed)" Color="Color.Primary" Disabled="!ManageAccount" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="@User.UserName" Label="@(L[GetDescriptionProperty(a => a.UserName!)])"
+                              For="@(() => User.UserName)" Disabled="!ManageAccount"/>
+            </MudItem>
+        </MudGrid>
+    </MudTabPanel>
+
+    @if (Creation)
+    {
+        <MudTabPanel Text="@L["Password"]" Icon="@Icons.Material.Outlined.Password">
+            <AHPasswordsInput @bind-Value="PasswordInt" For="@(() => PasswordInt)" PasswordOptions="IdentityOptions.Value.Password" />
+        </MudTabPanel>
+    }
+</MudTabs>

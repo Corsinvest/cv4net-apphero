@@ -1,0 +1,18 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@page "/"
+
+@inherits AHComponentBase
+
+<PageTitle>@AppOptions.Value.Name - @L["Home"]</PageTitle>
+
+@if (Render == null)
+{
+    <MudText Color="Color.Error" Typo="Typo.h2">Error render component!</MudText>
+}
+else
+{
+    <DynamicComponent Type="Render" />
+}

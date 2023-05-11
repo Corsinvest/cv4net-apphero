@@ -1,0 +1,32 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@foreach (var item in UIAppBarItems)
+{
+    <DynamicComponent Type="@item.Render" />
+}
+
+@code
+{
+    private IEnumerable<IUIAppBarItem> UIAppBarItems { get; set; } = new List<IUIAppBarItem>();
+
+    protected override void OnInitialized()
+    {
+        var ret = new List<IUIAppBarItem>();
+
+        try
+        {
+            foreach (var item in AppDomain.CurrentDomain
+                                          .GetAssemblies()
+                                          .SelectMany(a => a.GetTypes())
+                                          .Where(a => !a.IsInterface && !a.IsAbstract && typeof(IUIAppBarItem).IsAssignableFrom(a)))
+            {
+                ret.Add((IUIAppBarItem)Activator.CreateInstance(item)!);
+            }
+        }
+        catch { }
+
+        UIAppBarItems = ret;
+    }
+}

@@ -399,5 +399,7 @@ FodyWeavers.xsd
 
 nupkgs/
 
-data/logs
 /src/Corsinvest.AppHero.AppBss/wwwroot/lib
+/src/Corsinvest.AppHero.AppBss/data
+/src/Corsinvest.AppHero.AppBss/appsettings.json
+Todo.txt

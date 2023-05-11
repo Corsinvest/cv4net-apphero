@@ -1,0 +1,16 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@page "/auth/email/validate/{email}/{*Token}"
+
+@inherits AHComponentBase
+
+@if (string.IsNullOrWhiteSpace(Token))
+{
+    <MudText Typo="Typo.h2" Style="color: var(--mud-palette-error);">@L["Toke in not valid"]</MudText>
+}
+else if (User == null)
+{
+    <MudText Typo="Typo.h2" Style="color: var(--mud-palette-error);">@L["User not valid"]</MudText>
+}

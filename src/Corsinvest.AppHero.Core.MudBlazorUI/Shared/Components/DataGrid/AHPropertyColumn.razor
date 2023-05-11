@@ -1,0 +1,21 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits PropertyColumn<T,TProperty>
+
+@typeparam T
+@typeparam TProperty
+
+@code
+{
+    private RenderFragment RenderFormattedValue(CellContext<T> context) => __builder =>
+    {
+        @GetFormattedString(ClassHelper.GetValue<TProperty>(context.Item!, PropertyName!)!)
+    };
+
+    private RenderFragment RenderBool(CellContext<T> context) => __builder =>
+    {
+        <MudCheckBox Checked="@(ClassHelper.GetValue<bool>(context.Item!, PropertyName!))" ReadOnly />
+    };
+}

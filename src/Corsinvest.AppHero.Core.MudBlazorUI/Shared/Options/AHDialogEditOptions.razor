@@ -1,0 +1,27 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex gap-2">
+            <MudIcon Icon="@Icons.Material.Outlined.Edit" />
+            <MudText>
+                @L["Edit options"] @Module.Description
+            </MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="max-height: 500px; min-width:800px; overflow-y: scroll">
+            <DynamicComponent @ref="RefOptions" Type="@Module.Options!.Render" />
+            <br />
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@L["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit"
+                   OnClick="SubmitAsync" Color="Color.Success">@L["Save"]</MudButton>
+    </DialogActions>
+</MudDialog>

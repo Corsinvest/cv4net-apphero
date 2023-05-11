@@ -1,0 +1,14 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+@typeparam T
+
+@if (PermissionEdit != null)
+{
+    <AHPermissionButtonIcon Permission="PermissionEdit"
+                        OnClick="@(() => DataGridManager.EditAsync(Context.Item,false))"
+                        Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
+}

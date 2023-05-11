@@ -1,0 +1,64 @@
+@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@page "/auth/user/signup"
+
+@inherits AHComponentBase
+
+<AuthorizeView>
+    <NotAuthorized Context="Auth">
+        <MudForm Model="@Model" @ref="@RefForm" Validation="@(RegisterValidator.ValidateValue)">
+            <MudText Typo="Typo.h4" GutterBottom>@L["Sign Up"]</MudText>
+            <MudText>@L["have an account?"] <MudLink Href="/auth/user/signin">@L["Sign In"]</MudLink></MudText>
+
+            @if (!IdentityOptions.Value.LoginUseEmail)
+            {
+                <MudTextField T="string"
+                          Immediate
+                          Label="@L["User Name"]"
+                          @bind-Value="Model.UserName"
+                          For="@(() => Model.UserName)"
+                          Variant="Variant.Outlined"
+                          Required
+                          RequiredError="@L["user name is required!"]"
+                          Class="my-4"></MudTextField>
+            }
+
+            <MudTextField T="string"
+                          Immediate
+                          Label="@L["E-mail"]"
+                          @bind-Value="Model.Email"
+                          For="@(() => Model.Email)"
+                          Required
+                          RequiredError="@L["e-mail is required!"]"
+                          Variant="Variant.Outlined"></MudTextField>
+
+            <AHPasswordsInput @bind-Value="@Model.Password" PasswordOptions="IdentityOptions.Value.Password" />
+
+            <MudCheckBox For="@(() => Model.AgreeToTerms)" @bind-Checked="@Model.AgreeToTerms"
+                         Label="@L["I agree to the terms and privacy"]" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Disabled="!Model.AgreeToTerms && IsValidPassword || ShowWait"
+                       Size="Size.Large"
+                       OnClick="SubmitAsync"
+                       FullWidth>
+                @if (ShowWait)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">@L["Loading..."]</MudText>
+                }
+                else
+                {
+                    <MudText>@L["Register"]</MudText>
+                }
+            </MudButton>
+        </MudForm>
+    </NotAuthorized>
+    <Authorized>
+        <AHRedirectToHome />
+        <MudAlert Severity="Severity.Info" Class="mt-8 mud-width-full" Style="max-width:500px;">@L["You are already logged in."]</MudAlert>
+    </Authorized>
+</AuthorizeView>

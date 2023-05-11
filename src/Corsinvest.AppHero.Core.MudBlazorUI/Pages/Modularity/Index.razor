@@ -1,0 +1,19 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<MudTabs Elevation="1" ApplyEffectsToContainer Border>
+    <MudTabPanel Text="@L["Modules"]" Icon="@Icons.Material.Outlined.Extension">
+        <Modules />
+    </MudTabPanel>
+
+    <MudTabPanel Text="@L["Packages"]" Icon="@Icons.Material.Outlined.Archive">
+        <Packages />
+    </MudTabPanel>
+
+    <MudTabPanel Text="@L["Packages Source"]" Icon="@Icons.Material.Outlined.Public">
+        <PackagesSource />
+    </MudTabPanel>
+</MudTabs>

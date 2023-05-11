@@ -1,0 +1,69 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits Corsinvest.AppHero.Core.BaseUI.Shared.Notification.NotificationChannelsOptionsGridBase<T>
+@using Permission = Corsinvest.AppHero.Core.Notification.Module.Permissions;
+
+@typeparam T
+
+<AHDataGrid T="T"
+            Permissions="Permission.Notification.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            MultiSelection
+            Filterable
+            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+            Groupable
+            ShowFilterIcons="false">
+    <ToolBarContent>
+        <AHDataGridToolBarCrud T="T" DataGridManager="DataGridManager" />
+    </ToolBarContent>
+
+    <Columns>
+        <SelectColumn T="T" ShowInFooter="false" />
+
+        <AHPropertyColumn T="T" TProperty="bool" Property="a => a.Enabled" />
+        <AHPropertyColumn T="T" TProperty="string" Property="a => a.Name" />
+        <AHPropertyColumn T="T" TProperty="string" Property="a => a.Info" />
+
+        <TemplateColumn T="T" CellClass="justify-end">
+            <CellTemplate>
+                <MudButtonGroup Variant="Variant.Text">
+                    <AHDataGridColumnEdit T="T" DataGridManager="DataGridManager" Context="context" />
+                    <AHPermissionButtonIcon Permission="Permission.Notification.Test" OnClick="@(() => TestAsync(context.Item))" Loading="@LoadingTest" />
+                </MudButtonGroup>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+    <EditTemplate>
+        <MudGrid>
+            <MudItem md="6">
+                <MudSwitch T="bool" @bind-Checked="context.Enabled"
+                           Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Enabled)])"
+                           Color="Color.Primary" For="@(() => context.Enabled)" />
+            </MudItem>
+            <MudItem md="6">
+                <MudTextField @bind-Value="context.Name"
+                              Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Name)])"
+                              For="@(() => context.Name)" Variant="Variant.Text" Margin="Margin.Normal" />
+            </MudItem>
+
+            @Row(context)
+        </MudGrid>
+    </EditTemplate>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="T" />
+    </PagerContent>
+</AHDataGrid>

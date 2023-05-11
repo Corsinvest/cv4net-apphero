@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<Import Project="..\common.props" />
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ClosedXML" Version="0.101.0" />
+		<PackageReference Include="CodeBeam.MudBlazor.Extensions" Version="6.4.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+		<PackageReference Include="MudBlazor" Version="6.2.2" />
+		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
+		<PackageReference Include="MudBlazor.Extensions" Version="1.7.40" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+		<PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="13.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Corsinvest.AppHero.Core.BaseUI\Corsinvest.AppHero.Core.BaseUI.csproj" />
+	</ItemGroup>
+</Project>

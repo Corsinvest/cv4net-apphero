@@ -1,0 +1,13 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@page "/NotAuthorized"
+
+@inherits AHComponentBase
+@inject IOptionsSnapshot<UIOptions> UIOptions
+
+
+<PageTitle>@L["You are not authorized"]</PageTitle>
+
+<DynamicComponent Type="@TypeHelper.GetType(UIOptions.Value.ClassNotAuthorizedComponent, typeof(AHNotAuthorized))" />

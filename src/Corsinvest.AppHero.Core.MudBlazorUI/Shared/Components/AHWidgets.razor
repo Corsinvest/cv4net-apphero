@@ -1,0 +1,50 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<style>
+    .zoom {
+        transition: transform .2s;
+    }
+
+        .zoom:hover {
+            transform: scale(1.025);
+        }
+</style>
+
+
+@foreach (var groupName in Authorizations.SelectMany(a => a.GetWidgets()).Select(a => a.GroupName).Distinct().OrderBy(a => a))
+{
+    <br />
+
+    <MudText Typo="Typo.h6">@L[groupName]</MudText>
+    <MudGrid>
+        @foreach (var item in Authorizations.Where(a => a.GetWidgets().Any(a => a.GroupName == groupName)))
+        {
+            @foreach (var widget in item.GetWidgets().Where(a => a.GroupName == groupName).OrderBy(a => a.Name))
+            {
+                <MudItem  Class="@(widget.Class ?? "mud-grid-item-xs-12 mud-grid-item-sm-6 mud-grid-item-md-3 mud-grid-item-lg-3")">
+                    <MudLink Href="@GetWidgetUrl(widget)" Underline="Underline.None" Target="@((widget.RefLink?.IsExternal is true) ? "_blank": "")" Color="Color.Inherit">
+                        <MudCard Elevation="2" Class="zoom" Style="height: 100%;">
+                            @if (widget.ShowDefaultHeader)
+                            {
+                                <MudCardHeader>
+                                    <div class="d-flex gap-4">
+                                        <MudIcon Icon="@item.Module.Icon" Size="Size.Large" Color="Color.Primary"/>
+                                        <MudText Typo="Typo.h5">@item.Module.Description</MudText>
+                                    </div>
+                                </MudCardHeader>
+                            }
+
+                            <MudCardContent Style="height: 100%;" Class="@(widget.ShowDefaultHeader ? "":"pa-0")">
+                                <DynamicComponent Type="@widget.Render" />
+                            </MudCardContent>
+                        </MudCard>
+                    </MudLink>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+}

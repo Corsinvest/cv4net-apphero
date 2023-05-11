@@ -1,0 +1,135 @@
+﻿@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@using Permissions = Core.Security.Module.Permissions.User;
+@using Corsinvest.AppHero.Core.Security.Identity;
+
+@inherits AHComponentBase
+
+<AHDataGrid T="ApplicationUser"
+            Permissions="Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            MultiSelection
+            Filterable
+            Groupable
+            ShowFilterIcons="false"
+            Height="calc(100vh - 245px)">
+    <ToolBarContent>
+        <AHDataGridToolBarCrud T="ApplicationUser" DataGridManager="DataGridManager" />
+    </ToolBarContent>
+
+    <Columns>
+        <SelectColumn T="ApplicationUser" ShowInFooter="false" />
+
+        <TemplateColumn T="ApplicationUser" CellClass="justify-start">
+            <CellTemplate>
+                <AHUserAvatar User="@context.Item" />
+            </CellTemplate>
+        </TemplateColumn>
+
+        <AHPropertyColumn T="ApplicationUser" TProperty="string" Property="a => a.UserName" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="string" Property="a => a.Email" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="bool" Property="a => a.EmailConfirmed" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="string" Property="a => a.FullName" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="bool" Property="a => a.IsActive" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="bool" Property="a => a.LockoutEnabled" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="DateTimeOffset?" Property="a => a.LockoutEnd" />
+        <AHPropertyColumn T="ApplicationUser" TProperty="string" Property="a => a.DefaultCulture" />
+
+        <TemplateColumn T="ApplicationUser" CellClass="justify-end">
+            <CellTemplate>
+                <MudButtonGroup Variant="Variant.Text">
+                    <AHDataGridColumnEdit T="ApplicationUser" DataGridManager="DataGridManager" Context="context" />
+                    <AHPermissionButtonIcon Permission="Permissions.ResetPassword" OnClick="@(() => ResetPassword(context.Item))" />
+                    <AHPermissionButtonIcon Permission="Permissions.ManageRoles" OnClick="@(() => ShowRolesManager(context.Item))" />
+                </MudButtonGroup>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+    <EditTemplate>
+        <UserDetail @bind-Password="Password" User="context" ManageAccount Creation="IsNew" />
+    </EditTemplate>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="ApplicationUser" />
+    </PagerContent>
+    </AHDataGrid>
+
+    <MudDialog IsVisible="ShowRolesDialog"
+           Style="width:80%;"
+           Options="new DialogOptions { CloseButton = false, CloseOnEscapeKey = false, DisableBackdropClick=true, MaxWidth = MaxWidth.Large }">
+    <TitleContent>
+        <div class="d-flex gap-2">
+            <MudIcon Icon="@Icons.Material.Outlined.Edit" />
+            <MudText>@L["Rols edit"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer>
+            <MudSimpleTable FixedHeader
+                            Style="height:300px;"
+                            Dense="@TableOptions.IsDense"
+                            Hover="@TableOptions.IsHoverable"
+                            Bordered="@TableOptions.IsBordered"
+                            Striped="@TableOptions.IsStriped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>@L["Name"]</th>
+                        <th>@L["Description"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in Roles)
+                    {
+                        <tr>
+                            <td>
+                                @*Label="@role.Description"*@
+                                <MudSwitch T="bool"
+                                       Checked="@(CurrentUser.UserRoles.Any(a=> a.Role.Name == role.Name))"
+                                       CheckedChanged="@(async (e) => await AddRemoveRoleAsync(e, role.Name!))"
+                                       Color="Color.Primary" />
+                            </td>
+                            <td>@role.Name</td>
+                            <td>@role.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </MudSimpleTable>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" OnClick="@(() => ShowRolesDialog = false)" Color="Color.Primary">@L["Close"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<MudDialog IsVisible="@ShowDialogResetPassword"
+           Options="new DialogOptions { CloseButton = false, CloseOnEscapeKey = false, DisableBackdropClick = true}">
+    <TitleContent>
+        <div class="d-flex gap-2">
+            <MudIcon Icon="@Icons.Material.Outlined.Password" />
+            <MudText>@L["Reset Password"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <AHPasswordsInput @bind-Value="Password" PasswordOptions="IdentityOptions.Value.Password" Label="@CurrentUser.FullName" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@(() => ShowDialogResetPassword= false)">@L["Cancel"]</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="ResetPasswordAsync" Disabled="string.IsNullOrEmpty(Password)">
+            @L["Change"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>

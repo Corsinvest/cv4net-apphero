@@ -1,0 +1,64 @@
+@*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+*@
+@inherits AHComponentBase
+
+<AHDataGrid T="AuditTrail"
+            Permissions="Auditing.Module.Permissions.Data"
+            FixedHeader
+            FixedFooter
+            DataGridManager="DataGridManager"
+            Filterable
+            Groupable
+            ShowFilterIcons="false"
+            Height="calc(100vh - 245px)">
+    <ToolBarContent>
+        <AHDataGridToolBarRead T="AuditTrail" DataGridManager="DataGridManager" />
+    </ToolBarContent>
+    <Columns>
+        <HierarchyColumn T="AuditTrail" />
+
+        <AHPropertyColumn T="AuditTrail" TProperty="string" Property="a => a.UserId" />
+        <AHPropertyColumn T="AuditTrail" TProperty="AuditType" Property="a => a.AuditType" />
+        <AHPropertyColumn T="AuditTrail" TProperty="string" Property="a => a.TableName" />
+
+        <TemplateColumn T="AuditTrail" Title="@L["Primary Key"]">
+            <CellTemplate>
+                @JsonSerializer.Serialize(context.Item.PrimaryKey, (JsonSerializerOptions)null!)
+            </CellTemplate>
+        </TemplateColumn>
+
+        <AHPropertyColumn T="AuditTrail" TProperty="DateTime" Property="a => a.DateTime" />
+    </Columns>
+
+    <ChildRowContent>
+        <MudCard Elevation="0">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1"><strong>@context.Item.TableName</strong></MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent Class="pt-0">
+                <MudText Typo="Typo.subtitle2">@L["Old Values"]</MudText>
+
+                <MudText Typo="Typo.body2">@JsonSerializer.Serialize(context.Item.OldValues, (JsonSerializerOptions)null!)</MudText>
+
+                <MudText Typo="Typo.subtitle2">@L["New Value"]</MudText>
+                <MudText Typo="Typo.body2">@JsonSerializer.Serialize(context.Item.NewValues, (JsonSerializerOptions)null!)</MudText>
+            </MudCardContent>
+        </MudCard>
+    </ChildRowContent>
+
+    <NoRecordsContent>
+        <AHNoRecordsContent />
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <AHLoadingContent />
+    </LoadingContent>
+
+    <PagerContent>
+        <MudDataGridPager T="AuditTrail" />
+    </PagerContent>
+</AHDataGrid>
