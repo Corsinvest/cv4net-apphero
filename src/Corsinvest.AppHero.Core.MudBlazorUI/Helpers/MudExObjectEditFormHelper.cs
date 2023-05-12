@@ -9,7 +9,6 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MudBlazor.Extensions.Components.ObjectEdit;
-using Microsoft.Extensions.Localization;
 using MudBlazor.Extensions.Options;
 using MudBlazor.Extensions;
 

@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Corsinvest.AppHero.Core.Security.Auth.Permissions;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Pages.Security;
 

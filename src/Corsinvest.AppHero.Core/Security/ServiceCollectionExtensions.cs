@@ -7,7 +7,6 @@ using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Security.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using static Corsinvest.AppHero.Core.Security.Module.Permissions;
 
 namespace Corsinvest.AppHero.Core.Security;
 
