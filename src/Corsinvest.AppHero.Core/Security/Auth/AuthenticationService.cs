@@ -5,7 +5,6 @@
 using Corsinvest.AppHero.Core.Security.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -24,23 +23,19 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
         _navigationManager = navigationManager;
     }
 
-    public override Task<AuthenticationState> GetAuthenticationStateAsync()
-    {
-        return Task.FromResult(new AuthenticationState(_httpContextAccessor.HttpContext == null
-                                    ? new System.Security.Claims.ClaimsPrincipal()
-                                    : _httpContextAccessor.HttpContext.User));
-    }
+    public override Task<AuthenticationState> GetAuthenticationStateAsync() 
+        => Task.FromResult(new AuthenticationState(_httpContextAccessor.HttpContext == null
+            ? new System.Security.Claims.ClaimsPrincipal()
+            : _httpContextAccessor.HttpContext.User));
 
     public async Task ExecuteLoginAsync(ApplicationUser user, bool rememberMe)
     {
-        var appOptions = _serviceProvider.GetRequiredService<IOptionsSnapshot<AppOptions>>().Value;
         var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
         var token = await userManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, "Login");
-        var data = $"{user.Id}|{token}|{rememberMe}";
-        var protector = DataProtectionProvider.Create(appOptions.Name).CreateProtector("Login");
-        var protectedData = protector.Protect(data);
-        _navigationManager.NavigateTo($"/api/account/login?token=" + protectedData, true);
+
+        var tokenRequest = Guid.NewGuid().ToString();
+        AccountController.Logins.Add(tokenRequest, (user.Id, token, rememberMe));
+        _navigationManager.NavigateTo($"/api/account/login?token=" + tokenRequest, true);
     }
 
     public async Task<bool> LoginAsync(LoginRequest loginRequest)
