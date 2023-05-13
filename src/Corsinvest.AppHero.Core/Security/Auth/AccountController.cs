@@ -4,6 +4,7 @@
  */
 using Corsinvest.AppHero.Core.Security.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -19,8 +20,6 @@ public class AccountController : ControllerBase
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IServiceProvider _serviceProvider;
 
-    public static Dictionary<string, (string UserId, string Token, bool RememberMe)> Logins { get; } = new();
-
     public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, IServiceProvider serviceProvider)
     {
         _logger = logger;
@@ -32,28 +31,27 @@ public class AccountController : ControllerBase
     [HttpGet(nameof(Login))]
     public async Task<IActionResult> Login(string token)
     {
-        if (Logins.TryGetValue(token, out var data))
+        var appOptions = _serviceProvider.GetRequiredService<IOptionsSnapshot<AppOptions>>().Value;
+        var protector = DataProtectionProvider.Create(appOptions.Name).CreateProtector("Login");
+        var data = protector.Unprotect(token);
+        var parts = data.Split('|');
+        var user = await _signInManager.UserManager.FindByIdAsync(parts[0]);
+        if (user == null) { return Unauthorized(); }
+
+        if (await _signInManager.UserManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, "Login", parts[1]))
         {
-            Logins.Remove(token);
+            await _signInManager.UserManager.ResetAccessFailedCountAsync(user);
+            await _signInManager.SignInAsync(user, bool.Parse(parts[2]));
 
-            var user = await _signInManager.UserManager.FindByIdAsync(data.UserId);
-            if (user == null) { return Unauthorized(); }
+            //culture
+            var defaultCulture = string.IsNullOrWhiteSpace(user.DefaultCulture)
+                                            ? "en-US"
 
-            if (await _signInManager.UserManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, "Login", data.Token))
-            {
-                await _signInManager.UserManager.ResetAccessFailedCountAsync(user);
-                await _signInManager.SignInAsync(user, data.RememberMe);
+                                            //from user
+                                            : user.DefaultCulture;
 
-                //culture
-                var defaultCulture = string.IsNullOrWhiteSpace(user.DefaultCulture)
-                                                ? "en-US"
-
-                                                //from user
-                                                : user.DefaultCulture;
-
-                HttpContext.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(defaultCulture)));
-            }
+            HttpContext.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(defaultCulture)));
         }
 
         return Redirect("/");
