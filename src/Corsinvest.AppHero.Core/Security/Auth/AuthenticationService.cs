@@ -33,12 +33,12 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
 
     public async Task ExecuteLoginAsync(ApplicationUser user, bool rememberMe)
     {
-        var appOptions = _serviceProvider.GetRequiredService<IOptionsSnapshot<AppOptions>>().Value;
         var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
         var token = await userManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, "Login");
         var data = $"{user.Id}|{token}|{rememberMe}";
-        var protector = DataProtectionProvider.Create(appOptions.Name).CreateProtector("Login");
+
+        var dataProtectionProvider = _serviceProvider.GetRequiredService<IDataProtectionProvider>();
+        var protector = dataProtectionProvider.CreateProtector("Login");
         var protectedData = protector.Protect(data);
         _navigationManager.NavigateTo($"/api/account/login?token=" + protectedData, true);
     }

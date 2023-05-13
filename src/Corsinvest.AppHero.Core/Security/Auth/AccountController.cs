@@ -31,8 +31,8 @@ public class AccountController : ControllerBase
     [HttpGet(nameof(Login))]
     public async Task<IActionResult> Login(string token)
     {
-        var appOptions = _serviceProvider.GetRequiredService<IOptionsSnapshot<AppOptions>>().Value;
-        var protector = DataProtectionProvider.Create(appOptions.Name).CreateProtector("Login");
+        var dataProtectionProvider = _serviceProvider.GetRequiredService<IDataProtectionProvider>();
+        var protector = dataProtectionProvider.CreateProtector("Login");
         var data = protector.Unprotect(token);
         var parts = data.Split('|');
         var user = await _signInManager.UserManager.FindByIdAsync(parts[0]);
