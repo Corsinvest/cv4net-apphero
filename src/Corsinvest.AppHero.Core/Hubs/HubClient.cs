@@ -5,6 +5,7 @@
 using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Session;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Corsinvest.AppHero.Core.Hubs;
@@ -12,12 +13,12 @@ namespace Corsinvest.AppHero.Core.Hubs;
 public class HubClient : IAsyncDisposable
 {
     private HubConnection _hubConnection = default!;
-    private string _hubUrl = string.Empty;
     private bool _started = false;
     private readonly ISessionsInfoTracker _sessionsInfoTracker;
     private readonly ICurrentUserService _currentUserService;
     private readonly NavigationManager _navigationManager;
     private readonly IAuthenticationService _authenticationService;
+    private readonly ILogger<HubClient> _logger;
 
     public event EventHandler<string>? LoggedIn;
     public event EventHandler<string>? LoggedOut;
@@ -30,23 +31,33 @@ public class HubClient : IAsyncDisposable
     public HubClient(NavigationManager navigationManager,
                      ICurrentUserService currentUserService,
                      IAuthenticationService authenticationService,
-                     ISessionsInfoTracker sessionsInfoTracker)
+                     ISessionsInfoTracker sessionsInfoTracker,
+                     ILogger<HubClient> logger)
     {
         _sessionsInfoTracker = sessionsInfoTracker;
         _currentUserService = currentUserService;
         _navigationManager = navigationManager;
         _authenticationService = authenticationService;
+        _logger = logger;
     }
 
     public async Task StartAsync()
     {
         if (!_started)
         {
-            _hubUrl = _navigationManager.BaseUri.TrimEnd('/') + SignalRConstants.HubUrl;
+            _logger.LogInformation("HubUrl: {0}", _navigationManager.ToAbsoluteUri(SignalRConstants.HubUrl));
 
-            // create the connection using the .NET SignalRConstants client
-            _hubConnection = new HubConnectionBuilder().WithUrl(_hubUrl).Build();
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl(_navigationManager.ToAbsoluteUri(SignalRConstants.HubUrl), config =>
+                {
+                    config.HttpMessageHandlerFactory = (x) => new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+                    };
+                })
+                .Build();
 
+            _hubConnection.ServerTimeout = TimeSpan.FromSeconds(30);
             _hubConnection.On(SignalRConstants.ForceLogout, _authenticationService.Logout);
             _hubConnection.On<string>(SignalRConstants.ConnectUser, (userId) =>
             {
