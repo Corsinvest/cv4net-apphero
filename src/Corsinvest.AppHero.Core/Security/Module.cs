@@ -86,9 +86,8 @@ public class Module : ModuleBase, IForceLoadModule
         services.ConfigureApplicationCookie(options =>
         {
             options.LoginPath = "/auth/user/signin";
-            //options.LogoutPath = "/";
-            options.Cookie.HttpOnly = true;
-            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            //options.Cookie.HttpOnly = true;
+            //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             options.SlidingExpiration = true;
             options.ExpireTimeSpan = TimeSpan.FromHours(services.GetOptionsSnapshot<Identity.Options>().Value.LoginCookieExpirationHours);
         });
