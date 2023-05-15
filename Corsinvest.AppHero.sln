@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{55F1BF
 		icon.png = icon.png
 		LICENSE = LICENSE
 		README.md = README.md
-		PublishNuget.ps1 = PublishNuget.ps1
+		publish-nuget.ps1 = publish-nuget.ps1
 		src\Todo.txt = src\Todo.txt
 		setKey.ps1 = setKey.ps1
 	EndProjectSection
