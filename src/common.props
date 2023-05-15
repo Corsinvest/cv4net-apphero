@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<LangVersion>latest</LangVersion>
-		<Version>0.0.94</Version>
+		<Version>0.0.95</Version>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<!--<NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>-->
 
@@ -13,20 +13,22 @@
 		<Authors>Corsinvest Srl</Authors>
 		<Copyright>Corsinvest Srl</Copyright>
 		<PackageProjectUrl>https://github.com/Corsinvest/cv4net-apphero</PackageProjectUrl>
-		<PackageIcon>icon.png</PackageIcon>
-		<PackageOutputPath>..\..\nupkgs\</PackageOutputPath>
 		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
 		<RepositoryType>Github</RepositoryType>
 		<RepositoryUrl>https://github.com/Corsinvest/cv4net-apphero</RepositoryUrl>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(BUILD_FOR_DOCKER)' == ''">
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageOutputPath>..\..\nupkgs\</PackageOutputPath>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(BUILD_FOR_DOCKER)' == ''">
 		<None Include="..\..\icon.png" Pack="true" PackagePath="" />
 		<None Include="..\..\LICENSE" Pack="true" PackagePath="" />
 	</ItemGroup>

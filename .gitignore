@@ -403,3 +403,4 @@ nupkgs/
 /src/Corsinvest.AppHero.AppBss/data
 /src/Corsinvest.AppHero.AppBss/appsettings.json
 Todo.txt
+setKey.ps1
