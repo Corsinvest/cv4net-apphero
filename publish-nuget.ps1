@@ -5,7 +5,7 @@
 
 #Read project version
 $xml = [xml](Get-Content .\src\common.props)
-$version = $xml.Project.PropertyGroup.Version
+$version = $xml.Project.PropertyGroup[0].Version
 Write-Host "Project version: $version"
 
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Auditing.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
