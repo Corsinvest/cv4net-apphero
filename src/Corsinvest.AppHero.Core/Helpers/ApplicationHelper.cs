@@ -17,6 +17,7 @@ public static class ApplicationHelper
     }
 
     public static Type RootComponent { get; set; } = default!;
+    public static bool InDocker => Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 
     public static string HelpUrl { get; } = "/doc/index.html";
     public static string ModuleComponentUrl { get; } = "/Module";
@@ -30,8 +31,9 @@ public static class ApplicationHelper
     public static string PathData => Path.Combine(PathExecution, "data");
     public static string FileNameOptions { get; } = "appsettings.json";
     public static string PathModules => Path.Combine(PathData, "modules");
-    public static Version Version => Assembly.GetEntryAssembly()!.GetName().Version!;
-    //public static Type TypeApllicationDB { get; set; } = default!;
+
+    public static string ProductVersion
+        => System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion!;
 
     public static string GetGravatar(string email, string forceDefault = "retro")
     {
