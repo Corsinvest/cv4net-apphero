@@ -32,7 +32,7 @@ public interface IReleaseService
                 {
                     if (SemVersion.TryParse(item.Version, SemVersionStyles.Any, out var semVer))
                     {
-                        if (currSemVer.ComparePrecedenceTo(semVer) == 1)
+                        if (currSemVer.ComparePrecedenceTo(semVer) == -1)
                         {
                             LastValue = item;
                             break;
