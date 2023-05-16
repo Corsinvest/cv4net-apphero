@@ -16,11 +16,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddAppHero(this IServiceCollection services, IConfiguration config)
     {
-        //if (ApplicationHelper.TypeApllicationDB == null)
-        //{
-        //    throw new AppHeroException($"Application database not setting! Use {nameof(Persistence.ServiceCollectionExtensions.AddAppHeroDbContext)}");
-        //}
-
         services.AddHttpContextAccessor();
         services.AddOptions<AppOptions>(config, nameof(AppOptions));
         services.AddOptions<PackagesOptions>(config, nameof(PackagesOptions));

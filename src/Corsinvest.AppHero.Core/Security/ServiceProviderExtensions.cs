@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Corsinvest.AppHero.Core.Security;
 
-public static class ServiceCollectionExtensions
+public static class ServiceProviderExtensions
 {
     public static async Task AppHeroPopulateSecurityAsync(this IServiceProvider services)
     {
-        var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger(typeof(ServiceCollectionExtensions));
+        var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger(typeof(ServiceProviderExtensions));
         logger.LogInformation("Initialize Security db");
 
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
