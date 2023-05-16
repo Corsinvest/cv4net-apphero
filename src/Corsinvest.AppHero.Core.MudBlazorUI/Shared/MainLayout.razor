@@ -70,12 +70,29 @@
 
                         <MudNavMenu Class="d-flex justify-space-between pa-4">
                             <MudLink Href="@AppOptions.Url" Target="_blank"
-                                     Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important"><b>@AppOptions.Author</b></MudLink>
-                            <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">@L["version"] @ApplicationHelper.ProductVersion</MudText>
-                        </MudNavMenu>
-                        </MudDrawer>
+                                     Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important">
+                                <b>@AppOptions.Author</b>
+                            </MudLink>
 
-                        <MudMainContent>
+                            @if (ReleaseInfo == null)
+                            {
+                                <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
+                                    @L["version"] @ApplicationHelper.ProductVersion
+                                </MudText>
+                            }
+                            else
+                            {
+                                <MudLink Target="_blank" Href="@ReleaseInfo.Url"
+                                     Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">                                    
+                                    <MudBadge Dot="true" Color="Color.Primary" >
+                                        @L["new version"] @ReleaseInfo.Version
+                                    </MudBadge>
+                                </MudLink>
+                            }
+                        </MudNavMenu>
+                    </MudDrawer>
+
+                    <MudMainContent>
                         <MudContainer Style="max-width: 100%">
                             @Body
 
@@ -83,12 +100,12 @@
                                 <MudFab StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Primary" Size="Size.Small" />
                             </MudScrollToTop>
                         </MudContainer>
-                        </MudMainContent>
-                    </Authorized>
-                    </AuthorizeView>
-                    </MudLayout>
-                </ChildContent>
-                <ErrorContent>
-                    <AHCustomError Exception="context" />
-                </ErrorContent>
-                </ErrorBoundary>
+                    </MudMainContent>
+                </Authorized>
+            </AuthorizeView>
+        </MudLayout>
+    </ChildContent>
+    <ErrorContent>
+        <AHCustomError Exception="context" />
+    </ErrorContent>
+</ErrorBoundary>

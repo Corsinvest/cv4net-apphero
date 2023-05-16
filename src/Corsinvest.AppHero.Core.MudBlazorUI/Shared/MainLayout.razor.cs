@@ -5,6 +5,7 @@
 using Corsinvest.AppHero.Core.Hubs;
 using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components;
 using Corsinvest.AppHero.Core.MudBlazorUI.Style;
+using Corsinvest.AppHero.Core.SoftwareRelease;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
@@ -23,13 +24,19 @@ public partial class MainLayout : IAsyncDisposable
     [Inject] private IModularityService ModularityService { get; set; } = default!;
     [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private IServiceScopeFactory ServiceScopeFactory { get; set; } = default!;
 
     private AppOptions AppOptions => SnapshotAppOptions.Value;
     private UIOptions UIOptions => ModnitorUIOptions.CurrentValue;
     private bool DrawerOpen { get; set; } = true;
+    private RleaseInfo? ReleaseInfo { get; set; }
+    private IReleaseService? _releaseService;
+    private Timer? _timer;
 
     public async ValueTask DisposeAsync()
     {
+        _timer?.Dispose();
+
         await HubClient.StopAsync();
         HubClient.LoggedOut -= HubClient_LoggedOut;
         HubClient.LoggedIn -= HubClient_LoggedIn;
@@ -54,6 +61,16 @@ public partial class MainLayout : IAsyncDisposable
 
     protected override async Task OnInitializedAsync()
     {
+        using var scope = ServiceScopeFactory.CreateScope();
+        _releaseService = scope.ServiceProvider.GetService<IReleaseService>();
+        if (_releaseService != null)
+        {
+            _timer = new Timer(async (o) => ReleaseInfo = await _releaseService.NewReleaseIsAvaibleAsync(),
+                               null,
+                               TimeSpan.Zero,
+                               TimeSpan.FromMinutes(5));
+        }
+
         HubClient.LoggedOut += HubClient_LoggedOut;
         HubClient.LoggedIn += HubClient_LoggedIn;
         HubClient.JobStarted += HubClient_JobStarted;
