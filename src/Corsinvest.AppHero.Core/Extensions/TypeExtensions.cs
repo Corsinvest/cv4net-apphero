@@ -8,13 +8,14 @@ namespace Corsinvest.AppHero.Core.Extensions;
 
 public static class TypeExtensions
 {
-    public static PropertyInfo GetPropertyFromPath(this Type type, string path)
+    public static PropertyInfo? GetPropertyFromPath(this Type type, string path)
     {
         var typeInfo = type;
-        PropertyInfo pi = default!;
+        PropertyInfo? pi = null;
         foreach (var item in path.Split('.'))
         {
             pi = typeInfo.GetPublicProperty(item)!;
+            if (pi == null) { break; }
             typeInfo = pi.PropertyType;
         }
 

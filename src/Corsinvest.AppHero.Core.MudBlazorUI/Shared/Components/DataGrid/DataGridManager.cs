@@ -162,9 +162,13 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
             col = 'A';
             foreach (var field in fields)
             {
-                var value = (item!.GetType().GetPropertyFromPath(field)!.GetValue(item) + "").ToString();
-                worksheet.Cell($"{col}{row}").Value = value;
-                col++;
+                var pi = item!.GetType().GetPropertyFromPath(field);
+                if (pi != null)
+                {
+                    var value = (pi.GetValue(item) + "").ToString();
+                    worksheet.Cell($"{col}{row}").Value = value;
+                    col++;
+                }
             }
             row++;
         }
