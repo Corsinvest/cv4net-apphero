@@ -7,7 +7,6 @@ using Corsinvest.AppHero.AppBss.Persistence;
 using Corsinvest.AppHero.Core;
 using Corsinvest.AppHero.Core.Extensions;
 using Corsinvest.AppHero.Core.Helpers;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Connections;
 using Serilog;

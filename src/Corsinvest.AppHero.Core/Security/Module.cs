@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Hosting;
 using Corsinvest.AppHero.Core.UI;
-using Microsoft.AspNetCore.Http;
 
 namespace Corsinvest.AppHero.Core.Security;
 

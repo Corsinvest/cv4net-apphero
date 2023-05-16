@@ -5,7 +5,6 @@
 using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Session;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Corsinvest.AppHero.Core.Hubs;
