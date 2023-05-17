@@ -18,7 +18,7 @@ namespace Corsinvest.AppHero.AppBss;
 
 public static class ServiceCollectionExtensions
 {
-    public static void Customize(this IServiceCollection services)
+    public static IServiceCollection Customize(this IServiceCollection services)
     {
         var writableAppOptions = services.GetWritableOptions<AppOptions>();
         writableAppOptions.Value.Name = "AppHero";
@@ -28,6 +28,8 @@ public static class ServiceCollectionExtensions
         writableAppOptions.Value.RepoDockerHub = "corsinvest/cv4net-apphero";
         writableAppOptions.Value.RepoGitHub= "corsinvest/cv4net-apphero";
         writableAppOptions.Update(writableAppOptions.Value);
+
+        return services;
     }
 
     private static IServiceCollection ConfigureHangfire(this IServiceCollection services)

@@ -51,10 +51,9 @@ builder.Services.ConfigureApp();
 builder.Services.AddMvc();
 builder.Services.AddControllers();
 
-builder.Services.AddAppHero(builder.Configuration);
-builder.Services.Customize();
-
-builder.Services.AddReleaseGitHub()
+builder.Services.AddAppHero(builder.Configuration)
+                .Customize()
+                .AddReleaseGitHub()
                 .AddReleaseDockerHub();
 
 builder.Services.AddEndpointsApiExplorer();

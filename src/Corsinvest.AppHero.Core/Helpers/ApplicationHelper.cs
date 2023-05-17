@@ -33,7 +33,7 @@ public static class ApplicationHelper
     public static string PathModules => Path.Combine(PathData, "modules");
 
     public static string ProductVersion
-        => System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion!;
+        => System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly()!.Location).ProductVersion!;
 
     public static string GetGravatar(string email, string forceDefault = "retro")
     {

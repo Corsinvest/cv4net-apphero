@@ -36,6 +36,7 @@ For licensing details please visit [LICENSE](LICENSE)
 * Localization runtime, translation
 * Job Scheduling
 * Make easy to create Options
+* Release check form GitHubu or DockerHub
 * MudBlazor render in this moment, but indipendent
 
 Framework for fast application.
