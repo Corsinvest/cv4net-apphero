@@ -10,7 +10,7 @@
     @foreach (var item in GetAllChannelsNotification())
     {
         <MudSelectItem T="string" Value="@item.Name">
-            <div class="d-flex gap-4">
+            <div class="d-flex gap-1">
                 <MudIcon Icon=@item.Icon />
                 @item.Name
             </div>
