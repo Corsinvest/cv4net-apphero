@@ -13,17 +13,6 @@ public partial class GenericRenderOptions<TOptions, T>
     where TOptions : NotificationChannelsOptions<T>, new()
     where T : NotificationChannelOptions, new()
 {
-    private string DefaultGroupName { get; set; } = default!;
-
-    protected override void OnInitialized()
-    {
-        //if (Options.GetType().GetProperties().Any(a => !a.PropertyType.IsAssignableTo(typeof(IEnumerable))
-        //                                                && Type.GetTypeCode(a.PropertyType) == TypeCode.Object))
-        //{
-        DefaultGroupName = "General";
-        //}
-    }
-
     private void Configure(ObjectEditMeta<T> meta)
     {
         foreach (var item in meta.AllProperties)
@@ -35,7 +24,7 @@ public partial class GenericRenderOptions<TOptions, T>
             else
             {
                 MudExObjectEditFormHelper.FixPropertyItem(item);
-            }            
+            }
         }
     }
 }

@@ -8,21 +8,13 @@
     <MudTabs Elevation="1" ApplyEffectsToContainer Border>
         <Header>
             <AHPermissionButton Permission="Corsinvest.AppHero.Core.Options.Module.Permissions.Save" Disabled="@(!IsValid)"
-                                Variant="Variant.Filled" OnClick="@OnSaveAsync" Style="margin:10px" />
+                                Variant="Variant.Filled" OnClick="@OnSaveAsync" Style="margin:10px" Size="Size.Small" />
         </Header>
         <ChildContent>
-            @*@foreach (var item in Modules.Implements<IGroupableService>().GroupBy(a => ((IGroupableService)a).GetGroupName()).OrderBy(a => a.Key))
-            {
-            var group = (IGroupableService)item.ToArray()[0];
-            <MudTabPanel Text="@L[group.GetGroupName()]" Icon="@group.ToMBIcon()">
-            @RenderOptionsModules(item)
-            </MudTabPanel>
-            }
-            *@
-            <MudTabPanel Text="@L["Service"]" Icon="@Icons.Material.Outlined.Settings">
+            <MudTabPanel Text="@L["Service"]" Icon="@Icons.Material.Filled.Settings">
                 <MudTabs Elevation="1" ApplyEffectsToContainer Border>
                     @* Services not grouped *@
-                    <MudTabPanel Text="@L["General"]" Icon="@Icons.Material.Outlined.Folder">
+                    <MudTabPanel Text="@L["General"]" Icon="@Icons.Material.Filled.Folder">
                         @RenderOptionsModules(Modules.IsType(ModuleType.Service).NotImplements<IGroupableService>())
                     </MudTabPanel>
 
@@ -37,19 +29,7 @@
                 </MudTabs>
             </MudTabPanel>
 
-            @* only Application *@
-            @*@foreach (var category in ModularityService.GetCategories())
-            {
-            var modules = Modules.IsType(ModuleType.Application).IsCategory(category);
-            if (modules.Any())
-            {
-            <MudTabPanel Text="@L[category]" Icon="@ModularityService.ToMBIcon(category)">
-            @RenderOptionsModules(modules)
-            </MudTabPanel>
-            }
-            }*@
-
-            <MudTabPanel Text="@L["Apps"]" Icon="@Icons.Material.Outlined.Apps">
+            <MudTabPanel Text="@L["Apps"]" Icon="@Icons.Material.Filled.Apps">
                 @RenderOptionsModules(Modules.IsType(ModuleType.Application).IsEnabled().OrderBy(a=> a.Description))
             </MudTabPanel>
         </ChildContent>

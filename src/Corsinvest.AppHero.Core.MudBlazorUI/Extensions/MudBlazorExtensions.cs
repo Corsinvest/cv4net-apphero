@@ -87,7 +87,7 @@ public static class MudBlazorExtensions
     //                                                   message,
     //                                                   "Yes",
     //                                                   "No",
-    //                                                   Icons.Material.Outlined.QuestionMark,
+    //                                                   Icons.Material.Filled.QuestionMark,
     //                                                   new DialogOptionsEx()
     //                                                   {
     //                                                       DragMode = MudDialogDragMode.Simple,

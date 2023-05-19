@@ -6,11 +6,11 @@
 
 <MudMenu AnchorOrigin="Origin.BottomRight" Class="@Class">
     <ActivatorContent>
-        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Outlined.Apps" />
+        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Apps" />
     </ActivatorContent>
     <ChildContent>
         <MudPaper MaxWidth="300px" MaxHeight="480px" Elevation="0">
-            @RenderButton(Icons.Material.Outlined.Home,Color.Default,@L["Home"],"/","")
+            @RenderButton(Icons.Material.Filled.Home,Color.Default,@L["Home"],"/","")
 
             @foreach (var item in Links.Where(a => string.IsNullOrWhiteSpace(Search) || a.Module.Search(Search)).GroupBy(a => a.Module.Category).OrderBy(a => a.Key))
             {

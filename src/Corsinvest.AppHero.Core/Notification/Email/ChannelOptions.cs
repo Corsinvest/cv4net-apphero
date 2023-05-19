@@ -50,10 +50,10 @@ public class ChannelOptions : NotificationChannelOptions
         var email = new MimeMessage
         {
             Subject = message.Subject,
+            Sender = new MailboxAddress(FromDisplayName, FromAddress),
         };
         email.From.Add(new MailboxAddress(FromDisplayName, FromAddress));
-        email.Sender = new MailboxAddress(FromDisplayName, FromAddress);
-        email.To.AddRange(ToAddress.Split(";").Select(a => MailboxAddress.Parse(a)));
+        email.To.AddRange(ToAddress.Split(",").Select(a => MailboxAddress.Parse(a.Trim())));
 
         var builder = new BodyBuilder
         {

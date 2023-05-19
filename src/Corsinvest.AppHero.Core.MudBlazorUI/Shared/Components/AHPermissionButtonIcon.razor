@@ -7,7 +7,7 @@
 <AHPermission Permission="Permission" Loading="@Loading">
     <ChildContent>
         <MudIconButton Icon="@Permission.ToMBIcon()" Color="Permission.Color.ToMBColor()"
-                       OnClick="@OnClick" Size="Size.Small" Title="@L[Permission.Description]"
+                       OnClick="@OnClick" Size="@Size" Title="@L[Permission.Description]"
                        Disabled="@Disabled" Variant="@Variant" Class="@Class" Style="@Style" />
     </ChildContent>
 </AHPermission>
@@ -19,4 +19,5 @@
     [Parameter] public bool Disabled { get; set; }
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
     [Parameter] public Variant Variant { get; set; }
+    [Parameter] public Size Size { get; set; } = Size.Medium;
 }

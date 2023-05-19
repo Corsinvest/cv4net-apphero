@@ -8,7 +8,7 @@
     <MudItem xs="12" md="@(ShowDescriptor ? Size : 12)">
         <MudTextField @bind-Value="@Expression" Label="@L["Cron expression"]" For="@(() => Expression)"
                       TextChanged="@TextChanged" Immediate Clearable
-                      AdornmentIcon="@Icons.Material.Outlined.Timer"
+                      AdornmentIcon="@Icons.Material.Filled.Timer"
                       Adornment="Adornment.End"
                       AdornmentColor="Color.Info"           
                       AdornmentAriaLabel="@L["Cron configurator"]"

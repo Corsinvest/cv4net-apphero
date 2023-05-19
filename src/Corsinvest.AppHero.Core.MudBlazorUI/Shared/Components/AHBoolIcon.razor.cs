@@ -17,10 +17,10 @@ public partial class AHBoolIcon
     private string? GetIcon()
         => IconType switch
         {
-            AHBoolIconType.Thumb => Value ? Icons.Material.Outlined.ThumbUp : Icons.Material.Outlined.ThumbDown,
-            AHBoolIconType.CheckBox => Value ? Icons.Material.Outlined.CheckBox : @Icons.Material.Outlined.CheckBoxOutlineBlank,
-            AHBoolIconType.RadioButton => Value ? Icons.Material.Outlined.RadioButtonChecked : @Icons.Material.Outlined.RadioButtonUnchecked,
-            AHBoolIconType.Toggle => Value ? Icons.Material.Outlined.ToggleOn : @Icons.Material.Outlined.ToggleOff,
+            AHBoolIconType.Thumb => Value ? Icons.Material.Filled.ThumbUp : Icons.Material.Filled.ThumbDown,
+            AHBoolIconType.CheckBox => Value ? Icons.Material.Filled.CheckBox : @Icons.Material.Filled.CheckBoxOutlineBlank,
+            AHBoolIconType.RadioButton => Value ? Icons.Material.Filled.RadioButtonChecked : @Icons.Material.Filled.RadioButtonUnchecked,
+            AHBoolIconType.Toggle => Value ? Icons.Material.Filled.ToggleOn : @Icons.Material.Filled.ToggleOff,
             AHBoolIconType.Custom => Value ? IconTrue : IconFalse,
             _ => "",
         };

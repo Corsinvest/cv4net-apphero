@@ -11,7 +11,8 @@ public class NotificationChannelsOptionsGridBase<T> : AHComponentBase where T : 
     [Parameter] public NotificationChannelsOptions<T> Options { get; set; } = default!;
     [Parameter] public RenderFragment<T> Row { get; set; } = default!;
     [Inject] protected IDataGridManager<T> DataGridManager { get; set; } = default!;
-    [Inject] private IUIMessageBox ViewMessageBox { get; set; } = default!;
+    [Inject] private IUINotifier UINotifier { get; set; } = default!;
+    [Inject] private IUIMessageBox UIMessageBox { get; set; } = default!;
 
     protected bool LoadingTest { get; set; }
 
@@ -42,10 +43,14 @@ public class NotificationChannelsOptionsGridBase<T> : AHComponentBase where T : 
     protected async Task TestAsync(T channel)
     {
         LoadingTest = true;
-        if (await ViewMessageBox.ShowQuestionAsync(L["Send test"], L["Execute Test?"]))
+        if (await UIMessageBox.ShowQuestionAsync(L["Send test"], L["Execute Test?"]))
         {
-            try { await channel.SendTest(); }
-            catch (Exception ex) { await ViewMessageBox.ShowInfoAsync(L["Error"], ex.Message); }
+            try
+            {
+                await channel.SendTest();
+                UINotifier.Show(L["Test done successfully!!"], UINotifierSeverity.Success);
+            }
+            catch (Exception ex) { await UIMessageBox.ShowInfoAsync(L["Error"], ex.Message); }
         }
         LoadingTest = false;
     }

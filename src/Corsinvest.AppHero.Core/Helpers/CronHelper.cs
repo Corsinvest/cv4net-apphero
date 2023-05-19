@@ -11,7 +11,7 @@ public class CronHelper
 {
     public static DateTimeOffset? NextOccurrence(string cronExpression)
         => IsValid(cronExpression)
-                ? CronExpression.Parse(cronExpression).GetNextOccurrence(DateTime.UtcNow, TimeZoneInfo.Local)!.Value
+                ? CronExpression.Parse(cronExpression).GetNextOccurrence(DateTime.UtcNow, TimeZoneInfo.Utc)!.Value
                 : null;
 
     public static bool IsValid(string cronExpression)

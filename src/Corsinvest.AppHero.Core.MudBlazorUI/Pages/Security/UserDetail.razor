@@ -5,7 +5,7 @@
 @inherits AHComponentBase
 
 <MudTabs Elevation="1" ApplyEffectsToContainer Border PanelClass="pa-6" KeepPanelsAlive>
-    <MudTabPanel Text="@L["Avatar"]" Icon="@Icons.Material.Outlined.Image">
+    <MudTabPanel Text="@L["Avatar"]" Icon="@Icons.Material.Filled.Image">
         <div class="d-flex justify-center mb-4">
             <AHUserAvatar User="User" Style="height:200px; width:200px;" />
 
@@ -13,7 +13,7 @@
             <MudMenu Icon="@Icons.Material.Filled.MoreVert">
                 <MudMenuItem>
                     <div class="d-flex" onclick="document.getElementById('UploadPhoto').click()">
-                        <MudIcon Class="mx-2" Icon="@Icons.Material.Outlined.PhotoCamera" Size="Size.Small" />
+                        <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.PhotoCamera" Size="Size.Small" />
                         <MudText>@L["Upload"]</MudText>
                     </div>
                 </MudMenuItem>
@@ -22,7 +22,7 @@
                 {
                     <MudMenuItem OnClick="@ClearPhoto">
                         <div class="d-flex">
-                            <MudIcon Class="mx-2" Icon="@Icons.Material.Outlined.DeleteForever" Size="Size.Small"
+                            <MudIcon Class="mx-2" Icon="@Icons.Material.Filled.DeleteForever" Size="Size.Small"
                                  Color="Color.Error" />
                             <MudText>@L["Clear"]</MudText>
                         </div>
@@ -32,7 +32,7 @@
         </div>
     </MudTabPanel>
 
-    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Outlined.Person">
+    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Filled.Person">
         <MudGrid>
             <MudItem xs="12" sm="6">
                 <MudTextField @bind-Value="@User.FirstName" Label="@(L[GetDescriptionProperty(a => a.FirstName!)])" For="@(() => User.FirstName)" />
@@ -63,7 +63,7 @@
         </MudGrid>
     </MudTabPanel>
 
-    <MudTabPanel Text="@L["Account"]" Icon="@Icons.Material.Outlined.Public">
+    <MudTabPanel Text="@L["Account"]" Icon="@Icons.Material.Filled.Public">
         <MudGrid>
             <MudItem xs="12" sm="6">
                 <MudSwitch @bind-Checked="@User.IsActive" Label="@(L[GetDescriptionProperty(a => a.IsActive)])"
@@ -89,7 +89,7 @@
 
     @if (Creation)
     {
-        <MudTabPanel Text="@L["Password"]" Icon="@Icons.Material.Outlined.Password">
+        <MudTabPanel Text="@L["Password"]" Icon="@Icons.Material.Filled.Password">
             <AHPasswordsInput @bind-Value="PasswordInt" For="@(() => PasswordInt)" PasswordOptions="IdentityOptions.Value.Password" />
         </MudTabPanel>
     }

@@ -11,7 +11,7 @@
     @ToolBarContentBefore
 }
 
-<MudIconButton Title="@L["Refresh"]" Icon="@Icons.Material.Outlined.Refresh" OnClick="@DataGridManager.Refresh"
+<MudIconButton Title="@L["Refresh"]" Icon="@Icons.Material.Filled.Refresh" OnClick="@DataGridManager.Refresh"
                Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
 
 @if (PermissionExport != null)

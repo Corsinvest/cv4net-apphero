@@ -5,7 +5,7 @@
 @inherits AHComponentBase
 
 <MudNavMenu Dense Margin="Margin.Dense" Color="Color.Primary">
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@L["Home"]</MudNavLink>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@L["Home"]</MudNavLink>
 
     @foreach (var category in ModularityService.GetCategories().OrderBy(a => a))
     {

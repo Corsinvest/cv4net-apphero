@@ -5,7 +5,7 @@
 @inherits AHComponentBase
 
 <MudTabs Border Elevation="1" ApplyEffectsToContainer Class="mt-8" PanelClass="pa-6">
-    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Outlined.Person">
+    <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Filled.Person">
         <MudForm Model="@User" @ref="@RefProfile" Style="display: flex; align-content: center;  align-items: center; flex-direction: column;">
             <MudGrid Justify="Justify.Center" Style="max-width:50%;display:flex;">
                 <MudItem sm="12" xs="12">
@@ -20,7 +20,7 @@
         </MudForm>
     </MudTabPanel>
 
-    <MudTabPanel Text="@L["Change Password"]" Icon="@Icons.Material.Outlined.Password">
+    <MudTabPanel Text="@L["Change Password"]" Icon="@Icons.Material.Filled.Password">
         <MudForm Model="@ChangePassword" @ref="@RefChangepPassword" Validation="@(PasswordValidator.ValidateValue)"
                  Style="display: flex; align-content: center;  align-items: center; flex-direction: column;">
             <MudGrid Justify="Justify.Center" Style="max-width:25%;">

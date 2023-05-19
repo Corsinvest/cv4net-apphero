@@ -95,13 +95,13 @@ else
                             <ChildContent>
                                 @if (context.Item.CurrentVersion != null)
                                 {
-                                    <MudIconButton Icon="@Icons.Material.Outlined.FileDownload" Title="@L["Install"]"
+                                    <MudIconButton Icon="@Icons.Material.Filled.FileDownload" Title="@L["Install"]"
                                            Color="Color.Success" OnClick="@(async () => await InstallerAsync(context.Item,true))" />
                                 }
 
                                 @if (context.Item.IsInstallated)
                                 {
-                                    <MudIconButton Icon="@Icons.Material.Outlined.DeleteForever" Title="@L["Uninstall"]"
+                                    <MudIconButton Icon="@Icons.Material.Filled.DeleteForever" Title="@L["Uninstall"]"
                                            Color="Color.Error" OnClick="@(async () => await InstallerAsync(context.Item,false))" />
                                 }
                             </ChildContent>
