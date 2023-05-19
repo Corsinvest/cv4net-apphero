@@ -31,10 +31,33 @@ public class JobService : IJobService
     public string Schedule<T>(Expression<Func<T, Task>> methodCall, DateTimeOffset enqueueAt) => BackgroundJobHelper.Schedule(methodCall, enqueueAt);
 
     //Recurring Job
-    public void Schedule(string recurringJobId, Expression<Action> methodCall, string cronExpression) => RecurringJob.AddOrUpdate(recurringJobId, methodCall, cronExpression);
-    public void Schedule(string recurringJobId, Expression<Func<Task>> methodCall, string cronExpression) => RecurringJob.AddOrUpdate(recurringJobId, methodCall, cronExpression);
-    public void Schedule<T>(string recurringJobId, Expression<Action<T>> methodCall, string cronExpression) => RecurringJob.AddOrUpdate(recurringJobId, methodCall, cronExpression);
-    public void Schedule<T>(string recurringJobId, Expression<Func<T, Task>> methodCall, string cronExpression) => RecurringJob.AddOrUpdate(recurringJobId, methodCall, cronExpression);
+    public void Schedule(string recurringJobId, Expression<Action> methodCall, string cronExpression, TimeZoneInfo timezone)
+        => RecurringJob.AddOrUpdate(recurringJobId,
+                                    methodCall,
+                                    cronExpression,
+                                    new RecurringJobOptions() { TimeZone = timezone });
+
+    public void Schedule(string recurringJobId, Expression<Func<Task>> methodCall, string cronExpression, TimeZoneInfo timezone)
+        => RecurringJob.AddOrUpdate(recurringJobId,
+                                    methodCall,
+                                    cronExpression,
+                                    new RecurringJobOptions() { TimeZone = timezone });
+
+    public void Schedule<T>(string recurringJobId, Expression<Action<T>> methodCall, string cronExpression, TimeZoneInfo timezone)
+        => RecurringJob.AddOrUpdate(recurringJobId,
+                                    methodCall,
+                                    cronExpression,
+                                    new RecurringJobOptions() { TimeZone = timezone });
+
+    public void Schedule<T>(string recurringJobId, Expression<Func<T, Task>> methodCall, string cronExpression, TimeZoneInfo timezone)
+        => RecurringJob.AddOrUpdate(recurringJobId,
+                                    methodCall,
+                                    cronExpression,
+                                    new RecurringJobOptions()
+                                    {
+                                        TimeZone = timezone ?? TimeZoneInfo.Local
+                                    });
+
     public void RemoveIfExists(string recurringJobId) => RecurringJob.RemoveIfExists(recurringJobId);
     public void TriggerJob(string recurringJobId) => RecurringJob.TriggerJob(recurringJobId);
 }
