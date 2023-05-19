@@ -9,10 +9,10 @@
 <MudSelect T="string" Label="@L["Notification Channels"]" @bind-SelectedValues="Options.NotificationChannels" MultiSelection Clearable>
     @foreach (var item in GetAllChannelsNotification())
     {
-        <MudSelectItem T="string" Value="@item.Key">
+        <MudSelectItem T="string" Value="@item.Name">
             <div class="d-flex gap-4">
-                <MudIcon Icon=@item.Value />
-                @item.Key
+                <MudIcon Icon=@item.Icon />
+                @item.Name
             </div>
         </MudSelectItem>
     }

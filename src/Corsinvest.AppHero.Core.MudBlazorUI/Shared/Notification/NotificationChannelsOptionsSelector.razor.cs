@@ -14,17 +14,16 @@ public partial class NotificationChannelsOptionsSelector<T> where T : INotificat
     [Inject] private IModularityService ModularityService { get; set; } = default!;
     [Inject] private INotificationService NotificationService { get; set; } = default!;
 
-
-    private IDictionary<string, string> GetAllChannelsNotification()
+    private IList<(string Name,string Icon)> GetAllChannelsNotification()
     {
         using var scope = ServiceScopeFactory.CreateScope();
 
-        var ret = new Dictionary<string, string>();
+        var ret = new List<(string Name, string Icon)>();
         foreach (var module in ModularityService.Modules.IsEnabled().Implements<INotification>())
         {
             foreach (var item in NotificationService.GetNotificationChannels(scope, module).Where(a => a.Enabled))
             {
-                ret.Add(item.Name, module.Icon);
+                ret.Add((item.Name, module.ToMBIcon()));
             }
         }
 
