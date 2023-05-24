@@ -19,6 +19,5 @@ public class AHModuleOptionsBase<T> : AHComponentBase, ISavable where T : class,
         await Task.CompletedTask;
     }
 
-    public string GetDescriptionProperty(Expression<Func<T, object>> expression) => MudBlazorHelper.GetDescriptionProperty(expression);
-    public string GetDescriptionProperty(string propertyName) => MudBlazorHelper.GetDescriptionProperty<T>(propertyName);
+    public string GetDescriptionProperty(Expression<Func<T, object>> expression) => ClassHelper.GetDescriptionProperty(expression);
 }

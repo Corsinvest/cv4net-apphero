@@ -20,12 +20,12 @@ public static class MudExObjectEditFormHelper
     {
         if (!string.IsNullOrEmpty(item.GroupInfo.Name)) { item.GroupInfo.Name = item.GroupInfo.Name.Humanize(LetterCasing.Title); }
 
-        item.WithLabelResolver(pi => MudBlazorHelper.GetDescriptionProperty(pi.DeclaringType!, pi.Name));
+        item.WithLabelResolver(pi => ClassHelper.GetDescriptionProperty(pi.DeclaringType!, pi.Name));
 
         item.WithSettings(a =>
         {
             //a.Localizer = stringLocalizer;
-            a.LabelResolverFn = (pi) => MudBlazorHelper.GetDescriptionProperty(pi.DeclaringType!, pi.Name);
+            a.LabelResolverFn = (pi) => ClassHelper.GetDescriptionProperty(pi.DeclaringType!, pi.Name);
         });
 
         //hide browsable

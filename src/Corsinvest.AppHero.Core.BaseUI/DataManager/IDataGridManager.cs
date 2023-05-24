@@ -29,7 +29,6 @@ public interface IDataGridManager<T> : IRefreshable   where T : class
     Task ExportToExcel();
     bool ExistsSelection { get; }
     Dictionary<string, bool> DefaultSort { get; set; }
-    string GetDescriptionProperty(Expression<Func<T, object>> expression);
     HashSet<T> SelectedItems { get; }
     T SelectedItem { get; }
 }

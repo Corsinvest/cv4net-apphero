@@ -2,7 +2,9 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+using Corsinvest.AppHero.Core.Helpers;
 using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace Corsinvest.AppHero.Core.BaseUI.Shared.Components;
 
@@ -28,4 +30,6 @@ public abstract class AHComponentBase : ComponentBase
 
     private IStringLocalizer _l = default!;
     protected IStringLocalizer L => _l ??= LocalizerFactory.Create(GetType());
+
+    public string GetDescriptionProperty<T>(Expression<Func<T, object>> expression) => ClassHelper.GetDescriptionProperty(expression);
 }

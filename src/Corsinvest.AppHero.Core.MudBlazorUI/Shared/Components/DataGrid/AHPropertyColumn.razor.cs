@@ -4,6 +4,7 @@
  */
 using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components.DataGrid;
 
@@ -21,19 +22,20 @@ public partial class AHPropertyColumn<T, TProperty> : PropertyColumn<T, TPropert
             CellTemplate = RenderBool;
         }
 
-        if (!string.IsNullOrWhiteSpace(PropertyName))
+        if (Property != null)
         {
             var L = LocalizerFactory.Create(GetType());
-            Title = L[MudBlazorHelper.GetDescriptionProperty<T>(PropertyName)];
+            Title = L[ClassHelper.GetDescriptionProperty(Property)];
 
             if (IsFormattedValue) { CellTemplate = RenderFormattedValue; }
         }
     }
 
+    private TValue GetValue<TValue>(T item) => (TValue)((PropertyInfo)ClassHelper.GetPropertyInfo(Property.Body)!).GetValue(item)!;
+
     private TAttribute? GetAttribute<TAttribute>() where TAttribute : Attribute
-        => string.IsNullOrWhiteSpace(PropertyName)
-            ? null
-            : typeof(T).GetProperty(PropertyName)!.GetCustomAttributes(typeof(TAttribute), false).Cast<TAttribute>().FirstOrDefault();
+        => ClassHelper.GetPropertyInfo(Property.Body)?
+                      .GetCustomAttributes(typeof(TAttribute), false).Cast<TAttribute>().FirstOrDefault();
 
     private bool IsFormattedValue
         => !string.IsNullOrWhiteSpace(Format)
@@ -63,72 +65,3 @@ public partial class AHPropertyColumn<T, TProperty> : PropertyColumn<T, TPropert
         }
     }
 }
-
-
-//public partial class AHDataGridColumn<T> : Column<T>
-//{
-//    [Parameter] public Type FormatProvider { get; set; } = default!;
-//    [Parameter] public string DataFormatString { get; set; } = default!;
-
-//    protected override void OnInitialized()
-//    {
-//        base.OnInitialized();
-
-//        if (!string.IsNullOrWhiteSpace(PropertyName))
-//        {
-//            Title = MudBlazorHelper.GetDescriptionProperty<T>(PropertyName);
-
-//            if (IsFormattedValue) { CellTemplate = RenderFormattedValue; }
-
-//            if (Type.GetTypeCode(base.PropertyType) == TypeCode.Boolean)
-//            {
-//                CellTemplate = RenderBool;
-//            }
-//        }
-//    }
-
-//    private TAttribute? GetAttribute<TAttribute>() where TAttribute : Attribute
-//        => string.IsNullOrWhiteSpace(PropertyName)
-//            ? null
-//            : typeof(T).GetProperty(PropertyName)!.GetCustomAttributes(typeof(TAttribute), false).Cast<TAttribute>().FirstOrDefault();
-
-//    private bool IsFormattedValue
-//        => !string.IsNullOrWhiteSpace(DataFormatString)
-//            || !string.IsNullOrWhiteSpace(GetAttribute<DisplayFormatAttribute>()?.DataFormatString);
-
-//    private string GetFormattedString(object item)
-//    {
-//        var dataFormatString = DataFormatString;
-//        var format = GetAttribute<DisplayFormatAttribute>();
-//        if (string.IsNullOrWhiteSpace(DataFormatString)) { dataFormatString = format?.DataFormatString; }
-
-//        if (item == null && !string.IsNullOrWhiteSpace(format?.NullDisplayText))
-//        {
-//            return format.NullDisplayText;
-//        }
-//        else if (string.IsNullOrWhiteSpace(dataFormatString))
-//        {
-//            return item + "";
-//        }
-//        else if (FormatProvider != null)
-//        {
-//            return string.Format((IFormatProvider)Activator.CreateInstance(FormatProvider)!, dataFormatString, item);
-//        }
-//        else
-//        {
-//            return string.Format(dataFormatString, item);
-//        }
-//    }
-
-//    protected override object CellContent(T item)
-//    {
-//        return null;
-//    }
-
-//    protected override object PropertyFunc(T item)
-//    {
-//        return null;
-//    }
-
-//    protected override void SetProperty(object item, object value) { }
-//}

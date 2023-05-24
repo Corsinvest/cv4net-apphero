@@ -11,11 +11,11 @@
 {
     private RenderFragment RenderFormattedValue(CellContext<T> context) => __builder =>
     {
-        @GetFormattedString(ClassHelper.GetValue<TProperty>(context.Item!, PropertyName!)!)
+        @GetFormattedString(GetValue<TProperty>(context.Item!)!)
     };
 
     private RenderFragment RenderBool(CellContext<T> context) => __builder =>
     {
-        <MudCheckBox Checked="@(ClassHelper.GetValue<bool>(context.Item!, PropertyName!))" ReadOnly />
+        <MudCheckBox Checked="@(GetValue<bool>(context.Item!))" ReadOnly />
     };
 }

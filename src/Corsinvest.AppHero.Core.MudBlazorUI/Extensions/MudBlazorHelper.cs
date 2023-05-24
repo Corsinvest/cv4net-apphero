@@ -2,10 +2,6 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Humanizer;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Extensions;
 
@@ -76,45 +72,5 @@ public static class MudBlazorHelper
                 IconConvert.Add($"{nameof(UIIcon)}.{item}", value);
             }
         }
-    }
-
-    public static string GetDescriptionProperty<T>(Expression<Func<T, object>> propertyExpression)
-    {
-        var propertyInfo = ClassHelper.GetPropertyInfo(propertyExpression.Body);
-        return propertyInfo == null
-                ? null!
-                : GetDescriptionProperty(propertyInfo.DeclaringType!, propertyInfo.Name);
-    }
-
-    public static string GetDescriptionProperty<T>(string propertyName) => GetDescriptionProperty(typeof(T), propertyName);
-
-    public static string GetDescriptionProperty(Type type, string propertyName)
-    {
-        var label = string.Empty;
-        var propertyInfo = type.GetProperty(propertyName);
-        if (propertyInfo != null)
-        {
-            label = propertyInfo.GetCustomAttributes(typeof(LabelAttribute), true)
-                                .Cast<LabelAttribute>()
-                                .FirstOrDefault()?.Name ?? string.Empty;
-
-            if (label == string.Empty)
-            {
-                label = propertyInfo?.GetCustomAttributes(typeof(DisplayAttribute), true)
-                                     .Cast<DisplayAttribute>()
-                                     .FirstOrDefault()?.Name ?? string.Empty;
-
-                if (label == string.Empty)
-                {
-                    label = propertyInfo?.GetCustomAttributes(typeof(DisplayNameAttribute), true)
-                                         .Cast<DisplayNameAttribute>()
-                                         .FirstOrDefault()?.DisplayName ?? string.Empty;
-                }
-
-                if (label == string.Empty) { label = propertyName.Humanize(LetterCasing.Title); }
-            }
-        }
-
-        return label;
     }
 }

@@ -6,7 +6,17 @@
 
 <MudSelect Margin="Margin.Dense" Dense="true" T="string" Class="" Strict="true"
            Variant="Variant.Outlined" Label="Sample">
-    <MudSelectItem Value="@("Mario")" />
-    <MudSelectItem Value="@("Mirko")" />
+    <MudSelectItem Value="@("Mario")" >
+        <div class="d-flex gap-2 align-center">
+            <MudIconButton Icon="@Icons.Material.Filled.Dns" Size="Size.Small"/>
+            <MudText >Mario</MudText>
+        </div>
+    </MudSelectItem>
+    <MudSelectItem Value="@("Mirko")">
+        <div class="d-flex gap-2 align-center">
+            <MudIconButton Icon="@Icons.Material.Filled.Domain" Size="Size.Small" />
+            <MudText>Mirko</MudText>
+        </div>
+    </MudSelectItem>
     <MudSelectItem Value="@("Luca")" />
 </MudSelect>

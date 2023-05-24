@@ -5,6 +5,8 @@
 using BlazorDownloadFile;
 using ClosedXML.Excel;
 using Corsinvest.AppHero.Core.Security.Auth.Permissions;
+using DocumentFormat.OpenXml.Office.CustomUI;
+using MudBlazor;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
@@ -237,7 +239,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
         else
         {
             //row filter
-            foreach (var item in state.FilterDefinitions) { query = query.Where(item.GenerateFilterExpression()); }
+            foreach (var item in state.FilterDefinitions) { query = query.Where(((FilterDefinition<T>)item).GenerateFilterExpression()); }
         }
 
         var count = query.Count();
@@ -262,7 +264,6 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
         };
     }
 
-    public string GetDescriptionProperty(Expression<Func<T, object>> expression) => MudBlazorHelper.GetDescriptionProperty(expression);
     public PermissionsRead? Permissions { get; set; }
     public HashSet<T> SelectedItems => DataGrid!.SelectedItems;
     public T SelectedItem => DataGrid!.SelectedItem;

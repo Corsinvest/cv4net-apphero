@@ -75,28 +75,28 @@
     <EditTemplate>
         <MudGrid>
             <MudItem md="6">
-                <MudSwitch @bind-Checked="context.Enabled" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Enabled)])"
+                <MudSwitch @bind-Checked="context.Enabled" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Enabled)])"
                            For="@(() => context.Enabled)" Color="Color.Primary" />
             </MudItem>
 
             <MudItem md="6">
-                <MudTextField @bind-Value="@context.CultureName" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.CultureName)])"
+                <MudTextField @bind-Value="@context.CultureName" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.CultureName)])"
                               For="@(() => context.CultureName)" ReadOnly="context.Id > 0" />
             </MudItem>
 
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.Context" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Context!)])"
+                <MudTextField @bind-Value="@context.Context" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Context!)])"
                               For="@(() => context.Context)" ReadOnly="context.Id > 0" />
             </MudItem>
 
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.Key" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Key)])"
+                <MudTextField @bind-Value="@context.Key" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Key)])"
                               For="@(() => context.Key)" ReadOnly="context.Id > 0"
                               Lines="5" />
             </MudItem>
 
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.Value" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Value)])"
+                <MudTextField @bind-Value="@context.Value" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Value)])"
                               For="@(() => context.Value)" Lines="5" />
             </MudItem>
         </MudGrid>

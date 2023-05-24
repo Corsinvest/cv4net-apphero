@@ -42,12 +42,12 @@
         <MudGrid>
             <MudItem md="6">
                 <MudSwitch T="bool" @bind-Checked="context.Enabled"
-                           Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Enabled)])"
+                           Label="@(L[GetDescriptionProperty<T>(a => a.Enabled)])"
                            Color="Color.Primary" For="@(() => context.Enabled)" />
             </MudItem>
             <MudItem md="6">
                 <MudTextField @bind-Value="context.Name"
-                              Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Name)])"
+                              Label="@(L[GetDescriptionProperty<T>(a => a.Name)])"
                               For="@(() => context.Name)" Variant="Variant.Text" Margin="Margin.Normal" />
             </MudItem>
 

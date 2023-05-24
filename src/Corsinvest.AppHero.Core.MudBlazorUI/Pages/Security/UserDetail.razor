@@ -35,24 +35,24 @@
     <MudTabPanel Text="@L["Profile"]" Icon="@Icons.Material.Filled.Person">
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudTextField @bind-Value="@User.FirstName" Label="@(L[GetDescriptionProperty(a => a.FirstName!)])" For="@(() => User.FirstName)" />
+                <MudTextField @bind-Value="@User.FirstName" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.FirstName!)])" For="@(() => User.FirstName)" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudTextField @bind-Value="@User.LastName" Label="@(L[GetDescriptionProperty(a => a.LastName!)])" For="@(() => User.LastName)" />
+                <MudTextField @bind-Value="@User.LastName" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.LastName!)])" For="@(() => User.LastName)" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudTextField @bind-Value="@User.Email" Label="@(L[GetDescriptionProperty(a => a.Email!)])" For="@(() => User.Email)"
+                <MudTextField @bind-Value="@User.Email" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.Email!)])" For="@(() => User.Email)"
                               Required />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudTextField @bind-Value="@User.PhoneNumber" Label="@(L[GetDescriptionProperty(a => a.PhoneNumber!)])" For="@(() => User.PhoneNumber)" />
+                <MudTextField @bind-Value="@User.PhoneNumber" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.PhoneNumber!)])" For="@(() => User.PhoneNumber)" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudSelect T="string" @bind-Value="@User.DefaultCulture" Label="@(L[GetDescriptionProperty(a => a.DefaultCulture)])"
+                <MudSelect T="string" @bind-Value="@User.DefaultCulture" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.DefaultCulture)])"
                            For="@(() => User.DefaultCulture)">
                     @foreach (var item in LocalizationOptions.Value.SupportedCultures!.ToList())
                     {
@@ -66,22 +66,22 @@
     <MudTabPanel Text="@L["Account"]" Icon="@Icons.Material.Filled.Public">
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudSwitch @bind-Checked="@User.IsActive" Label="@(L[GetDescriptionProperty(a => a.IsActive)])"
+                <MudSwitch @bind-Checked="@User.IsActive" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.IsActive)])"
                            For="@(() => User.IsActive)" Color="Color.Primary" Disabled="!ManageAccount" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudSwitch @bind-Checked="@User.LockoutEnabled" Label="@(L[GetDescriptionProperty(a => a.LockoutEnabled)])"
+                <MudSwitch @bind-Checked="@User.LockoutEnabled" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.LockoutEnabled)])"
                            For="@(() => User.LockoutEnabled)" Color="Color.Primary" Disabled="!ManageAccount" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudSwitch @bind-Checked="@User.EmailConfirmed" Label="@(L[GetDescriptionProperty(a => a.EmailConfirmed)])"
+                <MudSwitch @bind-Checked="@User.EmailConfirmed" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.EmailConfirmed)])"
                            For="@(() => User.EmailConfirmed)" Color="Color.Primary" Disabled="!ManageAccount" />
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                <MudTextField @bind-Value="@User.UserName" Label="@(L[GetDescriptionProperty(a => a.UserName!)])"
+                <MudTextField @bind-Value="@User.UserName" Label="@(L[GetDescriptionProperty<ApplicationUser>(a => a.UserName!)])"
                               For="@(() => User.UserName)" Disabled="!ManageAccount"/>
             </MudItem>
         </MudGrid>

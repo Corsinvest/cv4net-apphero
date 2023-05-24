@@ -37,9 +37,6 @@ public partial class UserDetail
     [Inject] private IOptions<RequestLocalizationOptions> LocalizationOptions { get; set; } = default!;
     [Inject] private IFileStorageService FileStorageService { get; set; } = default!;
 
-    private static string GetDescriptionProperty(Expression<Func<ApplicationUser, object>> expression)
-        => MudBlazorHelper.GetDescriptionProperty(expression);
-
     //protected override void OnInitialized()
     //{
     //    base.OnInitialized();

@@ -17,7 +17,7 @@
             Groupable
             FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
             ShowFilterIcons="false"
-            Height="calc(100vh - 365px)">
+            Height="calc(100vh - 385px)">
     <ToolBarContent>
         <AHDataGridToolBarCrud T="PackageSourceOptions" DataGridManager="DataGridManager" />
     </ToolBarContent>
@@ -46,23 +46,23 @@
     <EditTemplate>
         <MudGrid>
             <MudItem md="6">
-                <MudTextField @bind-Value="@context.Name" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Name)])" For="@(() => context.Name)" />
+                <MudTextField @bind-Value="@context.Name" Label="@(L[GetDescriptionProperty<PackageSourceOptions>(a => a.Name)])" For="@(() => context.Name)" />
             </MudItem>
 
             <MudItem md="6">
-                <MudTextField @bind-Value="@context.Feed" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Feed)])" For="@(() => context.Feed)" />
+                <MudTextField @bind-Value="@context.Feed" Label="@(L[GetDescriptionProperty<PackageSourceOptions>(a => a.Feed)])" For="@(() => context.Feed)" />
             </MudItem>
 
             <MudItem md="6">
-                <MudTextField @bind-Value="@context.Username" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Username)])" For="@(() => context.Username)" />
+                <MudTextField @bind-Value="@context.Username" Label="@(L[GetDescriptionProperty<PackageSourceOptions>(a => a.Username)])" For="@(() => context.Username)" />
             </MudItem>
 
             <MudItem md="6">
-                <MudPasswordField @bind-Value="@context.Password" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Password)])" For="@(() => context.Password)" />
+                <MudPasswordField @bind-Value="@context.Password" Label="@(L[GetDescriptionProperty<PackageSourceOptions>(a => a.Password)])" For="@(() => context.Password)" />
             </MudItem>
 
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.PackagesToString" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.PackagesToString)])"
+                <MudTextField @bind-Value="@context.PackagesToString" Label="@(L[GetDescriptionProperty<PackageSourceOptions>(a => a.PackagesToString)])"
                               Lines="5" For="@(() => context.PackagesToString)" />
             </MudItem>
         </MudGrid>

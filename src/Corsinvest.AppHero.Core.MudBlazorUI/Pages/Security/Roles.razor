@@ -46,11 +46,11 @@
     <EditTemplate>
         <MudGrid>
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.Name" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Name!)])" For="@(() => context.Name)" />
+                <MudTextField @bind-Value="@context.Name" Label="@(L[GetDescriptionProperty<ApplicationRole>(a => a.Name!)])" For="@(() => context.Name)" />
             </MudItem>
 
             <MudItem md="12">
-                <MudTextField @bind-Value="@context.Description" Label="@(L[DataGridManager.GetDescriptionProperty(a => a.Description)])"
+                <MudTextField @bind-Value="@context.Description" Label="@(L[GetDescriptionProperty<ApplicationRole>(a => a.Description)])"
                               For="@(() => context.Description)" />
             </MudItem>
         </MudGrid>
