@@ -45,4 +45,5 @@ public enum UIIcon
     MicrosoftAzure,
     MicrosoftWindows,
     Key,
+    Discord,
 }

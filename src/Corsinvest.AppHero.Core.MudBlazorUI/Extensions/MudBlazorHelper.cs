@@ -64,6 +64,7 @@ public static class MudBlazorHelper
                 UIIcon.MicrosoftAzure => Icons.Custom.Brands.MicrosoftAzure,
                 UIIcon.MicrosoftWindows => Icons.Custom.Brands.MicrosoftWindows,
                 UIIcon.Key => Icons.Material.Filled.Key,
+                UIIcon.Discord => Icons.Custom.Brands.Discord,
                 _ => string.Empty,
             };
 
