@@ -30,11 +30,9 @@ public class ChannelOptions : NotificationChannelOptions
         var client = new TelegramBotClient(Token);
         var chatId = new ChatId(ChatId);
 
-        await client.SendTextMessageAsync(chatId, message.Subject);
-        if (!string.IsNullOrWhiteSpace(message.Body))
-        {
-            await client.SendTextMessageAsync(chatId, message.Body);
-        }
+        var text = "**" + message.Subject + "**";
+        if (!string.IsNullOrWhiteSpace(message.Body)) { text += Environment.NewLine + message.Body; }
+        await client.SendTextMessageAsync(chatId, text);
 
         foreach (var item in message.Attachments)
         {
