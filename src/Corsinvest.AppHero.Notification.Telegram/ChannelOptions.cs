@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.InputFiles;
 
 namespace Corsinvest.AppHero.Notification.Telegram;
 
@@ -39,7 +38,7 @@ public class ChannelOptions : NotificationChannelOptions
 
         foreach (var item in message.Attachments)
         {
-            await client.SendDocumentAsync(chatId, new InputOnlineFile(item.Stream, item.Name));
+            await client.SendDocumentAsync(chatId, InputFile.FromStream(item.Stream, item.Name));
         }
     }
 }
