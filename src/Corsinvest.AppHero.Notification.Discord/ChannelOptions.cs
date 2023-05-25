@@ -28,9 +28,16 @@ public class ChannelOptions : NotificationChannelOptions
     [Display(Name = "Text to Speech")]
     public bool IsTTS { get; set; }
 
+    [Required]
     public string SuccessUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/trophy-emoji.png";
+
+    [Required]
     public string InfoUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/information-emoji.png";
+
+    [Required]
     public string WarningUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/warning-emoji.png";
+
+    [Required]
     public string ErrorUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/cross-mark-button-emoji.png";
 
     public override string Type { get; } = "Discord";
@@ -41,7 +48,6 @@ public class ChannelOptions : NotificationChannelOptions
     protected override async Task SendImplAsync(NotificationMessage message)
     {
         using var client = new DiscordWebhookClient(Id, Token);
-
 
         await client.SendMessageAsync(//text: message.Body,
                                       username: Username,
