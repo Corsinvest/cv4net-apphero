@@ -67,6 +67,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corsinvest.AppHero.Auditing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corsinvest.AppHero.Notification.Discord", "src\Corsinvest.AppHero.Notification.Discord\Corsinvest.AppHero.Notification.Discord.csproj", "{FB8360E1-E559-44BC-9FB1-A7656C25E8CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corsinvest.AppHero.Notification.Slack", "src\Corsinvest.AppHero.Notification.Slack\Corsinvest.AppHero.Notification.Slack.csproj", "{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -281,6 +283,18 @@ Global
 		{FB8360E1-E559-44BC-9FB1-A7656C25E8CD}.Release|arm64.Build.0 = Release|Any CPU
 		{FB8360E1-E559-44BC-9FB1-A7656C25E8CD}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB8360E1-E559-44BC-9FB1-A7656C25E8CD}.Release|x86.Build.0 = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|arm64.Build.0 = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Debug|x86.Build.0 = Debug|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|arm64.ActiveCfg = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|arm64.Build.0 = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|x86.ActiveCfg = Release|Any CPU
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -307,6 +321,7 @@ Global
 		{52FBE87C-BA1B-42CE-9340-EADD7FF0B8BB} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
 		{FF142A3B-5D67-4A6A-B096-194F8459287E} = {B8982632-BB29-413F-9B7C-E6BF6FAD2D7D}
 		{FB8360E1-E559-44BC-9FB1-A7656C25E8CD} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
+		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60B460EF-C815-47AA-8C72-A3544D9960DB}

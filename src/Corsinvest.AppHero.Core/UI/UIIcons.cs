@@ -46,4 +46,5 @@ public enum UIIcon
     MicrosoftWindows,
     Key,
     Discord,
+    Chat,
 }

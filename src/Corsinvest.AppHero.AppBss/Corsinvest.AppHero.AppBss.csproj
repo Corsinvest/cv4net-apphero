@@ -26,6 +26,8 @@
 
 		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Discord\Corsinvest.AppHero.Notification.Discord.csproj" />
 
+		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Slack\Corsinvest.AppHero.Notification.Slack.csproj" />
+
 		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Telegram\Corsinvest.AppHero.Notification.Telegram.csproj" />
 		<ProjectReference Include="..\Corsinvest.AppHero.Serilog\Corsinvest.AppHero.Serilog.csproj" />
 		<ProjectReference Include="..\Corsinvest.AppHero.Translation\Corsinvest.AppHero.Translation.csproj" />
