@@ -47,4 +47,5 @@ public enum UIIcon
     Key,
     Discord,
     Chat,
+    WebHook,
 }

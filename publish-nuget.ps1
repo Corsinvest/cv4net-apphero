@@ -8,6 +8,8 @@ $xml = [xml](Get-Content .\src\common.props)
 $version = $xml.Project.PropertyGroup[0].Version
 Write-Host "Project version: $version"
 
+dotnet publish -c Release
+
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Auditing.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Auditing.MudBlazorUI.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Authentication.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
@@ -20,6 +22,10 @@ dotnet nuget push .\nupkgs\Corsinvest.AppHero.Core.RazdenUI.$version.nupkg --api
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.HangFire.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Localization.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Localization.MudBlazorUI.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
-dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Telegram.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.Corsinvest.AppHero.Notification.Discord.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.Corsinvest.AppHero.Notification.Hangouts.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.Corsinvest.AppHero.Notification.Slack.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.Corsinvest.AppHero.Notification.Teams.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.Corsinvest.AppHero.Notification.Telegram.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Serilog.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Translation.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json

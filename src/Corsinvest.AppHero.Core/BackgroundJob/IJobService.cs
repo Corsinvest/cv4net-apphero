@@ -27,8 +27,8 @@ public interface IJobService
     void Schedule(string recurringJobId, Expression<Action> methodCall, string cronExpression, TimeZoneInfo timezone);
     void Schedule(string recurringJobId, Expression<Func<Task>> methodCall, string cronExpression, TimeZoneInfo timezone);
     void Schedule<T>(string recurringJobId, Expression<Action<T>> methodCall, string cronExpression, TimeZoneInfo timezone);
-    void Schedule<T>(string recurringJobId, Expression<Func<T,Task>> methodCall, string cronExpression, TimeZoneInfo timezone);
-    
+    void Schedule<T>(string recurringJobId, Expression<Func<T, Task>> methodCall, string cronExpression, TimeZoneInfo timezone);
+
     void RemoveIfExists(string recurringJobId);
     void TriggerJob(string recurringJobId);
 }

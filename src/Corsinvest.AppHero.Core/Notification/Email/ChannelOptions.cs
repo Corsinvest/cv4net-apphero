@@ -60,6 +60,8 @@ public class ChannelOptions : NotificationChannelOptions
             HtmlBody = message.Body
         };
 
+        builder.HtmlBody += message.Data.Select(a => $"{a.Key} : {a.Value}").JoinAsString("<br>");
+
         //Attachments
         foreach (var item in message.Attachments)
         {

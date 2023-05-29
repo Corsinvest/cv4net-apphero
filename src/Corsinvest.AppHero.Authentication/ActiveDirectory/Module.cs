@@ -2,12 +2,12 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
+using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.UI;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.ActiveDirectory;
 

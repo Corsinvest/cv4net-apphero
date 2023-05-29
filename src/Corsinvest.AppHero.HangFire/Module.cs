@@ -2,18 +2,18 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Hangfire;
-using Hangfire.Console.Extensions;
-using Hangfire.Console;
-using Microsoft.AspNetCore.Builder;
-using Corsinvest.AppHero.Core.Modularity;
-using Corsinvest.AppHero.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
 using Corsinvest.AppHero.Core.BackgroundJob;
+using Corsinvest.AppHero.Core.Extensions;
+using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.UI;
+using Hangfire;
+using Hangfire.Console;
+using Hangfire.Console.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Corsinvest.AppHero.HangFire;
 

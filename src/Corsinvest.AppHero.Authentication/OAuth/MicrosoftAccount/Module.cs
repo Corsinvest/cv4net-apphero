@@ -2,15 +2,15 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Corsinvest.AppHero.Core.Modularity;
-using Corsinvest.AppHero.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.AspNetCore.Identity;
 using Corsinvest.AppHero.Authentication.OAuth.Controllers;
+using Corsinvest.AppHero.Core.Extensions;
+using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.UI;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.MicrosoftAccount;
 

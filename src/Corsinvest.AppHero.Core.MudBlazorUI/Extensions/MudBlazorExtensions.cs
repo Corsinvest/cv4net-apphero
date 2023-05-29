@@ -78,11 +78,11 @@ public static class MudBlazorExtensions
                                               null,
                                               new DialogOptions()
                                               {
-                                                CloseButton = true,
-                                                DisableBackdropClick = true,
-                                                MaxWidth = MaxWidth.ExtraSmall,
-                                                FullWidth = true,
-                                               }) ?? false;
+                                                  CloseButton = true,
+                                                  DisableBackdropClick = true,
+                                                  MaxWidth = MaxWidth.ExtraSmall,
+                                                  FullWidth = true,
+                                              }) ?? false;
     //=> await dialogService.ShowConfirmationDialogAsync(title,
     //                                                   message,
     //                                                   "Yes",

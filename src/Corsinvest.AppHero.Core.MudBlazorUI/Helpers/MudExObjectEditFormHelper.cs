@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Humanizer;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
+using MudBlazor.Extensions.Options;
 using MudExtensions;
 using System.Collections;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using MudBlazor.Extensions.Components.ObjectEdit;
-using MudBlazor.Extensions.Options;
-using MudBlazor.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Helpers;
 
@@ -83,7 +83,16 @@ public static class MudExObjectEditFormHelper
                 //case DataType.Currency: break;
                 //case DataType.Text: break;
                 //case DataType.Html: break;
-                //case DataType.MultilineText: break;
+                case DataType.MultilineText:
+                    item.RenderWith<MudTextField<string>, string>(a => a.Value,
+                                                                  options =>
+                                                                  {
+                                                                      options.Lines = (item.Value + "").SplitNewLine().Length > 15
+                                                                                        ? 10
+                                                                                        : 5;
+                                                                  });
+                    break;
+
                 //case DataType.EmailAddress: break;
                 case DataType.Password: item.RenderWith<MudPasswordField<string>, string>(a => a.Value); break;
 

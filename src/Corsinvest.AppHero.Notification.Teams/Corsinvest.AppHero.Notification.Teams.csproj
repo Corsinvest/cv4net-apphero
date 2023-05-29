@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="..\common.props" />
 
 	<PropertyGroup>
@@ -7,8 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Corsinvest.AppHero.Core.MudBlazorUI\Corsinvest.AppHero.Core.MudBlazorUI.csproj" />
+		<ProjectReference Include="..\Corsinvest.AppHero.Core\Corsinvest.AppHero.Core.csproj" />
 	</ItemGroup>
-
-
 </Project>

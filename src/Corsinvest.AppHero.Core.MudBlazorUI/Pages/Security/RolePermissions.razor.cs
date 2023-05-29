@@ -81,7 +81,7 @@ public partial class RolePermissions
                 }
 
                 treeItem!.IsChecked = Permissions.Contains(permission.Key);
-                treeItem.Key= permission.Key;
+                treeItem.Key = permission.Key;
                 FixParent(treeItem);
                 treeItem.Icon = permission.ToMBIcon();
                 treeItem.Color = permission.Color.ToMBColor();

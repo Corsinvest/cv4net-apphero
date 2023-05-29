@@ -28,18 +28,6 @@ public class ChannelOptions : NotificationChannelOptions
     [Display(Name = "Text to Speech")]
     public bool IsTTS { get; set; }
 
-    [Required]
-    public string SuccessUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/trophy-emoji.png";
-
-    [Required]
-    public string InfoUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/information-emoji.png";
-
-    [Required]
-    public string WarningUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/warning-emoji.png";
-
-    [Required]
-    public string ErrorUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/cross-mark-button-emoji.png";
-
     public override string Type { get; } = "Discord";
 
     [JsonIgnore]
@@ -68,15 +56,13 @@ public class ChannelOptions : NotificationChannelOptions
                                                     NotificationSeverity.Error => Color.Red,
                                                     _ => Color.Default
                                                 },
-                                                ThumbnailUrl = message.Severity switch
+                                                ThumbnailUrl = GetSeverityIcon(message.Severity),
+                                                Author = new EmbedAuthorBuilder().WithName(message.Context),
+                                                Fields = new( message.Data.Select(a => new EmbedFieldBuilder()
                                                 {
-                                                    NotificationSeverity.Success => SuccessUrlIcon,
-                                                    NotificationSeverity.Info => InfoUrlIcon,
-                                                    NotificationSeverity.Warning => WarningUrlIcon,
-                                                    NotificationSeverity.Error => ErrorUrlIcon ,
-                                                    _ => string.Empty
-                                                },
-                                                Author = new EmbedAuthorBuilder().WithName(message.Context)
+                                                    Name = a.Key,
+                                                    Value = a.Value
+                                                }))
                                             }.Build()
                                       });
 

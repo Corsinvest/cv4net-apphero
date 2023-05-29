@@ -38,8 +38,8 @@ builder.Services.AddServerSideBlazor(options =>
                 .AddHubOptions(options =>
                 {
                     options.EnableDetailedErrors = false;
-                //    options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
-                //    options.HandshakeTimeout = TimeSpan.FromSeconds(30);
+                    //    options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
+                    //    options.HandshakeTimeout = TimeSpan.FromSeconds(30);
                 })
                 .AddCircuitOptions(option =>
                 {

@@ -4,11 +4,10 @@
  */
 using Corsinvest.AppHero.Core.Domain.Contracts;
 using Corsinvest.AppHero.Core.Security.Auth.Permissions;
-using System.Linq.Expressions;
 
 namespace Corsinvest.AppHero.Core.BaseUI.DataManager;
 
-public interface IDataGridManager<T> : IRefreshable   where T : class
+public interface IDataGridManager<T> : IRefreshable where T : class
 {
     Func<T, bool, Task<T>> BeforeEditAsync { get; set; }
     Func<IEnumerable<T>, Task> DeleteAfterAsync { get; set; }

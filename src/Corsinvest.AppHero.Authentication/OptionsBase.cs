@@ -12,7 +12,7 @@ public class OptionsBase
     public string DefaultRolesNewUser { get; set; } = default!;
     public bool AutoImportUser { get; set; } = true;
 
-    public void MapCustomJson(ClaimActionCollection collection) 
+    public void MapCustomJson(ClaimActionCollection collection)
     {
         collection.MapCustomJson(nameof(DefaultRolesNewUser), (a) => { return DefaultRolesNewUser; });
         collection.MapCustomJson(nameof(AutoImportUser), (a) => { return AutoImportUser.ToString(); });

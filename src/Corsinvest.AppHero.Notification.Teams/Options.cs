@@ -2,6 +2,8 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-namespace Corsinvest.AppHero.Core.Notification.Email;
+using Corsinvest.AppHero.Core.Notification;
+
+namespace Corsinvest.AppHero.Notification.Teams;
 
 public class Options : NotificationChannelsOptions<ChannelOptions> { }

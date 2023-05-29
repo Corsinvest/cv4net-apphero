@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Corsinvest.AppHero.Authentication.ActiveDirectory;
-using Corsinvest.AppHero.Core.UI;
 using Corsinvest.AppHero.Core.Extensions;
+using Corsinvest.AppHero.Core.UI;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Corsinvest.AppHero.Authentication.MudBlazorUI.ActiveDirectory;
 
-public partial class RenderIndex 
+public partial class RenderIndex
 {
     [Inject] private IAutenticationActiveDirectory AuthenticationService { get; set; } = default!;
     [Inject] private IUINotifier UINotifier { get; set; } = default!;

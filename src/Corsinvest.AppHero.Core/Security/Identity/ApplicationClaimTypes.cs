@@ -8,5 +8,5 @@ public static class ApplicationClaimTypes
 {
     public static string Permission { get; } = "Permission";
     public static string ProfileImageUrl { get; } = "ProfileImageUrl";
-    public static string Fullname {get; } = "FullName";
+    public static string Fullname { get; } = "FullName";
 }

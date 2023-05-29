@@ -2,10 +2,10 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using BackgroundJobHelper = Hangfire.BackgroundJob;
+using Corsinvest.AppHero.Core.BackgroundJob;
 using Hangfire;
 using System.Linq.Expressions;
-using Corsinvest.AppHero.Core.BackgroundJob;
+using BackgroundJobHelper = Hangfire.BackgroundJob;
 
 namespace Corsinvest.AppHero.HangFire;
 

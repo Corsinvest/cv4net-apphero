@@ -14,7 +14,7 @@ public partial class NotificationChannelsOptionsSelector<T> where T : INotificat
     [Inject] private IModularityService ModularityService { get; set; } = default!;
     [Inject] private INotificationService NotificationService { get; set; } = default!;
 
-    private IList<(string Name,string Icon)> GetAllChannelsNotification()
+    private IList<(string Name, string Icon)> GetAllChannelsNotification()
     {
         using var scope = ServiceScopeFactory.CreateScope();
 

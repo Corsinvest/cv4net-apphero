@@ -5,7 +5,7 @@
 using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.UI;
 
-namespace Corsinvest.AppHero.Core.Notification.Email;
+namespace Corsinvest.AppHero.Core.Notification.WebHook;
 
 public class Module : ModuleBase, IForceLoadModule, INotification
 {
@@ -13,11 +13,11 @@ public class Module : ModuleBase, IForceLoadModule, INotification
     {
         Authors = "Corsinvest Srl";
         Company = "Corsinvest Srl";
-        Keywords = "Notification,Mail";
+        Keywords = "Notification,WebHook";
         Category = IModularityService.AdministrationCategoryName;
         Type = ModuleType.Service;
-        Icon = UIIcon.Email.GetName();
-        Description = "Email";
+        Icon = UIIcon.WebHook.GetName();
+        Description = "WebHook";
     }
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config) => AddOptions<Options>(services, config);

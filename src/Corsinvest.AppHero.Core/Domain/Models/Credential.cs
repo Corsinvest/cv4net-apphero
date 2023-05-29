@@ -11,7 +11,7 @@ public class Credential
     public string Username { get; set; } = default!;
 
     [Browsable(false)]
-    public string PasswordEncrypted{ get; set; }=default!;
+    public string PasswordEncrypted { get; set; } = default!;
 
     [JsonIgnore]
     [DataType(DataType.Password)]

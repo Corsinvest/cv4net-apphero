@@ -2,13 +2,13 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+using Corsinvest.AppHero.Core.DependencyInjection;
+using Corsinvest.AppHero.Core.Modularity;
+using Corsinvest.AppHero.Core.Modularity.Packages;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
-using FluentValidation.AspNetCore;
-using Corsinvest.AppHero.Core.Modularity.Packages;
-using Corsinvest.AppHero.Core.Modularity;
-using Corsinvest.AppHero.Core.DependencyInjection;
 
 namespace Corsinvest.AppHero.Core;
 

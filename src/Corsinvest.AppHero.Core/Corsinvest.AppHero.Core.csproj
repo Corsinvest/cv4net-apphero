@@ -9,8 +9,8 @@
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.101.0" />
 
-		<PackageReference Include="Ardalis.Specification" Version="6.1.0" />
-		<PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.1.0" />
+		<PackageReference Include="Ardalis.Specification" Version="7.0.0" />
+		<PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="7.0.0" />
 		<PackageReference Include="MailKit" Version="4.0.0" />
 
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />

@@ -19,24 +19,13 @@ public class ChannelOptions : NotificationChannelOptions
     [Required]
     public string Channels { get; set; } = default!;
 
-    [Display(Name = "Webhook Url")]
     [Required]
+    [Display(Name = "Webhook Url")]
+    [DataType(DataType.Url)]
     public string WebHookUrl { get; set; } = default!;
 
     [Required]
     public string IconUrl { get; set; } = default!;
-
-    [Required]
-    public string SuccessUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/trophy-emoji.png";
-
-    [Required]
-    public string InfoUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/information-emoji.png";
-
-    [Required]
-    public string WarningUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/warning-emoji.png";
-
-    [Required]
-    public string ErrorUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/cross-mark-button-emoji.png";
 
     public override string Type { get; } = "Slack";
 
@@ -45,9 +34,6 @@ public class ChannelOptions : NotificationChannelOptions
 
     protected override async Task SendImplAsync(NotificationMessage message)
     {
-        message.Context = "mail";
-        message.Severity = NotificationSeverity.Info;
-
         var slackMessage = new SlackMessage
         {
             IconUrl = new Uri(IconUrl),
@@ -68,25 +54,14 @@ public class ChannelOptions : NotificationChannelOptions
                     AuthorName = message.Context,
                     Fallback = message.Body,
                     Text = message.Body,
-                    AuthorIcon= message.Severity switch
-                    {
-                        NotificationSeverity.Success => SuccessUrlIcon,
-                        NotificationSeverity.Info => InfoUrlIcon,
-                        NotificationSeverity.Warning => WarningUrlIcon,
-                        NotificationSeverity.Error => ErrorUrlIcon ,
-                        _ => string.Empty
-                    },
-                    Color = message.Severity switch
-                    {
-                        NotificationSeverity.Success => "#00c853",
-                        NotificationSeverity.Info => "#2196f3",
-                        NotificationSeverity.Warning => "#ff9800",
-                        NotificationSeverity.Error => "#f44336",
-                        _ => string.Empty
-                    },
+                    AuthorIcon= GetSeverityIcon(message.Severity),
+                    Color = message.ColorSeverity,
                 }
             },
         };
+
+        //TODO how to send Data?
+        //TODO how to send Attachments?
 
         //foreach (var item in message.Attachments)
         //{

@@ -12,13 +12,13 @@ public static class PredicateBuilder
     public static Expression<Func<T, bool>> False<T>() => param => false;
     public static Expression<Func<T, bool>> Create<T>(Expression<Func<T, bool>> predicate) => predicate;
 
-    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second) 
+    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         => first.Compose(second, Expression.AndAlso);
 
-    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second) 
+    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         => first.Compose(second, Expression.OrElse);
 
-    public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expression) 
+    public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expression)
         => Expression.Lambda<Func<T, bool>>(Expression.Not(expression.Body), expression.Parameters);
 
     static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
@@ -41,7 +41,7 @@ public static class PredicateBuilder
         ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map)
             => _map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
 
-        public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map, Expression exp) 
+        public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map, Expression exp)
             => new ParameterRebinder(map).Visit(exp);
 
         protected override Expression VisitParameter(ParameterExpression p)

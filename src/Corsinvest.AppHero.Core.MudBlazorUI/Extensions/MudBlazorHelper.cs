@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Extensions;
 
 public static class MudBlazorHelper
@@ -13,7 +12,6 @@ public static class MudBlazorHelper
         => IconConvert.TryGetValue(icon + "", out var tmpIcon)
             ? tmpIcon
             : icon;
-
 
     private static Dictionary<string, string> IconConvert { get; set; } = default!;
 
@@ -66,6 +64,7 @@ public static class MudBlazorHelper
                 UIIcon.Key => Icons.Material.Filled.Key,
                 UIIcon.Discord => Icons.Custom.Brands.Discord,
                 UIIcon.Chat => Icons.Material.Filled.Chat,
+                UIIcon.WebHook => Icons.Material.Filled.Webhook,
                 _ => string.Empty,
             };
 

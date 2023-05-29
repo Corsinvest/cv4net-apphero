@@ -6,7 +6,7 @@ using FluentResults;
 
 namespace Corsinvest.AppHero.Authentication.ActiveDirectory;
 
-public interface IAutenticationActiveDirectory 
+public interface IAutenticationActiveDirectory
 {
     Task<IResult<bool>> LoginAsync(LoginRequestAD loginRequestAD);
 }

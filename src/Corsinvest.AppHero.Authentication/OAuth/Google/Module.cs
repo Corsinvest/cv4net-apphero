@@ -2,18 +2,18 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Corsinvest.AppHero.Core.Modularity;
-using Corsinvest.AppHero.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication;
-using Corsinvest.AppHero.Core.Security.Identity;
-using Microsoft.AspNetCore.Authentication.Google;
-using System.Security.Claims;
 using Corsinvest.AppHero.Authentication.OAuth.Controllers;
+using Corsinvest.AppHero.Core.Extensions;
+using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Security.Auth;
+using Corsinvest.AppHero.Core.Security.Identity;
 using Corsinvest.AppHero.Core.UI;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.Google;
 
@@ -30,7 +30,7 @@ public class Module : ModuleBase, IForceLoadModule, IAutenticationConfig, IAuten
         Type = ModuleType.Service;
         Description = "OAuth Google";
 
-        Link = new ModuleLink(this, Description, OAuthController.MakeUrlChallenge(GoogleDefaults.AuthenticationScheme),true)
+        Link = new ModuleLink(this, Description, OAuthController.MakeUrlChallenge(GoogleDefaults.AuthenticationScheme), true)
         {
             Icon = UIIcon.Google.GetName(),
             Enabled = false

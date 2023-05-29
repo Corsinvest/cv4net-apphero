@@ -64,7 +64,7 @@ public class Module : ModuleBase, IForceLoadModule
         foreach (var item in modularityService.Modules.Implements<INotification>().Where(a => a.Options != null && a.Options.Render == null))
         {
             item.Options!.Render = typeof(Shared.Notification.GenericRenderOptions<,>)
-                                        .MakeGenericType(new[] 
+                                        .MakeGenericType(new[]
                                         {
                                             item.Options.Type,
                                             item.Options.Type.BaseType!.GetGenericArguments()[0],

@@ -35,8 +35,9 @@ For licensing details please visit [LICENSE](LICENSE)
 * Auditing data
 * Localization runtime, translation
 * Job Scheduling
+* Notification Google,Teams,Hangout,Telegram,Slack,Discord
 * Make easy to create Options
 * Release check form GitHubu or DockerHub
 * MudBlazor render in this moment, but indipendent
 
-Framework for fast application.
+Framework for fast Blazor application.

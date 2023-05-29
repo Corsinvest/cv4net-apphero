@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Corsinvest.AppHero.Translation.Microsoft;
 
-public class Module : ModuleBase, IForceLoadModule,ITranslator
+public class Module : ModuleBase, IForceLoadModule, ITranslator
 {
     public Module()
     {

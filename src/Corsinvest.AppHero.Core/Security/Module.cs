@@ -3,15 +3,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Corsinvest.AppHero.Core.Modularity;
+using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Security.Auth.Permissions;
 using Corsinvest.AppHero.Core.Security.Identity;
-using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Security.Identity.Validators;
+using Corsinvest.AppHero.Core.UI;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Hosting;
-using Corsinvest.AppHero.Core.UI;
 
 namespace Corsinvest.AppHero.Core.Security;
 

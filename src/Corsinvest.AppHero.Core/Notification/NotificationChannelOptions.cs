@@ -13,12 +13,34 @@ public abstract class NotificationChannelOptions
     public bool Enabled { get; set; } = true;
     [JsonIgnore] public abstract string Info { get; }
 
-    public async Task SendTest()
-        => await SendImplAsync(new NotificationMessage
+    [Required]
+    public string SuccessUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/trophy-emoji.png";
+
+    [Required]
+    public string InfoUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/information-emoji.png";
+
+    [Required]
+    public string WarningUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/warning-emoji.png";
+
+    [Required]
+    public string ErrorUrlIcon { get; set; } = "https://img.icons8.com/emoji/48/cross-mark-button-emoji.png";
+
+    public string GetSeverityIcon(NotificationSeverity notificationSeverity)
+        => notificationSeverity switch
         {
-            Subject = "Test message from your app",
-            Body = "Perfect!! Your app can!"
-        });
+            NotificationSeverity.Success => SuccessUrlIcon,
+            NotificationSeverity.Info => InfoUrlIcon,
+            NotificationSeverity.Warning => WarningUrlIcon,
+            NotificationSeverity.Error => ErrorUrlIcon,
+            _ => string.Empty
+        };
+
+    public async Task SendTest()
+            => await SendImplAsync(new NotificationMessage
+            {
+                Subject = "Test message from your app",
+                Body = "Perfect!! Your app can!"
+            });
 
     public async Task SendAsync(NotificationMessage mailMessage)
     {
