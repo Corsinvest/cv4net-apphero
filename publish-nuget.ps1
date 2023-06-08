@@ -27,5 +27,6 @@ dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Hangouts.$version.nup
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Slack.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Teams.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Telegram.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\Corsinvest.AppHero.Notification.Pushover.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Serilog.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json
 dotnet nuget push .\nupkgs\Corsinvest.AppHero.Translation.$version.nupkg --api-key $ENV:nugetapikey --source https://api.nuget.org/v3/index.json

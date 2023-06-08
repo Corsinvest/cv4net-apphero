@@ -73,6 +73,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corsinvest.AppHero.Notifica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corsinvest.AppHero.Notification.Hangouts", "src\Corsinvest.AppHero.Notification.Hangouts\Corsinvest.AppHero.Notification.Hangouts.csproj", "{C0953FD7-C66E-49CE-B7B8-6E6EBA00E1AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corsinvest.AppHero.Notification.Pushover", "src\Corsinvest.AppHero.Notification.Pushover\Corsinvest.AppHero.Notification.Pushover.csproj", "{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6676E0E8-AEAF-4BC2-950B-7EAC44C6C9ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -323,6 +327,18 @@ Global
 		{C0953FD7-C66E-49CE-B7B8-6E6EBA00E1AF}.Release|arm64.Build.0 = Release|Any CPU
 		{C0953FD7-C66E-49CE-B7B8-6E6EBA00E1AF}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0953FD7-C66E-49CE-B7B8-6E6EBA00E1AF}.Release|x86.Build.0 = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|arm64.Build.0 = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Debug|x86.Build.0 = Debug|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|arm64.ActiveCfg = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|arm64.Build.0 = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|x86.ActiveCfg = Release|Any CPU
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -352,6 +368,7 @@ Global
 		{28BAEC0D-B420-4F72-A8F7-DE9D40C77A99} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
 		{C91D8548-8BC5-4B59-B766-FC6E89CAA89E} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
 		{C0953FD7-C66E-49CE-B7B8-6E6EBA00E1AF} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
+		{44F77D0C-9CCE-417D-963F-AFD7ABDC486C} = {CB169F57-323A-4C1F-8F60-CAD39DBED4ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60B460EF-C815-47AA-8C72-A3544D9960DB}
