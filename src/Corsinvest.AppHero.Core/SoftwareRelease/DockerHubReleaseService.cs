@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Newtonsoft.Json;
+using Semver;
 
 namespace Corsinvest.AppHero.Core.SoftwareRelease;
 
@@ -22,7 +23,7 @@ public class DockerHubReleaseService : IReleaseService
         return JsonConvert.DeserializeObject<Data>(data)!.Results
                           .Select(a => new RleaseInfo()
                           {
-                              Prerelease = false,
+                              Prerelease = SemVersion.Parse(a.Name, Semver.SemVersionStyles.Any).IsPrerelease,
                               Url = $"https://hub.docker.com/r/{repo}/tags",
                               PublishedAt = a.TagLastPushed,
                               Version = a.Name
