@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using ClosedXML.Excel;
+using MiniExcelLibs;
 using System.Data;
 
 namespace Corsinvest.AppHero.Core.Service;
@@ -29,10 +29,8 @@ public class ExcelWriter : IExcelWriter
             table.Rows.Add(row);
         }
 
-        using XLWorkbook wb = new();
-        wb.Worksheets.Add(table);
-        MemoryStream stream = new();
-        wb.SaveAs(stream);
+        var stream = new MemoryStream();
+        MiniExcel.SaveAs(stream, table);
         stream.Seek(0, SeekOrigin.Begin);
         return stream;
     }

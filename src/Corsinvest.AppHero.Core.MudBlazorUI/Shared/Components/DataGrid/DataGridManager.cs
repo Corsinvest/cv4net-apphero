@@ -3,8 +3,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using BlazorDownloadFile;
-using ClosedXML.Excel;
 using Corsinvest.AppHero.Core.Security.Auth.Permissions;
+using MiniExcelLibs;
+using System.Data;
 using System.Linq.Dynamic.Core;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components.DataGrid;
@@ -134,58 +135,86 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
 
     public async Task ExportToExcel()
     {
-        using var stream = new MemoryStream();
-        using var workbook = new XLWorkbook();
-        var worksheet = workbook.Worksheets.Add();
+        var table = new DataTable();
+        var columns = DataGrid!.RenderedColumns.Where(a => !string.IsNullOrEmpty(a.PropertyName) && !string.IsNullOrEmpty(a.Title))
+                                                        .Select(a => new DataColumn(a.Title)
+                                                        {
+                                                            ColumnName = a.PropertyName,
+                                                        })
+                                                        .ToArray();
+        table.Columns.AddRange(columns);
 
-        var fields = new List<string>();
-        var col = 'A';
-        var row = 1;
-
-        for (int i = 0; i < DataGrid!.RenderedColumns.Count; i++)
-        {
-            var column = DataGrid!.RenderedColumns[i];
-            if (!string.IsNullOrWhiteSpace(column.PropertyName))
-            {
-                worksheet.Cell($"{col}1").Value = column.Title;
-                fields.Add(column.PropertyName);
-                col++;
-            }
-        }
-
-        col--;
-        worksheet.Range($"A1:{col}1").SetAutoFilter();
-        row++;
         foreach (var item in (await DataGrid!.ServerData(_state)).Items)
         {
-            col = 'A';
-            foreach (var field in fields)
-            {
-                var pi = item!.GetType().GetPropertyFromPath(field);
-                if (pi != null)
-                {
-                    var value = (pi.GetValue(item) + "").ToString();
-                    worksheet.Cell($"{col}{row}").Value = value;
-                    col++;
-                }
-            }
-            row++;
+            var row = columns.Select(a => item!.GetType().GetPropertyFromPath(a.ColumnName))
+                             .Select(a => a == null
+                                          ? ""
+                                          : (a.GetValue(item) + "").ToString())
+                             .ToArray();
+            table.Rows.Add(row);
         }
 
-        var header = worksheet.Range($"A1:{--col}1");
-        header.Style.Fill.SetBackgroundColor(XLColor.LightBlue);
-        header.Style.Font.Bold = true;
-        header.SetAutoFilter();
-
-        worksheet.Columns().AdjustToContents();
-        workbook.SaveAs(stream);
+        using var stream = new MemoryStream();
+        MiniExcel.SaveAs(stream, table);
         stream.Seek(0, SeekOrigin.Begin);
 
         var fileName = string.IsNullOrEmpty(Title)
                         ? "data"
                         : Title;
-
         await _blazorDownloadFileService.DownloadFile($"{fileName}.xlsx", stream, "application/vnd.ms-excel");
+
+
+        //using var workbook = new XLWorkbook();
+        //var worksheet = workbook.Worksheets.Add();
+
+        //var fields = new List<string>();
+        //var col = 'A';
+        //var row = 1;
+
+        //for (int i = 0; i < DataGrid!.RenderedColumns.Count; i++)
+        //{
+        //    var column = DataGrid!.RenderedColumns[i];
+        //    if (!string.IsNullOrWhiteSpace(column.PropertyName))
+        //    {
+        //        worksheet.Cell($"{col}1").Value = column.Title;
+        //        fields.Add(column.PropertyName);
+        //        col++;
+        //    }
+        //}
+
+        //col--;
+        //worksheet.Range($"A1:{col}1").SetAutoFilter();
+        //row++;
+        //foreach (var item in (await DataGrid!.ServerData(_state)).Items)
+        //{
+        //    col = 'A';
+        //    foreach (var field in fields)
+        //    {
+        //        var pi = item!.GetType().GetPropertyFromPath(field);
+        //        if (pi != null)
+        //        {
+        //            var value = (pi.GetValue(item) + "").ToString();
+        //            worksheet.Cell($"{col}{row}").Value = value;
+        //            col++;
+        //        }
+        //    }
+        //    row++;
+        //}
+
+        //var header = worksheet.Range($"A1:{--col}1");
+        //header.Style.Fill.SetBackgroundColor(XLColor.LightBlue);
+        //header.Style.Font.Bold = true;
+        //header.SetAutoFilter();
+
+        //worksheet.Columns().AdjustToContents();
+        //workbook.SaveAs(stream);
+        //stream.Seek(0, SeekOrigin.Begin);
+
+        //var fileName = string.IsNullOrEmpty(Title)
+        //                ? "data"
+        //                : Title;
+
+        //await _blazorDownloadFileService.DownloadFile($"{fileName}.xlsx", stream, "application/vnd.ms-excel");
     }
 
     public async Task<GridData<T>> LoadServerData(GridState<T> state)
