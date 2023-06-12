@@ -59,10 +59,10 @@
                         <AHAppMenu />
                         @*  <NotificationMenu Class="mx-3" />*@
                         <AHUserMenu Class="mx-1" />
-                        </MudAppBar>
+                    </MudAppBar>
 
-                        @*<MudDrawer @bind-Open="DrawerOpen" Variant="@DrawerVariant.Mini" OpenMiniOnHover ClipMode="DrawerClipMode.Always" MiniWidth="70px">*@
-                        <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always">
+                    @*<MudDrawer @bind-Open="DrawerOpen" Variant="@DrawerVariant.Mini" OpenMiniOnHover ClipMode="DrawerClipMode.Always" MiniWidth="70px">*@
+                    <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always">
 
                         <NavMenu />
 
@@ -82,12 +82,12 @@
                             }
                             else
                             {
-                                <MudLink Target="_blank" Href="@ReleaseInfo.Url"
-                                     Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">                                    
-                                    <MudBadge Dot="true" Color="Color.Primary" >
-                                        @L["new version"] @ReleaseInfo.Version
-                                    </MudBadge>
-                                </MudLink>
+                                <MudBadge Content="@ReleaseInfo.Version" Color="Color.Primary" Origin="Origin.TopCenter" OnClick="OpenRelease"
+                                          Style="cursor:pointer">
+                                    <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
+                                        @L["version"] @ApplicationHelper.ProductVersion
+                                    </MudText>
+                                </MudBadge>
                             }
                         </MudNavMenu>
                     </MudDrawer>

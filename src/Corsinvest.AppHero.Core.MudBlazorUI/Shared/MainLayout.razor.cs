@@ -82,6 +82,7 @@ public partial class MainLayout : IAsyncDisposable
         AuthenticationStateProvider.AuthenticationStateChanged += AuthenticationStateProvider_AuthenticationStateChanged;
     }
 
+    private async Task OpenRelease() => await JSRuntime.InvokeVoidAsync("open", ReleaseInfo.Url, "_blank");
     private void HubClient_NotificationReceived(object? sender, string e) { }
     private async Task HubClient_MessageReceived(object sender, MessageReceivedEventArgs e) { await Task.CompletedTask; }
     private void HubClient_JobCompleted(object? sender, string jobId) { }
