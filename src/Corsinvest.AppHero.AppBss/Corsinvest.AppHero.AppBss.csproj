@@ -8,7 +8,7 @@
 	<ItemGroup>
 		<PackageReference Include="Hangfire.EntityFrameworkCore" Version="0.5.0" />
 		<PackageReference Include="Serilog.Sinks.SQLite" Version="6.0.0" />
-		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="1.2.0" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="1.3.0" />
 
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		
