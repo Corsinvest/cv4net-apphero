@@ -4,7 +4,6 @@
  */
 using Corsinvest.AppHero.Core.Domain.Models;
 using Newtonsoft.Json;
-using NuGet.Packaging;
 using System.Net;
 
 namespace Corsinvest.AppHero.Core.Notification.WebHook;

@@ -18,31 +18,28 @@
             <MudCardContent>
                 <MudGrid>
                     <MudItem md="3">
-                        <MudColorPicker @bind-Text="@Options.Theme.PrimaryColor"
-                                        Value="@Options.Theme.PrimaryColor"
+                        <MudColorPicker @bind-Text="@LayoutService.PrimaryColor"
+                                        Value="@LayoutService.PrimaryColor"
                                         DisableToolbar="false"
                                         Label="@L["Primary Color"]"
-                                        Style="@($"color: {Options.Theme.PrimaryColor};")"
+                                        Style="@($"color: {LayoutService.PrimaryColor};")"
                                         PickerVariant="PickerVariant.Dialog" />
                     </MudItem>
 
-                    @*
-                    @oninput="@((e) =>
-                    {
-                    UIOptions.CurrentValue.Theme.DarkMode = System.Convert.ToBoolean(e.Value);
-                    StateHasChanged();
-                    })"
-                    *@
-
                     <MudItem md="3">
-                        <MudSwitch @bind-Checked="@Options.Theme.DarkMode" Label="@L["Dark mode"]" Color="Color.Primary"                                  
-                                   ThumbIcon="@(Options.Theme.DarkMode ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode)" />
+                        <MudSelectExtended @bind-Value="@LayoutService.DarkLightMode" ItemCollection="@(Enum.GetValues<DarkLightMode>())"
+                                           Label="@L["Dark Light Mode"]" Required="true"
+                                           For="@(() => LayoutService.DarkLightMode)" />
                     </MudItem>
 
                     <MudItem md="3">
-                        <MudSlider ValueLabel @bind-Value="@Options.Theme.DefaultBorderRadius"
+                        <MudSwitch @bind-Checked="@LayoutService.IsRightToLeft" Label="@L["Right To Left"]" Color="Color.Primary" />
+                    </MudItem>
+
+                    <MudItem md="3">
+                        <MudSlider ValueLabel @bind-Value="@LayoutService.DefaultBorderRadius"
                                    Min="0" Max="32" Immediate Step="1" Color="Color.Primary">
-                            @L["Border Radius:"] @Options.Theme.DefaultBorderRadius
+                            @L["Border Radius:"] @LayoutService.DefaultBorderRadius
                         </MudSlider>
                     </MudItem>
 
@@ -61,7 +58,7 @@
             <MudCardHeader>
                 <CardHeaderContent>
                     <div class="d-flex gap-4">
-                                <MudIcon Icon="@Icons.Material.Filled.List" />
+                        <MudIcon Icon="@Icons.Material.Filled.List" />
                         <MudText>@L["Grid"]</MudText>
                     </div>
                 </CardHeaderContent>

@@ -4,11 +4,11 @@
 *@
 @inherits AHComponentBase
 
-<AHPermission Permission="Permission" Loading="@Loading">
+<AHPermission Permission="Permission">
     <ChildContent>
-        <MudIconButton Icon="@Permission.ToMBIcon()" Color="Permission.Color.ToMBColor()"
-                       OnClick="@OnClick" Size="@Size" Title="@L[Permission.Description]"
-                       Disabled="@Disabled" Variant="@Variant" Class="@Class" Style="@Style" />
+        <MudLoadingButton Icon="@Permission.ToMBIcon()" Color="Permission.Color.ToMBColor()" ButtonVariant="ButtonVariant.IconButton"
+                          OnClick="@OnClick" Size="@Size" Title="@L[Permission.Description]"
+                          Class="@Class" Disabled="@Disabled" Variant="@Variant" Loading="@Loading" Style="@Style" />
     </ChildContent>
 </AHPermission>
 

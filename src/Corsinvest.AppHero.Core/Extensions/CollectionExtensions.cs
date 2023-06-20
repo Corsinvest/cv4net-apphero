@@ -8,6 +8,14 @@ public static class CollectionExtensions
 {
     public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source) => source.Select((item, index) => (item, index));
 
+    public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
+    {
+        foreach (T item in items)
+        {
+            collection.Add(item);
+        }
+    }
+
     public static void AddIf<T>(this List<T> list, bool condition, T item)
     {
         if (condition) { list.Add(item); }

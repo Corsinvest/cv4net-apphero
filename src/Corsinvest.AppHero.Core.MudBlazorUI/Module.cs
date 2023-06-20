@@ -6,6 +6,7 @@ using BlazorDownloadFile;
 using Corsinvest.AppHero.Core.BaseUI.Extensions;
 using Corsinvest.AppHero.Core.MudBlazorUI.Services;
 using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components.DataGrid;
+using Corsinvest.AppHero.Core.MudBlazorUI.Style;
 using Corsinvest.AppHero.Core.Notification;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +41,7 @@ public class Module : ModuleBase, IForceLoadModule
         services.AddScoped<IUIMessageBox, UIMessageBox>();
         services.AddMudExtensions();
         services.AddMudServicesWithExtensions();
+        services.AddScoped<LayoutService>();
         services.AddTransient(typeof(IDataGridManager<>), typeof(DataGridManager<>));
         services.AddTransient(typeof(IDataGridManagerRepository<>), typeof(DataGridManagerRepository<>));
     }

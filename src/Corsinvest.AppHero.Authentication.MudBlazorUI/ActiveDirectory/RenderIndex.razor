@@ -15,7 +15,7 @@
         @foreach (var item in Options.Value.Domains.OrderBy(a => a.Name))
         {
             <MudSelectItem Value="@item.Domain">
-                <div class="d-flex gap-1">
+                <div class="d-flex gap-1 align-center">
                     <MudIcon Icon="@Icons.Material.Filled.Domain" />
                     @item.Name
                 </div>

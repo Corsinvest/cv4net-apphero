@@ -18,7 +18,7 @@ public partial class MainLayout : IAsyncDisposable
 
     [Inject] private IStringLocalizer<MainLayout> L { get; set; } = default!;
     [Inject] private IOptionsSnapshot<AppOptions> SnapshotAppOptions { get; set; } = default!;
-    [Inject] private IOptionsMonitor<UIOptions> ModnitorUIOptions { get; set; } = default!;
+    [Inject] private LayoutService LayoutService { get; set; } = default!;
     [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
     [Inject] private HubClient HubClient { get; set; } = default!;
     [Inject] private IModularityService ModularityService { get; set; } = default!;
@@ -27,14 +27,16 @@ public partial class MainLayout : IAsyncDisposable
     [Inject] private IServiceScopeFactory ServiceScopeFactory { get; set; } = default!;
 
     private AppOptions AppOptions => SnapshotAppOptions.Value;
-    private UIOptions UIOptions => ModnitorUIOptions.CurrentValue;
     private bool DrawerOpen { get; set; } = true;
     private RleaseInfo? ReleaseInfo { get; set; }
     private IReleaseService? _releaseService;
     private Timer? _timer;
+    private MudThemeProvider? RefMudThemeProvider { get; set; }
 
     public async ValueTask DisposeAsync()
     {
+        LayoutService.MajorUpdateOccured -= LayoutService_MajorUpdateOccured;
+
         _timer?.Dispose();
 
         await HubClient.StopAsync();
@@ -49,18 +51,22 @@ public partial class MainLayout : IAsyncDisposable
         GC.SuppressFinalize(this);
     }
 
-    //protected override async Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    if (firstRender)
-    //    {
-    //        //TODO use system dark AppOptions
-    //        //var aa = await RefMudThemeProvider?.GetSystemPreference()!;
-    //        StateHasChanged();
-    //    }
-    //}
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var darkMode = await RefMudThemeProvider!.GetSystemPreference();
+            LayoutService.Initialize(darkMode);
+
+            await RefMudThemeProvider.WatchSystemPreference(LayoutService.OnSystemPreferenceChanged);
+
+            StateHasChanged();
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
+        LayoutService.MajorUpdateOccured += LayoutService_MajorUpdateOccured;
         using var scope = ServiceScopeFactory.CreateScope();
         _releaseService = scope.ServiceProvider.GetService<IReleaseService>();
         if (_releaseService != null)
@@ -82,7 +88,8 @@ public partial class MainLayout : IAsyncDisposable
         AuthenticationStateProvider.AuthenticationStateChanged += AuthenticationStateProvider_AuthenticationStateChanged;
     }
 
-    private async Task OpenRelease() => await JSRuntime.InvokeVoidAsync("open", ReleaseInfo.Url, "_blank");
+    private void LayoutService_MajorUpdateOccured(object? sender, EventArgs e) => StateHasChanged();
+    private async Task OpenRelease() => await JSRuntime.InvokeVoidAsync("open", ReleaseInfo!.Url, "_blank");
     private void HubClient_NotificationReceived(object? sender, string e) { }
     private async Task HubClient_MessageReceived(object sender, MessageReceivedEventArgs e) { await Task.CompletedTask; }
     private void HubClient_JobCompleted(object? sender, string jobId) { }

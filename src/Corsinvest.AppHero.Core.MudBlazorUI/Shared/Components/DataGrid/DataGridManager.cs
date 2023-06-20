@@ -162,59 +162,6 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
                         ? "data"
                         : Title;
         await _blazorDownloadFileService.DownloadFile($"{fileName}.xlsx", stream, "application/vnd.ms-excel");
-
-
-        //using var workbook = new XLWorkbook();
-        //var worksheet = workbook.Worksheets.Add();
-
-        //var fields = new List<string>();
-        //var col = 'A';
-        //var row = 1;
-
-        //for (int i = 0; i < DataGrid!.RenderedColumns.Count; i++)
-        //{
-        //    var column = DataGrid!.RenderedColumns[i];
-        //    if (!string.IsNullOrWhiteSpace(column.PropertyName))
-        //    {
-        //        worksheet.Cell($"{col}1").Value = column.Title;
-        //        fields.Add(column.PropertyName);
-        //        col++;
-        //    }
-        //}
-
-        //col--;
-        //worksheet.Range($"A1:{col}1").SetAutoFilter();
-        //row++;
-        //foreach (var item in (await DataGrid!.ServerData(_state)).Items)
-        //{
-        //    col = 'A';
-        //    foreach (var field in fields)
-        //    {
-        //        var pi = item!.GetType().GetPropertyFromPath(field);
-        //        if (pi != null)
-        //        {
-        //            var value = (pi.GetValue(item) + "").ToString();
-        //            worksheet.Cell($"{col}{row}").Value = value;
-        //            col++;
-        //        }
-        //    }
-        //    row++;
-        //}
-
-        //var header = worksheet.Range($"A1:{--col}1");
-        //header.Style.Fill.SetBackgroundColor(XLColor.LightBlue);
-        //header.Style.Font.Bold = true;
-        //header.SetAutoFilter();
-
-        //worksheet.Columns().AdjustToContents();
-        //workbook.SaveAs(stream);
-        //stream.Seek(0, SeekOrigin.Begin);
-
-        //var fileName = string.IsNullOrEmpty(Title)
-        //                ? "data"
-        //                : Title;
-
-        //await _blazorDownloadFileService.DownloadFile($"{fileName}.xlsx", stream, "application/vnd.ms-excel");
     }
 
     public async Task<GridData<T>> LoadServerData(GridState<T> state)

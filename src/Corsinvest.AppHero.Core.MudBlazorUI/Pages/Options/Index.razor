@@ -8,7 +8,7 @@
     <MudTabs Elevation="1" ApplyEffectsToContainer Border>
         <Header>
             <AHPermissionButton Permission="Corsinvest.AppHero.Core.Options.Module.Permissions.Save" Disabled="@(!IsValid)"
-                                Variant="Variant.Filled" OnClick="@OnSaveAsync" Style="margin:10px" Size="Size.Small" />
+                                Variant="Variant.Filled" OnClick="@OnSaveAsync" Style="margin:10px" Size="Size.Small" Loading="@InSaving" />
         </Header>
         <ChildContent>
             <MudTabPanel Text="@L["Service"]" Icon="@Icons.Material.Filled.Settings">
@@ -40,41 +40,24 @@
 {
     private RenderFragment RenderOptionsModules(IEnumerable<ModuleBase> modules) => __builder =>
     {
-        @if (ExpansionPanels)
-        {
-            <MudExpansionPanels>
-                @foreach (var module in modules)
-                {
-                    OptionsComponents.TryAdd(module.Class, null!);
+        <MudExpansionPanels>
+            @foreach (var module in modules)
+            {
+                OptionsComponents.TryAdd(module.Class, null!);
 
-                    <MudExpansionPanel>
-                        <TitleContent>
-                            <div class="d-flex gap-4">
-                                <MudIcon Icon="@module.ToMBIcon()" />
-                                <MudText>@L[@module.Description]</MudText>
-                            </div>
-                        </TitleContent>
+                <MudExpansionPanel>
+                    <TitleContent>
+                        <div class="d-flex gap-4">
+                            <MudIcon Icon="@module.ToMBIcon()" />
+                            <MudText>@L[@module.Description]</MudText>
+                        </div>
+                    </TitleContent>
 
-                        <ChildContent>
-                            <DynamicComponent @ref="@OptionsComponents[module.Class]" Type="@module.Options!.Render" />
-                        </ChildContent>
-                    </MudExpansionPanel>
-                }
-            </MudExpansionPanels>
-        }
-        else
-        {
-            <MudTabs>
-                @foreach (var module in modules)
-                {
-                    OptionsComponents.TryAdd(module.Class, null!);
-
-                    <MudTabPanel IsPreRendered Text="@L[module.Description]" Icon="@module.ToMBIcon()">
-                        <br />
-                        <DynamicComponent @ref="@OptionsComponents[module.Class]" Type="module.Options!.Render" />
-                    </MudTabPanel>
-                }
-            </MudTabs>
-        }
+                    <ChildContent>
+                        <DynamicComponent @ref="@OptionsComponents[module.Class]" Type="@module.Options!.Render" />
+                    </ChildContent>
+                </MudExpansionPanel>
+            }
+        </MudExpansionPanels>
     };
 }

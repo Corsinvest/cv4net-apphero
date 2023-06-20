@@ -7,105 +7,108 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Web
 
-<MudDialogProvider />
-<MudSnackbarProvider />
-<MudThemeProvider @bind-IsDarkMode="@ModnitorUIOptions.CurrentValue.Theme.DarkMode" Theme="@UIOptions.Theme.Current" />
+<MudRTLProvider RightToLeft="@LayoutService.IsRightToLeft">
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    <MudThemeProvider @ref="RefMudThemeProvider" IsDarkMode="@LayoutService.IsDarkMode"
+                      Theme="@LayoutService.CurrentTheme" IsDarkModeChanged="LayoutService.SystemDarkModeChanged" />
 
-<ErrorBoundary>
-    <ChildContent>
-        <MudLayout>
-            <AuthorizeView>
-                <NotAuthorized>
-                    <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
-                        <div class="d-flex flex-column mud-width-full">
+    <ErrorBoundary>
+        <ChildContent>
+            <MudLayout>
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+                            <div class="d-flex flex-column mud-width-full">
 
-                            <MudPaper Elevation="25" Class="pa-8" Width="100%">
-                                <div class="d-flex gap-2">
-                                    <MudIcon Icon="@AppOptions.Icon" Size="Size.Large" Style="width:100px; height:100px;" />
-                                    <MudText Typo="Typo.h4" Class="align-self-center">@AppOptions.Name</MudText>
-                                </div>
-                                @Body
-                            </MudPaper>
-                            @*
-                            <MudAlert Class="mt-8 mud-width-full" Style="max-width:500px;">
-                            @L["authentication is required, click sign in."]
-                            </MudAlert>
-                            *@
-                        </div>
-                    </MudContainer>
-                </NotAuthorized>
-                <Authorized>
-                    <MudAppBar Dense Elevation="0" Color="Color.Primary">
-                        <MudTooltip Arrow Text="@L["Menu"]">
-                            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
-                                           OnClick="@(() => DrawerOpen =! DrawerOpen)" />
-                        </MudTooltip>
+                                <MudPaper Elevation="25" Class="pa-8" Width="100%">
+                                    <div class="d-flex gap-2">
+                                        <MudIcon Icon="@AppOptions.Icon" Size="Size.Large" Style="width:100px; height:100px;" />
+                                        <MudText Typo="Typo.h4" Class="align-self-center">@AppOptions.Name</MudText>
+                                    </div>
+                                    @Body
+                                </MudPaper>
+                                @*
+                                <MudAlert Class="mt-8 mud-width-full" Style="max-width:500px;">
+                                @L["authentication is required, click sign in."]
+                                </MudAlert>
+                                *@
+                            </div>
+                        </MudContainer>
+                    </NotAuthorized>
+                    <Authorized>
+                        <MudAppBar Dense Elevation="0" Color="Color.Primary">
+                            <MudTooltip Arrow Text="@L["Menu"]">
+                                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+                                               OnClick="@(() => DrawerOpen =! DrawerOpen)" />
+                            </MudTooltip>
 
-                        <MudLink Href="/" Typo="Typo.h5" Class="ml-3 mud-inherit-text" Underline="Underline.None">@AppOptions.Name</MudLink>
+                            <MudLink Href="/" Typo="Typo.h5" Class="ml-3 mud-inherit-text" Underline="Underline.None">@AppOptions.Name</MudLink>
 
-                        <MudSpacer />
-                        <AHUIAppBarItems />
-                        <MudSpacer />
+                            <MudSpacer />
+                            <AHUIAppBarItems />
+                            <MudSpacer />
 
-                        <MudTooltip Arrow Text="@L["Search (Cmd + K)"]">
-                            <MudIconButton Color="Color.Inherit"
-                                           Edge="Edge.Start"
-                                           Icon="@Icons.Material.Filled.Search"
-                                           OnClick="OpenFinder" />
-                        </MudTooltip>
+                            <MudTooltip Arrow Text="@L["Search (Cmd + K)"]">
+                                <MudIconButton Color="Color.Inherit"
+                                               Edge="Edge.Start"
+                                               Icon="@Icons.Material.Filled.Search"
+                                               OnClick="OpenFinder" />
+                            </MudTooltip>
 
-                        <MudIconButton Icon="@Icons.Material.Filled.Help" Color="Color.Inherit" OnClick="ShowHelp" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Help" Color="Color.Inherit" OnClick="ShowHelp" />
 
-                        <AHAppMenu />
-                        @*  <NotificationMenu Class="mx-3" />*@
-                        <AHUserMenu Class="mx-1" />
-                    </MudAppBar>
+                            <AHAppMenu />
+                            @*  <NotificationMenu Class="mx-3" />*@
+                            <AHUserMenu Class="mx-1" />
+                        </MudAppBar>
 
-                    @*<MudDrawer @bind-Open="DrawerOpen" Variant="@DrawerVariant.Mini" OpenMiniOnHover ClipMode="DrawerClipMode.Always" MiniWidth="70px">*@
-                    <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always">
+                        @*<MudDrawer @bind-Open="DrawerOpen" Variant="@DrawerVariant.Mini" OpenMiniOnHover ClipMode="DrawerClipMode.Always" MiniWidth="70px">*@
+                        <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always">
 
-                        <NavMenu />
+                            <NavMenu />
 
-                        <MudDivider Class="mt-auto"></MudDivider>
+                            <MudDivider Class="mt-auto"></MudDivider>
 
-                        <MudNavMenu Class="d-flex justify-space-between pa-4">
-                            <MudLink Href="@AppOptions.Url" Target="_blank"
-                                     Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important">
-                                <b>@AppOptions.Author</b>
-                            </MudLink>
+                            <MudNavMenu Class="d-flex justify-space-between pa-4">
+                                <MudLink Href="@AppOptions.Url" Target="_blank"
+                                         Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important">
+                                    <b>@AppOptions.Author</b>
+                                </MudLink>
 
-                            @if (ReleaseInfo == null)
-                            {
-                                <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
-                                    @L["version"] @ApplicationHelper.ProductVersion
-                                </MudText>
-                            }
-                            else
-                            {
-                                <MudBadge Content="@ReleaseInfo.Version" Color="Color.Primary" Origin="Origin.TopCenter" OnClick="OpenRelease"
-                                          Style="cursor:pointer">
+                                @if (ReleaseInfo == null)
+                                {
                                     <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
                                         @L["version"] @ApplicationHelper.ProductVersion
                                     </MudText>
-                                </MudBadge>
-                            }
-                        </MudNavMenu>
-                    </MudDrawer>
+                                }
+                                else
+                                {
+                                    <MudBadge Content="@ReleaseInfo.Version" Color="Color.Primary" Origin="Origin.TopCenter" OnClick="OpenRelease"
+                                              Style="cursor:pointer">
+                                        <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
+                                            @L["version"] @ApplicationHelper.ProductVersion
+                                        </MudText>
+                                    </MudBadge>
+                                }
+                            </MudNavMenu>
+                        </MudDrawer>
 
-                    <MudMainContent>
-                        <MudContainer Style="max-width: 100%">
-                            @Body
+                        <MudMainContent>
+                            <MudContainer Style="max-width: 100%">
+                                @Body
 
-                            <MudScrollToTop Style="z-index:2000; right: 50%">
-                                <MudFab StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Primary" Size="Size.Small" />
-                            </MudScrollToTop>
-                        </MudContainer>
-                    </MudMainContent>
-                </Authorized>
-            </AuthorizeView>
-        </MudLayout>
-    </ChildContent>
-    <ErrorContent>
-        <AHCustomError Exception="context" />
-    </ErrorContent>
-</ErrorBoundary>
+                                <MudScrollToTop Style="z-index:2000; right: 50%">
+                                    <MudFab StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Primary" Size="Size.Small" />
+                                </MudScrollToTop>
+                            </MudContainer>
+                        </MudMainContent>
+                    </Authorized>
+                </AuthorizeView>
+            </MudLayout>
+        </ChildContent>
+        <ErrorContent>
+            <AHCustomError Exception="context" />
+        </ErrorContent>
+    </ErrorBoundary>
+</MudRTLProvider>
