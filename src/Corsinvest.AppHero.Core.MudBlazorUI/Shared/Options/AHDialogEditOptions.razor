@@ -21,7 +21,9 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">@L["Cancel"]</MudButton>
-        <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit"
-                   OnClick="SubmitAsync" Color="Color.Success">@L["Save"]</MudButton>
+        <MudLoadingButton Variant="Variant.Filled" ButtonType="ButtonType.Submit"
+                          OnClick="SubmitAsync" Color="Color.Success" Loading="InSaving">
+            @L["Save"]
+        </MudLoadingButton>
     </DialogActions>
 </MudDialog>
