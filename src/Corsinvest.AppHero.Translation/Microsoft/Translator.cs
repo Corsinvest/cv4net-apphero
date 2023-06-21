@@ -5,6 +5,7 @@
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Net.Mime;
 
 namespace Corsinvest.AppHero.Translation.Microsoft;
 
@@ -29,7 +30,7 @@ public class Translator
             var response = await client.PostAsync($"https://microsoft-translator-text.p.rapidapi.com/translate?from={source}&to={targets}&api-version=3.0&profanityAction=NoAction&textType=plain",
                                                   new StringContent(JsonConvert.SerializeObject(texts.Select(a => new { Text = a }).ToArray()))
                                                   {
-                                                      Headers = { ContentType = new MediaTypeHeaderValue("application/json") }
+                                                      Headers = { ContentType = new MediaTypeHeaderValue(MediaTypeNames.Application.Json) }
                                                   });
 
             if (response.IsSuccessStatusCode)

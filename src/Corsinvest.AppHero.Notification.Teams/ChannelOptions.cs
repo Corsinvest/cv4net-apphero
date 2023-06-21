@@ -8,6 +8,7 @@ using Corsinvest.AppHero.Core.Notification;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 
 namespace Corsinvest.AppHero.Notification.Teams;
 
@@ -56,8 +57,8 @@ public class ChannelOptions : NotificationChannelOptions
                                                                .JoinAsString(""));
 
         using var client = new HttpClient();
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
+        var content = new StringContent(data, System.Text.Encoding.UTF8, MediaTypeNames.Application.Json);
         var ret = await client.PostAsync(WebHookUrl, content);
         if (!ret.IsSuccessStatusCode) { throw new AppHeroException($"Error: {ret.ReasonPhrase}"); }
 
