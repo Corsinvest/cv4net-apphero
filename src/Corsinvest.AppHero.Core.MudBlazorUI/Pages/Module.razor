@@ -27,17 +27,17 @@
                 @if (typeof(IRefreshable).IsAssignableFrom(Render))
                 {
                     <MudIconButton Icon="@Icons.Material.Filled.Refresh" OnClick="RefreshAsync" Size="Size.Small"
-                       Style="vertical-align: baseline;" />
+                                   Style="vertical-align: baseline;" />
                 }
 
                 @if (CanOptions || MenuItems.Any())
                 {
-                    <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Dense>
-                    @if (CanOptions)
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Dense="true">
+                        @if (CanOptions)
                         {
                             <MudMenuItem Icon="@CurrentModule.PermissionEditOptions.ToMBIcon()"
-                         IconColor="CurrentModule.PermissionEditOptions.Color.ToMBColor()"
-                         OnClick="ShowOptionsAsync">
+                                         IconColor="CurrentModule.PermissionEditOptions.Color.ToMBColor()"
+                                         OnClick="ShowOptionsAsync">
                                 <MudText Class="ml-n5">@L[CurrentModule.PermissionEditOptions.Description]</MudText>
                             </MudMenuItem>
                         }
@@ -58,7 +58,7 @@
                             else
                             {
                                 <MudMenuItem Icon="@item.ToMBIcon()" IconColor="item.IconColor.ToMBColor()"
-                         Href="@item.RealUrl" Target="@(item.IsExternal ? "_blank" : null)" Disabled="@(!item.Enabled)">
+                                             Href="@item.RealUrl" Target="@(item.IsExternal ? "_blank" : null)" Disabled="@(!item.Enabled)">
                                     <MudText Class="ml-n5">@L[item.Text]</MudText>
                                 </MudMenuItem>
                             }
