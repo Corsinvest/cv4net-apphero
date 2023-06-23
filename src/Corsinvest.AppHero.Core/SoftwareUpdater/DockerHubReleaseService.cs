@@ -5,7 +5,7 @@
 using Newtonsoft.Json;
 using Semver;
 
-namespace Corsinvest.AppHero.Core.SoftwareRelease;
+namespace Corsinvest.AppHero.Core.SoftwareUpdater;
 
 public class DockerHubReleaseService : IReleaseService
 {
@@ -13,7 +13,7 @@ public class DockerHubReleaseService : IReleaseService
 
     public DockerHubReleaseService(IOptionsSnapshot<AppOptions> appOptions) => _appOptions = appOptions;
 
-    public async Task<IEnumerable<RleaseInfo>> GetReleasesAsync()
+    public async Task<IEnumerable<ReleaseInfo>> GetReleasesAsync()
     {
         var repo = _appOptions.Value.RepoDockerHub;
 
@@ -21,7 +21,7 @@ public class DockerHubReleaseService : IReleaseService
         var data = await client.GetStringAsync($"https://registry.hub.docker.com/v2/repositories/{repo}/tags");
 
         return JsonConvert.DeserializeObject<Data>(data)!.Results
-                          .Select(a => new RleaseInfo()
+                          .Select(a => new ReleaseInfo()
                           {
                               Prerelease = SemVersion.Parse(a.Name, Semver.SemVersionStyles.Any).IsPrerelease,
                               Url = $"https://hub.docker.com/r/{repo}/tags",

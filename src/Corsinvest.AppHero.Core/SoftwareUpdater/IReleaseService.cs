@@ -4,16 +4,16 @@
  */
 using Semver;
 
-namespace Corsinvest.AppHero.Core.SoftwareRelease;
+namespace Corsinvest.AppHero.Core.SoftwareUpdater;
 
 public interface IReleaseService
 {
-    Task<IEnumerable<RleaseInfo>> GetReleasesAsync();
+    Task<IEnumerable<ReleaseInfo>> GetReleasesAsync();
 
     private static DateTime? LastRun { get; set; }
-    private static RleaseInfo? LastValue { get; set; }
+    private static ReleaseInfo? LastValue { get; set; }
 
-    public async Task<RleaseInfo?> NewReleaseIsAvaibleAsync()
+    public async Task<ReleaseInfo?> NewReleaseIsAvaibleAsync()
     {
         if (LastRun == null || (DateTime.Now - LastRun).Value.Minutes > 5)
         {
@@ -21,14 +21,14 @@ public interface IReleaseService
 
             if (SemVersion.TryParse(ApplicationHelper.ProductVersion, SemVersionStyles.Any, out var currSemVer))
             {
-                IEnumerable<RleaseInfo>? data = null;
+                IEnumerable<ReleaseInfo>? data = null;
                 try
                 {
                     data = await GetReleasesAsync();
                 }
                 catch { }
 
-                foreach (var item in data ?? new List<RleaseInfo>())
+                foreach (var item in data ?? new List<ReleaseInfo>())
                 {
                     if (SemVersion.TryParse(item.Version, SemVersionStyles.Any, out var semVer))
                     {

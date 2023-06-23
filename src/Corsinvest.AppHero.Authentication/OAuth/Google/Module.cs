@@ -17,7 +17,7 @@ using System.Security.Claims;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.Google;
 
-public class Module : ModuleBase, IForceLoadModule, IAutenticationConfig, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAutentication
 {
     private bool _configurated;
 

@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.MicrosoftAccount;
 
-public class Module : ModuleBase, IForceLoadModule, IAutenticationConfig, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAutentication
 {
     private bool _configurated;
 

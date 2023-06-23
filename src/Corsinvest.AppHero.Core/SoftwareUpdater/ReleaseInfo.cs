@@ -4,9 +4,9 @@
  */
 using Semver;
 
-namespace Corsinvest.AppHero.Core.SoftwareRelease;
+namespace Corsinvest.AppHero.Core.SoftwareUpdater;
 
-public class RleaseInfo
+public class ReleaseInfo
 {
     public string? Url { get; set; }
     public bool Prerelease { get; set; }

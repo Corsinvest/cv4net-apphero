@@ -5,14 +5,14 @@
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
-namespace Corsinvest.AppHero.Core.SoftwareRelease;
+namespace Corsinvest.AppHero.Core.SoftwareUpdater;
 
 public class GitHubReleaseService : IReleaseService
 {
     private readonly IOptionsSnapshot<AppOptions> _appOptions;
     public GitHubReleaseService(IOptionsSnapshot<AppOptions> appOptions) => _appOptions = appOptions;
 
-    public async Task<IEnumerable<RleaseInfo>> GetReleasesAsync()
+    public async Task<IEnumerable<ReleaseInfo>> GetReleasesAsync()
     {
         var repo = _appOptions.Value.RepoGitHub;
 
@@ -22,7 +22,7 @@ public class GitHubReleaseService : IReleaseService
 
         return JsonConvert.DeserializeObject<List<Data>>(data)!
                           .Where(a => !a.Draft)
-                          .Select(a => new RleaseInfo()
+                          .Select(a => new ReleaseInfo()
                           {
                               Prerelease = a.Prerelease,
                               Url = a.HtmlUrl,

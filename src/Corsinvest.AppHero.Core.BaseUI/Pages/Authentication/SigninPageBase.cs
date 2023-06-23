@@ -20,7 +20,7 @@ public abstract class SigninPageBase : AHComponentBase
                             .Implements<IAutentication>()
                             .IsEnabled()
                             .IsConfigured()
-                            .Where(a => ((IAutenticationConfig)a).AutenticationType == type);
+                            .Where(a => ((IAutentication)a).AutenticationType == type);
 
     protected class LoginDef
     {

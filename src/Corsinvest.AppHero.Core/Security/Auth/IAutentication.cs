@@ -10,4 +10,6 @@ public interface IAutentication : IGroupableService
 {
     string IGroupableService.GetGroupName() => "Autentication";
     string IGroupableService.GetGroupIcon() => UI.UIIcon.Key.GetName();
+
+    AutenticationType AutenticationType { get; }
 }

@@ -5,7 +5,7 @@
 using Corsinvest.AppHero.Core.Hubs;
 using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components;
 using Corsinvest.AppHero.Core.MudBlazorUI.Style;
-using Corsinvest.AppHero.Core.SoftwareRelease;
+using Corsinvest.AppHero.Core.SoftwareUpdater;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
@@ -28,7 +28,7 @@ public partial class MainLayout : IAsyncDisposable
 
     private AppOptions AppOptions => SnapshotAppOptions.Value;
     private bool DrawerOpen { get; set; } = true;
-    private RleaseInfo? ReleaseInfo { get; set; }
+    private ReleaseInfo? ReleaseInfo { get; set; }
     private IReleaseService? _releaseService;
     private Timer? _timer;
     private MudThemeProvider? RefMudThemeProvider { get; set; }
