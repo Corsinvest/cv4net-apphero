@@ -126,7 +126,7 @@ public class AutenticationActiveDirectory : IAutenticationActiveDirectory
                     }
 
                     //redirect to login
-                    if (ret.IsSuccess) { await _autentication.ExecuteLoginAsync(user!, loginRequestAD.RememberMe); }
+                    if (ret.IsSuccess) { await _autentication.LoginAsync(loginRequestAD); }
                 }
             }
         }

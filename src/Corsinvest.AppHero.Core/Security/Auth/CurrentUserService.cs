@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Corsinvest.AppHero.Core.Security.Identity;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -53,5 +54,18 @@ public class CurrentUserService : ICurrentUserService
             var ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress + "";
             return string.IsNullOrWhiteSpace(ip) ? "unknown" : ip;
         }
+    }
+
+    public void SetCulture(string culture, string redirectUri)
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var navigationManager = scope.ServiceProvider.GetRequiredService<NavigationManager>();
+        navigationManager.NavigateTo(UrlHelper.SetParameter("/culture",
+                                                               new()
+                                                               {
+                                                                    { "culture", culture},
+                                                                    { "redirectUri", redirectUri}
+                                                               }),
+                                                               true);
     }
 }

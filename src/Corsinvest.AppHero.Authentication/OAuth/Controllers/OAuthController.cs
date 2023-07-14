@@ -44,7 +44,8 @@ public class OAuthController : ControllerBase
                 ["returnUrl"] = "/" ,
                 ["scheme"] = provider ,
             }
-        }, provider);
+        },
+        provider);
 
 
     [AllowAnonymous]

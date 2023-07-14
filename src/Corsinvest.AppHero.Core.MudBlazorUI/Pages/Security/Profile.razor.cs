@@ -33,16 +33,7 @@ public partial class Profile
             var result = await UserManager.UpdateAsync(User);
             UINotifier.Show(result.Succeeded, L["Update successfully."], result.ToStringErrors());
 
-            if (result.Succeeded)
-            {
-                //reload page for change language
-                NavigationManager.NavigateTo(UrlHelper.SetParameter("/api/account/setculture",
-                                                                    new()
-                                                                    {
-                                                                        { "culture", User.DefaultCulture},
-                                                                        { "redirectUri", NavigationManager.Uri}
-                                                                    }), true);
-            }
+            if (result.Succeeded) { CurrentUserService.SetCulture(User.DefaultCulture, NavigationManager.Uri); }
         }
     }
 
@@ -57,14 +48,14 @@ public partial class Profile
         }
     }
 
-    private class ChangePasswordModel
+    class ChangePasswordModel
     {
         public string CurrentPassword { get; set; } = string.Empty;
         public string NewPassword { get; set; } = string.Empty;
         public string ConfirmPassword { get; set; } = string.Empty;
     }
 
-    private class PasswordFluentValidator : AbstractModelValidator<ChangePasswordModel>
+    class PasswordFluentValidator : AbstractModelValidator<ChangePasswordModel>
     {
         public PasswordFluentValidator(Core.Security.Identity.Options identityOptions)
         {

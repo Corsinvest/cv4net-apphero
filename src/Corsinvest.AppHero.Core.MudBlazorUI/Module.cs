@@ -40,7 +40,6 @@ public class Module : ModuleBase, IForceLoadModule
         services.AddScoped<IUINotifier, UINotifier>();
         services.AddScoped<IUIMessageBox, UIMessageBox>();
         services.AddMudExtensions();
-        services.AddMudServicesWithExtensions();
         services.AddScoped<LayoutService>();
         services.AddTransient(typeof(IDataGridManager<>), typeof(DataGridManager<>));
         services.AddTransient(typeof(IDataGridManagerRepository<>), typeof(DataGridManagerRepository<>));

@@ -36,5 +36,5 @@ public partial class AHUserMenu
         }
     }
 
-    private void Logout() => AuthenticationService.Logout();
+    private void Logout() => AuthenticationService.LogoutAsync();
 }

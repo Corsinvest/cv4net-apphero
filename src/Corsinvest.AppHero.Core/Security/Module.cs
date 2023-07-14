@@ -78,6 +78,7 @@ public class Module : ModuleBase, IForceLoadModule
         //Authentication
         services.AddTransient<IAuthenticationService, AuthenticationService>()
                 .AddScoped<AuthenticationService>()
+                .AddScoped<AccessTokenProvider>()
                 .AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredService<AuthenticationService>());
 
         services.AddScoped<IPermissionService, PermissionService>();
@@ -91,10 +92,42 @@ public class Module : ModuleBase, IForceLoadModule
             options.ExpireTimeSpan = TimeSpan.FromHours(services.GetOptionsSnapshot<Identity.Options>().Value.LoginCookieExpirationHours);
         });
 
-        services.AddAuthentication();
+        //services.AddAuthentication();
 
         //Authorization
         //services.AddTransient<IIdentityService, IdentityService>();
+
+        //var secret = "S0M3RAN0MS3CR3T!1!MAG1C!1!"; //_appConfig.Secret
+        //services.AddAuthentication()
+        //        .AddJwtBearer(options =>
+        //{
+        //    options.SaveToken = true;
+        //    options.RequireHttpsMetadata = false;
+        //    options.TokenValidationParameters = new TokenValidationParameters()
+        //    {
+        //        ValidateIssuerSigningKey = false,
+        //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+        //        ValidateIssuer = false,
+        //        ValidateAudience = false,
+        //        RoleClaimType = ClaimTypes.Role,
+        //        ClockSkew = TimeSpan.Zero,
+        //        ValidateLifetime = true
+        //    };
+
+        //    options.Events = new JwtBearerEvents
+        //    {
+        //        OnMessageReceived = context =>
+        //        {
+        //            var accessToken = context.Request.Headers.Authorization;
+        //            if (!string.IsNullOrEmpty(accessToken) &&
+        //                (context.HttpContext.Request.Path.StartsWithSegments("/signalRHub")))
+        //            {
+        //                context.Token = accessToken.ToString().Substring(7);
+        //            }
+        //            return Task.CompletedTask;
+        //        }
+        //    };
+        //});
 
         services.AddAuthorization(options =>
         {
@@ -119,6 +152,8 @@ public class Module : ModuleBase, IForceLoadModule
         var app = (WebApplication)host;
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseMiddleware<BlazorCookieLoginMiddleware>();
 
         await Task.CompletedTask;
     }

@@ -9,7 +9,7 @@ namespace Corsinvest.AppHero.Translation.Google;
 
 public class Translator
 {
-    private class WebResult
+    class WebResult
     {
         [JsonProperty("data")]
         public Data_ Data { get; set; } = default!;

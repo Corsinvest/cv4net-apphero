@@ -17,9 +17,7 @@ public abstract class ModuleBase
 
     public ModuleLink? Link { get; set; }
     public IEnumerable<ModuleLink> GetFlatLinks() => Link?.GetFlatLinks() ?? new List<ModuleLink>().AsReadOnly();
-
     public IEnumerable<ModuleMenuItem> MenuItems { get; set; } = Enumerable.Empty<ModuleMenuItem>();
-
     public string? InfoText { get; set; }
 
     private string _icon = default!;

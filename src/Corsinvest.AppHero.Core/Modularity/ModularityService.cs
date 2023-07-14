@@ -27,8 +27,8 @@ public class ModularityService : IModularityService
 
     private void Initialize()
     {
-        SetCategoryIcon(IModularityService.AdministrationCategoryName, UIIcon.SettingsApplications.GetName());
-        SetCategoryIcon(IModularityService.GeneralCategoryName, UIIcon.Folder.GetName());
+        Categories.Add(new(IModularityService.AdministrationCategoryName, UIIcon.SettingsApplications.GetName(), 0));
+        Categories.Add(new(IModularityService.GeneralCategoryName, UIIcon.Folder.GetName(), 0));
     }
 
     public IEnumerable<ModuleBase> Modules { get; private set; }
@@ -70,18 +70,7 @@ public class ModularityService : IModularityService
     public async Task<IEnumerable<ModuleMenuItem>> GetAuthorizedMenuItemssAsync(IPermissionService permissionService)
         => (await GetAuthorizationsAsync(permissionService)).SelectMany(a => a.MenuItems);
 
-    public IEnumerable<string> GetCategories() => Modules.Select(a => a.Category).Distinct();
-
-    private readonly Dictionary<string, string> _cateoryIcons = new();
-    public string? GetCategoryIcon(string category)
-        => _cateoryIcons.TryGetValue(category, out var icon)
-                ? icon
-                : null;
-
-    public void SetCategoryIcon(string category, string icon)
-    {
-        if (!_cateoryIcons.TryAdd(category, icon)) { _cateoryIcons[category] = icon; }
-    }
+    public List<ModuleCategory> Categories { get; } = new();
 
     public IEnumerable<Assembly> Assemblies
         => Modules.Select(a => a.GetType().Assembly)

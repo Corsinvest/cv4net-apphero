@@ -8,7 +8,7 @@ namespace Corsinvest.AppHero.Core.Extensions;
 
 public static class LoggerExtensions
 {
-    private class Operation : IDisposable
+    class Operation : IDisposable
     {
         private readonly Stopwatch _timer;
         private readonly ILogger _logger;

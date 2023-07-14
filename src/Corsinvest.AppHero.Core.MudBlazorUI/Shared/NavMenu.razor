@@ -7,17 +7,16 @@
 <MudNavMenu Dense Margin="Margin.Dense" Color="Color.Primary">
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@L["Home"]</MudNavLink>
 
-    @foreach (var category in ModularityService.GetCategories().OrderBy(a => a))
+    @foreach (var category in ModularityService.Categories.OrderBy(a => a.Order).ThenBy(a => a.Name))
     {
-        if (Authorizations.Any(a => a.Module.Category == category))
+        if (Authorizations.Any(a => a.Module.Category == category.Name))
         {
-            <MudNavGroup Title="@L[category]" Icon="@ModularityService.ToMBIcon(category)">
-                @foreach (var item in GetByCategory(category))
+            <MudNavGroup Title="@L[category.Name]" Icon="@ModularityService.ToMBIcon(category.Name)">
+                @foreach (var item in GetByCategory(category.Name))
                 {
                     @RenderLinkModule(item.Key.Link!, item.SelectMany(a => a.Links))
                 }
             </MudNavGroup>
-
         }
     }
 </MudNavMenu>
@@ -38,11 +37,11 @@
         else
         {
             <MudNavLink Href="@link.RealUrl"
-            Icon="@link.ToMBIcon()"
-            IconColor="@link.IconColor.ToMBColor()"
-            Match="NavLinkMatch.All"
-            Target="@(link.IsExternal ? "_blank" : null)"
-            Disabled="@(!link.Enabled)">
+                        Icon="@link.ToMBIcon()"
+                        IconColor="@link.IconColor.ToMBColor()"
+                        Match="NavLinkMatch.All"
+                        Target="@(link.IsExternal ? "_blank" : null)"
+                        Disabled="@(!link.Enabled)">
                 @link.Text
             </MudNavLink>
         }

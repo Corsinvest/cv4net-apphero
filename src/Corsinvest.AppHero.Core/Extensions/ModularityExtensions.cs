@@ -6,14 +6,15 @@ using Corsinvest.AppHero.Core.Modularity;
 
 namespace Corsinvest.AppHero.Core.Extensions;
 
-public static class ModuleExtensions
+public static class ModularityExtensions
 {
-    #region Linq
     public static IEnumerable<ModuleBase> IsType(this IEnumerable<ModuleBase> modules, ModuleType type) => modules.Where(a => a.Type == type);
     public static IEnumerable<ModuleBase> IsCategory(this IEnumerable<ModuleBase> modules, string category) => modules.Where(a => a.Category == category);
     public static IEnumerable<ModuleBase> IsEnabled(this IEnumerable<ModuleBase> modules) => modules.Where(a => a.Enabled);
     public static IEnumerable<ModuleBase> IsConfigured(this IEnumerable<ModuleBase> modules) => modules.Where(a => a.Configurated);
     public static IEnumerable<ModuleBase> Implements<T>(this IEnumerable<ModuleBase> modules) => modules.Where(a => typeof(T).IsAssignableFrom(a.GetType()));
     public static IEnumerable<ModuleBase> NotImplements<T>(this IEnumerable<ModuleBase> modules) => modules.Where(a => !typeof(T).IsAssignableFrom(a.GetType()));
-    #endregion
+
+    public static string GetCategoryIcon(this IModularityService modularityService, string category)
+        => modularityService.Categories.FirstOrDefault(a => a.Name == category)?.Icon + "";
 }

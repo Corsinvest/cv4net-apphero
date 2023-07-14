@@ -10,6 +10,7 @@ using Corsinvest.AppHero.Core.Helpers;
 using Corsinvest.AppHero.Core.SoftwareUpdater;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
 //appsetting default
@@ -83,7 +84,12 @@ else
     #endregion
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseRouting();
 

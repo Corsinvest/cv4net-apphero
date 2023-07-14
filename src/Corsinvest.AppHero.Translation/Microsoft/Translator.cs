@@ -52,7 +52,7 @@ public class Translator
         return ret;
     }
 
-    private class WebResult
+    class WebResult
     {
         [JsonProperty("translations")]
         public Translation_[] Translations { get; set; } = default!;

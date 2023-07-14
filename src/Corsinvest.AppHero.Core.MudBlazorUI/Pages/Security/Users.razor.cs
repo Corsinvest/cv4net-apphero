@@ -51,16 +51,7 @@ public partial class Users
         DataGridManager.SaveAfterAsync = async (user, isNew) =>
         {
             await Task.CompletedTask;
-            if (user.Id == CurrentUserService.UserId)
-            {
-                //reload page for change language
-                NavigationManager.NavigateTo(UrlHelper.SetParameter("/api/account/setculture",
-                                                                    new()
-                                                                    {
-                                                                        { "culture", user.DefaultCulture},
-                                                                        { "redirectUri", NavigationManager.Uri}
-                                                                    }), true);
-            }
+            if (user.Id == CurrentUserService.UserId) { CurrentUserService.SetCulture(user.DefaultCulture, NavigationManager.Uri); }
         };
 
         DataGridManager.DeleteAsync = async (items) =>

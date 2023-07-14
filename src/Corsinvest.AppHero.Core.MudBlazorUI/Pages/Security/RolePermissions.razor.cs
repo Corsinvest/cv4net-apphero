@@ -13,7 +13,7 @@ public partial class RolePermissions
 
     [Inject] private IModularityService ModularityService { get; set; } = default!;
 
-    private class TreeDataPermission
+    class TreeDataPermission
     {
         public string? Key { get; set; }
         public string Path { get; set; } = default!;

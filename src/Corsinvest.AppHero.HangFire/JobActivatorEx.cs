@@ -15,7 +15,7 @@ public class JobActivatorEx : JobActivator
     public JobActivatorEx(IServiceScopeFactory scopeFactory) => _scopeFactory = scopeFactory ?? throw new ArgumentNullException(nameof(scopeFactory));
     public override JobActivatorScope BeginScope(PerformContext context) => new Scope(context, _scopeFactory.CreateScope());
 
-    private class Scope : JobActivatorScope, IServiceProvider
+    class Scope : JobActivatorScope, IServiceProvider
     {
         private readonly PerformContext _context;
         private readonly IServiceScope _scope;

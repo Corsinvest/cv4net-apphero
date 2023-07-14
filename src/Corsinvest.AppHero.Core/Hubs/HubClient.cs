@@ -57,7 +57,7 @@ public class HubClient : IAsyncDisposable
                 .Build();
 
             _hubConnection.ServerTimeout = TimeSpan.FromSeconds(30);
-            _hubConnection.On(SignalRConstants.ForceLogout, _authenticationService.Logout);
+            _hubConnection.On(SignalRConstants.ForceLogout, _authenticationService.LogoutAsync);
             _hubConnection.On<string>(SignalRConstants.ConnectUser, (userId) =>
             {
                 _sessionsInfoTracker.SetHubConnectionId(_hubConnection.ConnectionId!);

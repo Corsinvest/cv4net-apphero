@@ -17,4 +17,5 @@ public interface ICurrentUserService : IScopedDependency
     string UserName { get; }
     string IpAddress { get; }
     string HttpConnectionId { get; }
+    void SetCulture(string culture, string redirectUri);
 }

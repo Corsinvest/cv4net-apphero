@@ -19,7 +19,7 @@ public partial class AHPasswordsInput
     private PasswordModel Model { get; set; } = new();
     private ResetPasswordFormModelValidator ModelValidator { get; set; } = default!;
 
-    private class PasswordModel
+    class PasswordModel
     {
         [Required]
         public string Password { get; set; } = default!;
@@ -28,7 +28,7 @@ public partial class AHPasswordsInput
         public string ConfirmPassword { get; set; } = default!;
     }
 
-    private class ResetPasswordFormModelValidator : AbstractModelValidator<PasswordModel>
+    class ResetPasswordFormModelValidator : AbstractModelValidator<PasswordModel>
     {
         public ResetPasswordFormModelValidator(PasswordOptions passwordOptions)
         {

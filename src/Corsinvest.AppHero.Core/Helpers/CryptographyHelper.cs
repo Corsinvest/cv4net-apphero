@@ -33,17 +33,22 @@ public class CryptographyHelper
     {
         if (string.IsNullOrEmpty(encrypted)) { return string.Empty; }
 
-        var dataArray = Convert.FromBase64String(encrypted);
+        var resultArray = Array.Empty<byte>();
 
-        using var tDes = TripleDES.Create();
-        tDes.Mode = CipherMode.ECB;
-        tDes.Key = Encoding.UTF8.GetBytes(passphrase ?? Key);
-        tDes.Padding = PaddingMode.PKCS7;
+        try
+        {
+            var dataArray = Convert.FromBase64String(encrypted);
 
-        using var cTransform = tDes.CreateDecryptor();
-        var resultArray = cTransform.TransformFinalBlock(dataArray, 0, dataArray.Length);
-        tDes.Clear();
+            using var tDes = TripleDES.Create();
+            tDes.Mode = CipherMode.ECB;
+            tDes.Key = Encoding.UTF8.GetBytes(passphrase ?? Key);
+            tDes.Padding = PaddingMode.PKCS7;
 
+            using var cTransform = tDes.CreateDecryptor();
+            resultArray = cTransform.TransformFinalBlock(dataArray, 0, dataArray.Length);
+            tDes.Clear();
+        }
+        catch (Exception ex) { }
         return Encoding.UTF8.GetString(resultArray);
     }
 }
