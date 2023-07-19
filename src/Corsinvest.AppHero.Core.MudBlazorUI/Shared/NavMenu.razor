@@ -40,7 +40,7 @@
                         Icon="@link.ToMBIcon()"
                         IconColor="@link.IconColor.ToMBColor()"
                         Match="NavLinkMatch.All"
-                        Target="@(link.IsExternal ? "_blank" : null)"
+                        Target="@(link.IsExternal ? "_blank" : null)" 
                         Disabled="@(!link.Enabled)">
                 @link.Text
             </MudNavLink>

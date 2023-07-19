@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 using Humanizer;
+using Microsoft.AspNetCore.Components.Rendering;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
@@ -16,6 +17,15 @@ namespace Corsinvest.AppHero.Core.MudBlazorUI.Helpers;
 
 public static class MudExObjectEditFormHelper
 {
+    class CustomRenderer : ICustomRenderer
+    {
+        public void Render(RenderTreeBuilder builder, IHandleEvent eventTarget, ObjectEditPropertyMeta propertyMeta)
+        {
+        //    FixPropertyItem(propertyMeta); 
+        }
+    }
+
+
     public static void FixPropertyItem(ObjectEditPropertyMeta item)
     {
         if (!string.IsNullOrEmpty(item.GroupInfo.Name)) { item.GroupInfo.Name = item.GroupInfo.Name.Humanize(LetterCasing.Title); }
@@ -51,6 +61,13 @@ public static class MudExObjectEditFormHelper
                 DisablePositionMargin = true
             });
 
+            //item.Value
+            //RenderDataDefaults.RegisterDefault<ICollection<string>, MudExCollectionEditor<string>>(f => f.Items);
+
+            //     item.RenderWith(new CustomRenderer());
+
+            //item.RenderData
+            //var cc = 
             //foreach (var item1 in item.MainEditMeta.Properties())
             //{
             //    FixPropertyItem(item1, stringLocalizer);

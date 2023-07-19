@@ -24,7 +24,7 @@ public partial class AHDialogEditOptions
 
         InSaving = false;
 
-        Logger.LogInformation(L["Save options {Module}", Module.FullInfo]);
+        Logger.LogInformation(L["Save options {0}", Module.FullInfo]);
         MudDialog.Close(DialogResult.Ok(true));
         //force refresh
         //NavigationManager.NavigateTo(NavigationManager.Uri, true);

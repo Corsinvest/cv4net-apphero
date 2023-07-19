@@ -70,28 +70,20 @@
 
                             <MudDivider Class="mt-auto"></MudDivider>
 
-                            <MudNavMenu Class="d-flex justify-space-between pa-4">
-                                <MudLink Href="@AppOptions.Url" Target="_blank"
-                                         Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important">
-                                    <b>@AppOptions.Author</b>
-                                </MudLink>
+                            <MudBadge Content="@L["New version: {0}",ReleaseInfo?.Version].ToString()" Color="Color.Primary" OnClick="OpenRelease"
+                                      Origin="Origin.TopCenter" Style="cursor:pointer" Visible="@(ReleaseInfo != null)">
 
-                                @if (ReleaseInfo == null)
-                                {
+                                <div class="d-flex justify-space-between pa-4">
+                                    <MudLink Href="@AppOptions.Url" Target="_blank"
+                                             Style="font-size:0.625rem; line-height:1.125rem; color: var(--mud-palette-text-primary) !important">
+                                        <b>@AppOptions.Author</b>
+                                    </MudLink>
+
                                     <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
                                         @L["version"] @ApplicationHelper.ProductVersion
                                     </MudText>
-                                }
-                                else
-                                {
-                                    <MudBadge Content="@ReleaseInfo.Version" Color="Color.Primary" Origin="Origin.TopCenter" OnClick="OpenRelease"
-                                              Style="cursor:pointer">
-                                        <MudText Style="font-size:0.625rem; line-height:1.125rem;color: var(--mud-palette-text-primary) !important">
-                                            @L["version"] @ApplicationHelper.ProductVersion
-                                        </MudText>
-                                    </MudBadge>
-                                }
-                            </MudNavMenu>
+                                </div>
+                            </MudBadge>
                         </MudDrawer>
 
                         <MudMainContent>

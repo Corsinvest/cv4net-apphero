@@ -5,7 +5,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace Corsinvest.AppHero.Authentication;
 

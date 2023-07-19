@@ -100,7 +100,7 @@ app.MapBlazorHub(configureOptions: options =>
     options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
 });
 
-app.MapFallbackToPage("/_Index");
+app.MapFallbackToPage("/_Host");
 
 await app.OnPostApplicationInitializationAsync();
 

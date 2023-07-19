@@ -49,10 +49,10 @@ public class Module : ModuleBase, IForceLoadModule
     {
         await Task.CompletedTask;
         var modularityService = host.Services.GetRequiredService<IModularityService>();
-        modularityService.SetRenderIndex<Modularity.Module, MudBlazorUI.Pages.Modularity.Index>();
-        modularityService.SetRenderIndex<Options.Module, MudBlazorUI.Pages.Options.Index>();
+        modularityService.SetRenderIndex<Modularity.Module, Pages.Modularity.Index>();
+        modularityService.SetRenderIndex<Options.Module, Pages.Options.Index>();
         //modularityService.SetRenderOptions<Notification.Email.Module, MudBlazorUI.Shared.Notification.Email.RenderOptions>();
-        modularityService.SetRenderIndex<Session.Module, MudBlazorUI.Pages.Session.Index>();
+        modularityService.SetRenderIndex<Session.Module, Pages.Session.Index>();
 
         //security
         modularityService.SetRenderOptions<Security.Module, Pages.Security.RenderOptions>();

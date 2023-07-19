@@ -8,7 +8,7 @@ namespace Corsinvest.AppHero.Core.MudBlazorUI.Extensions;
 
 public static class ModularityExtensions
 {
-    public static string ToMBIcon(this IModularityService modularityService, string category) 
+    public static string ToMBIcon(this IModularityService modularityService, string category)
         => MudBlazorHelper.ToMBIcon(modularityService.GetCategoryIcon(category));
 
     public static string ToMBIcon(this IGroupableService groupableService) => MudBlazorHelper.ToMBIcon(groupableService.GetGroupIcon());

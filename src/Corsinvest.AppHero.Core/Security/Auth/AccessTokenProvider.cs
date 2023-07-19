@@ -1,4 +1,8 @@
-﻿using Corsinvest.AppHero.Core.Security.Identity;
+﻿/*
+ * SPDX-FileCopyrightText: Copyright Corsinvest Srl
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+using Corsinvest.AppHero.Core.Security.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Security.Claims;
@@ -6,7 +10,7 @@ using System.Security.Cryptography;
 
 namespace Corsinvest.AppHero.Core.Security.Auth;
 
-public class AccessTokenProvider 
+public class AccessTokenProvider
 {
     private readonly string _tokenKey = nameof(_tokenKey);
     private readonly ProtectedLocalStorage _localStorage;

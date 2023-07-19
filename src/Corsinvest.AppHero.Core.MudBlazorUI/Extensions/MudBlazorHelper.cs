@@ -68,10 +68,7 @@ public static class MudBlazorHelper
                 _ => string.Empty,
             };
 
-            if (!string.IsNullOrEmpty(value))
-            {
-                IconConvert.Add($"{nameof(UIIcon)}.{item}", value);
-            }
+            if (!string.IsNullOrEmpty(value)) { IconConvert.Add($"{nameof(UIIcon)}.{item}", value); }
         }
     }
 }

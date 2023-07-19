@@ -110,7 +110,6 @@ public abstract class ModuleBase
     //public virtual async Task ShutdownAsync() => await Task.CompletedTask;
     public virtual async Task RefreshOptionsAsync(IServiceScope scope) => await Task.CompletedTask;
 
-
     protected IServiceCollection AddOptions<TType>(IServiceCollection services, IConfiguration config, string? section = null) where TType : class, new()
     {
         Options = new()

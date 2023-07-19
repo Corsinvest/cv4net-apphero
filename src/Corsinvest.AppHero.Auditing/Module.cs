@@ -24,7 +24,7 @@ public class Module : ModuleBase, IForceLoadModule
         Description = "Auditing";
         Slug = "Auditing";
 
-        Link = new ModuleLink(this, Description)
+        Link = new(this, Description)
         {
             Icon = UIIcon.PersonSearch.GetName(),
         };

@@ -48,6 +48,7 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
     public async Task<bool> LoginAsync(LoginRequest loginRequest)
     {
         var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
         var user = await userManager.FindByNameAsync(loginRequest.Username);
         var valid = user != null
                         && user.IsActive
@@ -85,7 +86,7 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
         }
         else
         {
-            _navigationManager.NavigateTo("/logout" ,true);
+            _navigationManager.NavigateTo("/logout", true);
         }
         //NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(_httpContextAccessor.HttpContext!.User)));
     }
