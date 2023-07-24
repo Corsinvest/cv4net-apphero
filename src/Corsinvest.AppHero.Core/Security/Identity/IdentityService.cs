@@ -19,8 +19,7 @@ public class IdentityService : IIdentityService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IServiceProvider _serviceProvider;
 
-    public IdentityService(IServiceProvider serviceProvider,
-                           UserManager<ApplicationUser> userManager)
+    public IdentityService(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
         _serviceProvider = serviceProvider;
@@ -100,13 +99,7 @@ public class IdentityService : IIdentityService
     {
         var _userClaimsPrincipalFactory = _serviceProvider.GetRequiredService<IUserClaimsPrincipalFactory<ApplicationUser>>();
         var principal = await _userClaimsPrincipalFactory.CreateAsync(user);
-
-        var claims = principal.Claims;
-        //claims = principal.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier
-        //                                   || a.Type == ClaimTypes.Name)
-        //                         .ToArray();
-
-        return GenerateEncryptedToken(GetSigningCredentials(), claims);
+        return GenerateEncryptedToken(GetSigningCredentials(), principal.Claims);
     }
 
     private static SigningCredentials GetSigningCredentials()
@@ -141,19 +134,7 @@ public class IdentityService : IIdentityService
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var result = await tokenHandler.ValidateTokenAsync(token, tokenValidationParameters);
-        //if (result.IsValid)
-        //{
-        //    var signInManager = _serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
-        //    var ret = await signInManager.ClaimsFactory.CreateAsync(await signInManager.UserManager.GetUserAsync(new ClaimsPrincipal(result.ClaimsIdentity)));
-        //    return ret;
-        //}
-        //else
-        //{
-        //    return new ClaimsPrincipal(new ClaimsIdentity());
-        //}
         return new ClaimsPrincipal(result.IsValid ? result.ClaimsIdentity : new ClaimsIdentity());
     }
-
     #endregion
-
 }

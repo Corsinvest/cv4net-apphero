@@ -89,7 +89,10 @@ public class Module : ModuleBase, IForceLoadModule
             //options.Cookie.HttpOnly = true;
             //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             options.SlidingExpiration = true;
-            options.ExpireTimeSpan = TimeSpan.FromHours(services.GetOptionsSnapshot<Identity.Options>().Value.LoginCookieExpirationHours);
+
+            var loginCookieExpirationHours = services.GetOptionsSnapshot<Identity.Options>().Value.LoginCookieExpirationHours;
+            options.ExpireTimeSpan = TimeSpan.FromHours(loginCookieExpirationHours);
+            options.SessionStore = new MemoryCacheTicketStore(loginCookieExpirationHours);
         });
 
         //services.AddAuthentication();
