@@ -5,8 +5,8 @@
 
 namespace Corsinvest.AppHero.Core.Security.Auth;
 
-public static class RoleConstants
+public enum SecurityPermissionState
 {
-    public static string AdministratorRole { get; } = "Admin";
-    public static string BasicRole { get; } = "Basic";
+    Allow,
+    Denay
 }

@@ -13,7 +13,7 @@ public interface IReleaseService
     private static DateTime? LastRun { get; set; }
     private static ReleaseInfo? LastValue { get; set; }
 
-    public async Task<ReleaseInfo?> NewReleaseIsAvaibleAsync()
+    public async Task<ReleaseInfo?> NewReleaseIsAvailableAsync()
     {
         if (LastRun == null || (DateTime.Now - LastRun).Value.Minutes > 5)
         {

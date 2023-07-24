@@ -17,9 +17,9 @@ using System.Security.Claims;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.Google;
 
-public class Module : ModuleBase, IForceLoadModule, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAuthentication
 {
-    private bool _configurated;
+    private bool _configured;
 
     public Module()
     {
@@ -37,8 +37,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         };
     }
 
-    public AutenticationType AutenticationType => AutenticationType.External;
-    public override bool Configurated => _configurated;
+    public AuthenticationType AuthenticationType => AuthenticationType.External;
+    public override bool Configured => _configured;
     static bool IsConfigurated(Options options) => !string.IsNullOrEmpty(options.ClientId) && !string.IsNullOrEmpty(options.ClientSecret);
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)
@@ -48,8 +48,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
 
         //https://github.com/dotnet/aspnetcore/blob/master/src/Security/Authentication/samples/SocialSample/Startup.cs
         //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins
-        _configurated = IsConfigurated(options);
-        if (_configurated)
+        _configured = IsConfigurated(options);
+        if (_configured)
         {
             services.AddAuthentication().AddGoogle(a =>
             {

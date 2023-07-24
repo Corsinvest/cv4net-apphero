@@ -6,16 +6,13 @@ namespace Corsinvest.AppHero.Core.MudBlazorUI.Style;
 
 public class LayoutService
 {
-    public event EventHandler? MajorUpdateOccured;
+    public event EventHandler? MajorUpdateOccurred;
 
     private bool _isDarkModeDefaultTheme;
     private bool _systemPreferencesDarkMode;
     private readonly UIOptions _options;
 
-    public LayoutService(IOptionsSnapshot<UIOptions> options)
-    {
-        _options = options.Value;
-    }
+    public LayoutService(IOptionsSnapshot<UIOptions> options) => _options = options.Value;
 
     public void Initialize(bool isDarkModeDefaultTheme)
     {
@@ -95,5 +92,5 @@ public class LayoutService
         return Task.CompletedTask;
     }
 
-    private void OnMajorUpdateOccured() => MajorUpdateOccured?.Invoke(this, EventArgs.Empty);
+    private void OnMajorUpdateOccured() => MajorUpdateOccurred?.Invoke(this, EventArgs.Empty);
 }

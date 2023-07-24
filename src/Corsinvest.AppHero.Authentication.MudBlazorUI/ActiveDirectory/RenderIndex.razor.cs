@@ -14,7 +14,7 @@ namespace Corsinvest.AppHero.Authentication.MudBlazorUI.ActiveDirectory;
 
 public partial class RenderIndex
 {
-    [Inject] private IAutenticationActiveDirectory AuthenticationService { get; set; } = default!;
+    [Inject] private IAuthenticationActiveDirectory AuthenticationService { get; set; } = default!;
     [Inject] private IUINotifier UINotifier { get; set; } = default!;
     [Inject] protected IOptionsSnapshot<Authentication.ActiveDirectory.Options> Options { get; set; } = default!;
 

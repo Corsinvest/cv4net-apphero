@@ -7,10 +7,10 @@ using FluentResults;
 
 namespace Corsinvest.AppHero.Core.Translator;
 
-public interface ITranslator : IGroupableService
+public interface ITranslator : IGroupableModule
 {
-    string IGroupableService.GetGroupName() => "Translator";
-    string IGroupableService.GetGroupIcon() => UI.UIIcon.Translate.GetName();
+    string IGroupableModule.GetGroupName() => "Translator";
+    string IGroupableModule.GetGroupIcon() => UI.UIIcon.Translate.GetName();
 
     Task<IResult<IEnumerable<string>>> TranslateAsync(IServiceScope scope, string source, string targets, IEnumerable<string> texts);
 }

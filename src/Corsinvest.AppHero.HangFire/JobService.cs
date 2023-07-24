@@ -2,6 +2,9 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+// Ignore Spelling: Requeue
+
 using Corsinvest.AppHero.Core.BackgroundJob;
 using Hangfire;
 using System.Linq.Expressions;

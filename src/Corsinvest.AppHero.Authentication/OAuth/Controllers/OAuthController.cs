@@ -56,10 +56,10 @@ public class OAuthController : ControllerBase
         {
             // read external identity from the temporary cookie
             var result = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
-            if (!result.Succeeded) { return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.ExternalAuthError)); }
+            if (!result.Succeeded) { return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.ExternalAuthError)); }
 
             var externalUser = result.Principal;
-            if (externalUser == null) { return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.ExternalAuthError)); }
+            if (externalUser == null) { return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.ExternalAuthError)); }
 
             if (_logger.IsEnabled(LogLevel.Debug))
             {
@@ -70,7 +70,7 @@ public class OAuthController : ControllerBase
             // try to determine the unique id of the external user - the most common claim type for that are the sub claim and the NameIdentifier
             // depending on the external provider, some other claim type might be used                
             var userIdClaim = externalUser.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) { return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.ExternalUnknownUserId)); }
+            if (userIdClaim == null) { return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.ExternalUnknownUserId)); }
 
             var externalUserId = userIdClaim.Value;
             var externalProvider = userIdClaim.Issuer;
@@ -84,7 +84,7 @@ public class OAuthController : ControllerBase
             if (user == null && !autoImportUser)
             {
                 _logger.LogInformation("External autentication AutoImportUser disabled");
-                return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.AutoImportUser));
+                return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.AutoImportUser));
             }
 
             if (user?.IsActive is false)
@@ -92,7 +92,7 @@ public class OAuthController : ControllerBase
                 // delete temporary cookie used during external authentication
                 await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
                 _logger.LogInformation("User not active: {UserName}", user.UserName);
-                return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserNotActive));
+                return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserNotActive));
             }
 
             //Quick check to sign in
@@ -135,14 +135,14 @@ public class OAuthController : ControllerBase
                         if (!identityResult.Succeeded)
                         {
                             var msg = identityResult.Errors.Select(a => $"{a.Code} - {a.Description}").JoinAsString(Environment.NewLine);
-                            return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserCreationFailed, msg));
+                            return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserCreationFailed, msg));
                         }
 
                     }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex, ex.Message);
-                        return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserCreationFailed, ex.Message));
+                        return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserCreationFailed, ex.Message));
                     }
                 }
                 else
@@ -156,17 +156,17 @@ public class OAuthController : ControllerBase
                         if (externalSignInResult.IsLockedOut)
                         {
                             _logger.LogInformation("User Locked out: {UserName}", user.UserName);
-                            return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserLockedOut));
+                            return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserLockedOut));
                         }
 
                         // If your email is not confirmed but you require it in the settings for login.
                         if (externalSignInResult.IsNotAllowed)
                         {
                             _logger.LogInformation("User not allowed to log in: {UserName}", user.UserName);
-                            return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserIsNotAllowed));
+                            return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserIsNotAllowed));
                         }
 
-                        return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
+                        return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
                     }
                 }
 
@@ -178,7 +178,7 @@ public class OAuthController : ControllerBase
                                                                                                                externalUser.FindFirstValue(ClaimTypes.Name)));
                 if (!addExternalLoginResult.Succeeded)
                 {
-                    return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.CannotAddExternalLogin));
+                    return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.CannotAddExternalLogin));
                 }
 
                 //Try to sign in again
@@ -196,24 +196,24 @@ public class OAuthController : ControllerBase
                     if (externalSignInResult.IsLockedOut)
                     {
                         _logger.LogInformation("User Locked out: {UserName}", user.UserName);
-                        return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserLockedOut));
+                        return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserLockedOut));
                     }
 
                     // If your email is not confirmed but you require it in the settings for login.
                     if (externalSignInResult.IsNotAllowed)
                     {
                         _logger.LogInformation("User not allowed to log in: {UserName}", user.UserName);
-                        return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.UserIsNotAllowed));
+                        return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.UserIsNotAllowed));
                     }
 
-                    return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
+                    return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
                 }
             }
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, ex.GetBaseException().Message);
-            return LocalRedirect(ExternalAutenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
+            return LocalRedirect(ExternalAuthenticationHelper.MakeUrlError(ExternalAuthError.Unknown));
         }
     }
 }

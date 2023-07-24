@@ -14,22 +14,22 @@ using Novell.Directory.Ldap;
 
 namespace Corsinvest.AppHero.Authentication.ActiveDirectory;
 
-public class AutenticationActiveDirectory : IAutenticationActiveDirectory
+public class AuthenticationActiveDirectory : IAuthenticationActiveDirectory
 {
-    private readonly ILogger<AutenticationActiveDirectory> _logger;
+    private readonly ILogger<AuthenticationActiveDirectory> _logger;
     private readonly IOptionsSnapshot<Options> _options;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IAuthenticationService _autentication;
 
-    public AutenticationActiveDirectory(IOptionsSnapshot<Options> options,
-                                        UserManager<ApplicationUser> usermanager,
-                                        IAuthenticationService autentication,
-                                        ILogger<AutenticationActiveDirectory> logger)
+    public AuthenticationActiveDirectory(IOptionsSnapshot<Options> options,
+                                        UserManager<ApplicationUser> userManager,
+                                        IAuthenticationService authentication,
+                                        ILogger<AuthenticationActiveDirectory> logger)
     {
         _logger = logger;
         _options = options;
-        _userManager = usermanager;
-        _autentication = autentication;
+        _userManager = userManager;
+        _autentication = authentication;
     }
 
     public async Task<IResult<bool>> LoginAsync(LoginRequestAD loginRequestAD)

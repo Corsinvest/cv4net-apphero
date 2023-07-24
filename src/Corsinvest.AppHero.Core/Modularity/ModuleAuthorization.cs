@@ -22,7 +22,7 @@ public class ModuleAuthorization
 
     public bool Exist(string permissionKey) => Authorization.ContainsKey(permissionKey);
 
-    public bool HasAutorizedLink(IEnumerable<string> subItems)
+    public bool HasAuthorizedLink(IEnumerable<string> subItems)
     {
         var items = new List<string>
         {

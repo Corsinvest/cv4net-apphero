@@ -16,9 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.Facebook;
 
-public class Module : ModuleBase, IForceLoadModule, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAuthentication
 {
-    private bool _configurated;
+    private bool _configured;
 
     public Module()
     {
@@ -36,8 +36,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         };
     }
 
-    public override bool Configurated => _configurated;
-    public AutenticationType AutenticationType => AutenticationType.External;
+    public override bool Configured => _configured;
+    public AuthenticationType AuthenticationType => AuthenticationType.External;
 
     static bool IsConfigurated(Options options) => !string.IsNullOrEmpty(options.AppId) && !string.IsNullOrEmpty(options.AppSecret);
 
@@ -46,8 +46,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         AddOptions<Options>(services, config);
         var options = services.GetOptionsSnapshot<Options>().Value;
 
-        _configurated = IsConfigurated(options);
-        if (_configurated)
+        _configured = IsConfigurated(options);
+        if (_configured)
         {
             services.AddAuthentication().AddFacebook(a =>
             {

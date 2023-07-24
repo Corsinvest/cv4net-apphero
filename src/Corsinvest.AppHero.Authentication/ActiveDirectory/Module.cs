@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.ActiveDirectory;
 
-public class Module : ModuleBase, IForceLoadModule, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAuthentication
 {
     private IServiceCollection _services = default!;
 
@@ -31,14 +31,14 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         };
     }
 
-    public AutenticationType AutenticationType => AutenticationType.Inline;
-    public override bool Configurated => _services.GetOptionsSnapshot<Options>().Value.Domains.Any(a => a.Enabled);
+    public AuthenticationType AuthenticationType => AuthenticationType.Inline;
+    public override bool Configured => _services.GetOptionsSnapshot<Options>().Value.Domains.Any(a => a.Enabled);
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)
     {
         _services = services;
         AddOptions<Options>(services, config);
 
-        services.AddScoped<IAutenticationActiveDirectory, AutenticationActiveDirectory>();
+        services.AddScoped<IAuthenticationActiveDirectory, AuthenticationActiveDirectory>();
     }
 }

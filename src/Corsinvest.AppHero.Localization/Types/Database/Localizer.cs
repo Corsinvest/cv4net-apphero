@@ -2,6 +2,9 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+// Ignore Spelling: Impl
+
 using Corsinvest.AppHero.Localization.Types.Database.Persistence;
 using Microsoft.EntityFrameworkCore;
 

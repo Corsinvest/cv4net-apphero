@@ -6,7 +6,7 @@ using Corsinvest.AppHero.Core.Security.Auth;
 
 namespace Corsinvest.AppHero.Authentication.Helper;
 
-public static class ExternalAutenticationHelper
+public static class ExternalAuthenticationHelper
 {
     public static string MakeUrlError(ExternalAuthError error, string? description = null)
         => string.IsNullOrEmpty(description)

@@ -43,12 +43,12 @@
             <DynamicComponent Type="@LoginItem.Render" />
         }
 
-        @if (GetExternalProviders(AutenticationType.External).Any())
+        @if (GetExternalProviders(AuthenticationType.External).Any())
         {
             <br />
 
             <div style="text-align:center;">
-                @foreach (var item in GetExternalProviders(AutenticationType.External).OrderBy(a => a.Description))
+                @foreach (var item in GetExternalProviders(AuthenticationType.External).OrderBy(a => a.Description))
                 {
                     <MudIconButton Icon="@item.ToMBIcon()" Href="@item?.Link?.RealUrl" Title="@item!.Description" />
                 }

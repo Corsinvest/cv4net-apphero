@@ -14,9 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Authentication.OAuth.MicrosoftAccount;
 
-public class Module : ModuleBase, IForceLoadModule, IAutentication
+public class Module : ModuleBase, IForceLoadModule, IAuthentication
 {
-    private bool _configurated;
+    private bool _configured;
 
     public Module()
     {
@@ -34,8 +34,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         };
     }
 
-    public AutenticationType AutenticationType => AutenticationType.External;
-    public override bool Configurated => _configurated;
+    public AuthenticationType AuthenticationType => AuthenticationType.External;
+    public override bool Configured => _configured;
     static bool IsConfigurated(Options options) => !string.IsNullOrEmpty(options.ClientId) && !string.IsNullOrEmpty(options.ClientSecret);
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)
@@ -44,8 +44,8 @@ public class Module : ModuleBase, IForceLoadModule, IAutentication
         var options = services.GetOptionsSnapshot<Options>().Value;
 
         // https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app
-        _configurated = IsConfigurated(options);
-        if (_configurated)
+        _configured = IsConfigurated(options);
+        if (_configured)
         {
             services.AddAuthentication().AddMicrosoftAccount(a =>
             {

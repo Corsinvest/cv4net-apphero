@@ -4,7 +4,7 @@
  */
 namespace Corsinvest.AppHero.Core.Modularity;
 
-public interface IGroupableService
+public interface IGroupableModule
 {
     string GetGroupName() => "";
     string GetGroupIcon() => "";

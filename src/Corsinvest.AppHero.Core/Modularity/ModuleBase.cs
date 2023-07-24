@@ -137,7 +137,7 @@ public abstract class ModuleBase
     #endregion
 
     public string Class => GetType().FullName!;
-    public virtual bool Configurated => true;
+    public virtual bool Configured => true;
 
     public bool Search(string value)
         => Class.Contains(value, StringComparison.InvariantCultureIgnoreCase)

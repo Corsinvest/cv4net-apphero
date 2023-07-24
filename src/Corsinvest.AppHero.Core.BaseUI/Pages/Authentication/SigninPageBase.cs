@@ -15,12 +15,12 @@ public abstract class SigninPageBase : AHComponentBase
     [Inject] private IOptionsSnapshot<Core.Security.Identity.Options> IdentityOptions { get; set; } = default!;
     [Inject] private IOptionsSnapshot<AppOptions> AppOptions { get; set; } = default!;
 
-    protected IEnumerable<ModuleBase> GetExternalProviders(AutenticationType type)
+    protected IEnumerable<ModuleBase> GetExternalProviders(AuthenticationType type)
         => ModularityService.Modules
-                            .Implements<IAutentication>()
+                            .Implements<IAuthentication>()
                             .IsEnabled()
                             .IsConfigured()
-                            .Where(a => ((IAutentication)a).AutenticationType == type);
+                            .Where(a => ((IAuthentication)a).AuthenticationType == type);
 
     protected class LoginDef
     {
@@ -46,7 +46,7 @@ public abstract class SigninPageBase : AHComponentBase
             });
         }
 
-        ret.AddRange(GetExternalProviders(AutenticationType.Inline)
+        ret.AddRange(GetExternalProviders(AuthenticationType.Inline)
                         .Where(a => a.Link?.Render != null)
                         .Select(a => new LoginDef
                         {

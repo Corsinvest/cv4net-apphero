@@ -2,6 +2,9 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+// Ignore Spelling: Auth
+
 using Corsinvest.AppHero.Core.Hubs;
 using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components;
 using Corsinvest.AppHero.Core.MudBlazorUI.Style;
@@ -35,7 +38,7 @@ public partial class MainLayout : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        LayoutService.MajorUpdateOccured -= LayoutService_MajorUpdateOccured;
+        LayoutService.MajorUpdateOccurred -= LayoutService_MajorUpdateOccured;
 
         _timer?.Dispose();
 
@@ -66,12 +69,12 @@ public partial class MainLayout : IAsyncDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        LayoutService.MajorUpdateOccured += LayoutService_MajorUpdateOccured;
+        LayoutService.MajorUpdateOccurred += LayoutService_MajorUpdateOccured;
         using var scope = ServiceScopeFactory.CreateScope();
         _releaseService = scope.ServiceProvider.GetService<IReleaseService>();
         if (_releaseService != null)
         {
-            _timer = new Timer(async (o) => ReleaseInfo = await _releaseService.NewReleaseIsAvaibleAsync(),
+            _timer = new Timer(async (o) => ReleaseInfo = await _releaseService.NewReleaseIsAvailableAsync(),
                                null,
                                TimeSpan.Zero,
                                TimeSpan.FromMinutes(5));

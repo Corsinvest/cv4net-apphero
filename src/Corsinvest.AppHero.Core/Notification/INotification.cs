@@ -6,8 +6,8 @@ using Corsinvest.AppHero.Core.Modularity;
 
 namespace Corsinvest.AppHero.Core.Notification;
 
-public interface INotification : IGroupableService
+public interface INotification : IGroupableModule
 {
-    string IGroupableService.GetGroupName() => "Notification";
-    string IGroupableService.GetGroupIcon() => UI.UIIcon.Telegram.GetName();
+    string IGroupableModule.GetGroupName() => "Notification";
+    string IGroupableModule.GetGroupIcon() => UI.UIIcon.Telegram.GetName();
 }

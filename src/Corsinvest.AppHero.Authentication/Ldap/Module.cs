@@ -26,8 +26,8 @@
 
 //    public override string Name => "AH.Ldap.Autentication";
 //    public override string Description => "Ldap";
-//    public AutenticationType AutenticationType => AutenticationType.Inline;
-//    public override bool Configurated => _services.GetOptionsSnapshot<Options>().Value.Domains.Any(a => a.Enabled);
+//    public AuthenticationType AuthenticationType => AuthenticationType.Inline;
+//    public override bool Configured => _services.GetOptionsSnapshot<Options>().Value.Domains.Any(a => a.Enabled);
 
 //    public override void ConfigureServices(IServiceCollection services, IConfiguration config)
 //    {

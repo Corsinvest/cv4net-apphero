@@ -4,7 +4,7 @@
  */
 namespace Corsinvest.AppHero.Core.Security.Auth;
 
-public enum AutenticationType
+public enum AuthenticationType
 {
     External,
     Inline

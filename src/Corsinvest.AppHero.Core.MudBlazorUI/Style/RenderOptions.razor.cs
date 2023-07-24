@@ -8,7 +8,7 @@ public partial class RenderOptions : IDisposable
 {
     [Inject] private LayoutService LayoutService { get; set; } = default!;
 
-    protected override void OnInitialized() => LayoutService.MajorUpdateOccured += LayoutService_MajorUpdateOccured;
-    public void Dispose() => LayoutService.MajorUpdateOccured -= LayoutService_MajorUpdateOccured;
+    protected override void OnInitialized() => LayoutService.MajorUpdateOccurred += LayoutService_MajorUpdateOccured;
+    public void Dispose() => LayoutService.MajorUpdateOccurred -= LayoutService_MajorUpdateOccured;
     private void LayoutService_MajorUpdateOccured(object? sender, EventArgs e) => StateHasChanged();
 }

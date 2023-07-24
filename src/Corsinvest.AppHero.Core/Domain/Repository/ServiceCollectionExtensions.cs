@@ -6,8 +6,8 @@ namespace Corsinvest.AppHero.Core.Domain.Repository;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddRepository<TContext, TEnity>(this IServiceCollection services)
-        => services.AddRepository(typeof(TContext), typeof(TEnity));
+    public static IServiceCollection AddRepository<TContext, TEntity>(this IServiceCollection services)
+        => services.AddRepository(typeof(TContext), typeof(TEntity));
 
     public static IServiceCollection AddRepository(this IServiceCollection services, Type dbContext, Type entity)
         => services.AddScoped(typeof(IReadRepository<>).MakeGenericType(new[] { entity }),

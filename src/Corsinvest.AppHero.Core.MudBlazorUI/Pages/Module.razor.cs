@@ -44,7 +44,7 @@ public partial class Module
 
         //permission
         var auth = await CurrentModule.GetAuthorizationAsync(PermissionService);
-        Authorized = auth.HasAutorizedLink(subItems);
+        Authorized = auth.HasAuthorizedLink(subItems);
         if (!Authorized)
         {
             NavigationManager.NavigateTo("/NotAuthorized", false);

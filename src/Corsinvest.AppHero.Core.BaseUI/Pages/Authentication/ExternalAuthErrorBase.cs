@@ -2,6 +2,9 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+// Ignore Spelling: Auth
+
 using Corsinvest.AppHero.Core.Security.Auth;
 
 namespace Corsinvest.AppHero.Core.BaseUI.Pages.Authentication;

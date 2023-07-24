@@ -15,13 +15,13 @@
                 <MudTabs Elevation="1" ApplyEffectsToContainer Border>
                     @* Services not grouped *@
                     <MudTabPanel Text="@L["General"]" Icon="@Icons.Material.Filled.Folder">
-                        @RenderOptionsModules(Modules.IsType(ModuleType.Service).NotImplements<IGroupableService>())
+                        @RenderOptionsModules(Modules.IsType(ModuleType.Service).NotImplements<IGroupableModule>())
                     </MudTabPanel>
 
                     @* Services grouped *@
-                    @foreach (var item in Modules.Implements<IGroupableService>().GroupBy(a => ((IGroupableService)a).GetGroupName()).OrderBy(a => a.Key))
+                    @foreach (var item in Modules.Implements<IGroupableModule>().GroupBy(a => ((IGroupableModule)a).GetGroupName()).OrderBy(a => a.Key))
                     {
-                        var group = (IGroupableService)item.ToArray()[0];
+                        var group = (IGroupableModule)item.ToArray()[0];
                         <MudTabPanel Text="@L[group.GetGroupName()]" Icon="@group.ToMBIcon()">
                             @RenderOptionsModules(item)
                         </MudTabPanel>
