@@ -65,9 +65,9 @@
     <PagerContent>
         <MudDataGridPager T="ApplicationUser" />
     </PagerContent>
-    </AHDataGrid>
+</AHDataGrid>
 
-    <MudDialog IsVisible="ShowRolesDialog"
+<MudDialog IsVisible="ShowRolesDialog"
            Style="width:80%;"
            Options="new DialogOptions { CloseButton = false, CloseOnEscapeKey = false, DisableBackdropClick=true, MaxWidth = MaxWidth.Large }">
     <TitleContent>
@@ -98,9 +98,9 @@
                             <td>
                                 @*Label="@role.Description"*@
                                 <MudSwitch T="bool"
-                                       Checked="@(CurrentUser.UserRoles.Any(a=> a.Role.Name == role.Name))"
-                                       CheckedChanged="@(async (e) => await AddRemoveRoleAsync(e, role.Name!))"
-                                       Color="Color.Primary" />
+                                           Checked="@(CurrentUser.UserRoles.Any(a=> a.Role.Name == role.Name))"
+                                           CheckedChanged="@(async (e) => await AddRemoveRoleAsync(e, role.Name!))"
+                                           Color="Color.Primary" />
                             </td>
                             <td>@role.Name</td>
                             <td>@role.Description</td>

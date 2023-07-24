@@ -22,9 +22,9 @@ public partial class RolePermissions
         public MudBlazor.Color Color { get; set; }
         public bool IsExpanded { get; set; } = false;
         public bool? IsChecked { get; set; } = false;
-        public bool HasChild => Childs.Count > 0;
+        public bool HasChild => Child.Count > 0;
         public TreeDataPermission? Parent { get; set; }
-        public HashSet<TreeDataPermission> Childs { get; set; } = new();
+        public HashSet<TreeDataPermission> Child { get; set; } = new();
     }
 
     private HashSet<TreeDataPermission> TreeData { get; set; } = new();
@@ -51,7 +51,7 @@ public partial class RolePermissions
                     if (treeItem == null) { break; }
                     paths.Remove(item);
                     parent = treeItem;
-                    data = treeItem.Childs;
+                    data = treeItem.Child;
                 }
 
                 //create nodes
@@ -74,7 +74,7 @@ public partial class RolePermissions
                     }
                     else
                     {
-                        parent.Childs.Add(treeItem);
+                        parent.Child.Add(treeItem);
                     }
 
                     parent = treeItem;
@@ -113,7 +113,7 @@ public partial class RolePermissions
         //            AddChild(treeItem, key, item, permissions);
         //        }
 
-        //        foreach (var item in treeItem.Childs.Traverse(a => a.Childs).Where(a => Permissions.Contains(a.Key!)))
+        //        foreach (var item in treeItem.Child.Traverse(a => a.Child).Where(a => Permissions.Contains(a.Key!)))
         //        {
         //            item.IsChecked = true;
         //            FixParent(item);
@@ -126,7 +126,7 @@ public partial class RolePermissions
     //{
     //    var keys = key.Split(".");
     //    var path = $"{parent.Path}/{keys[0]}";
-    //    var item = parent.Childs.FirstOrDefault(a => a.Path == path);
+    //    var item = parent.Child.FirstOrDefault(a => a.Path == path);
     //    if (item == null)
     //    {
     //        var hasChild = keys.Length > 1;
@@ -140,7 +140,7 @@ public partial class RolePermissions
     //            Color = hasChild ? MudBlazor.Color.Default : permission.Color.ToMBColor(),
     //        };
 
-    //        parent.Childs.Add(item);
+    //        parent.Child.Add(item);
     //    }
 
     //    if (keys.Length > 1)
@@ -154,11 +154,11 @@ public partial class RolePermissions
         var parent = item.Parent;
         while (parent != null)
         {
-            parent.IsChecked = parent.Childs.Any(i => i.IsChecked is null)
+            parent.IsChecked = parent.Child.Any(i => i.IsChecked is null)
                                 ? null
-                                : parent.Childs.All(i => i.IsChecked is true)
+                                : parent.Child.All(i => i.IsChecked is true)
                                     ? true
-                                    : parent.Childs.All(i => i.IsChecked is false)
+                                    : parent.Child.All(i => i.IsChecked is false)
                                         ? false
                                         : null;
             parent = parent.Parent;
@@ -171,13 +171,13 @@ public partial class RolePermissions
         // checked status on any item items should mirror this parent item
         if (item.HasChild)
         {
-            foreach (var child in item.Childs.Traverse(a => a.Childs)) { child.IsChecked = item.IsChecked; }
+            foreach (var child in item.Child.Traverse(a => a.Child)) { child.IsChecked = item.IsChecked; }
         }
 
         FixParent(item);
 
         await PermissionChangedAsync(item);
-        foreach (var prerm in item.Childs.Traverse(a => a.Childs).Where(a => a.Key != null))
+        foreach (var prerm in item.Child.Traverse(a => a.Child).Where(a => a.Key != null))
         {
             if (prerm != null) { await PermissionChangedAsync(prerm); }
         }

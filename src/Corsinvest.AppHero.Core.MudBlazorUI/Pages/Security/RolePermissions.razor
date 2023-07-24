@@ -4,7 +4,7 @@
 *@
 <MudTreeView Items="TreeData">
     <ItemTemplate>
-        <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Childs">
+        <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Child">
             <Content>
                 <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild" />
                 <MudCheckBox T="bool?" Checked="@context.IsChecked"
