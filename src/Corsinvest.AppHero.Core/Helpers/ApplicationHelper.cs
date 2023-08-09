@@ -2,6 +2,8 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+using Corsinvest.AppHero.Core.Cli;
+using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,5 +44,16 @@ public static class ApplicationHelper
                       .JoinAsString("")
                       .ToLower();
         return $"https://www.gravatar.com/avatar/{hash}?d={forceDefault}";
+    }
+
+    public static async Task<bool> ExecuteCommandAsync(IHost host, string[] args)
+    {
+        var ret = false;
+        foreach (var item in ICliCommand.GetCommands())
+        {
+            if (args.Contains($"--{item.Name}")) { ret = await item.ExecuteAsync(host, args); }
+        }
+
+        return ret;
     }
 }

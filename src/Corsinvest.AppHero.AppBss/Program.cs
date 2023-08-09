@@ -104,4 +104,6 @@ app.MapFallbackToPage("/_Host");
 
 await app.OnPostApplicationInitializationAsync();
 
+if (await ApplicationHelper.ExecuteCommandAsync(app, args)) { return; }
+
 await app.RunAsync();
