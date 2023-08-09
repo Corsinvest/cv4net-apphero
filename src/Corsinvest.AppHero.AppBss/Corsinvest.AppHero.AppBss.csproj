@@ -14,8 +14,8 @@
 		
 		<PackageReference Include="Hangfire.Storage.SQLite" Version="0.3.4" />
 		
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -24,17 +24,7 @@
 
 		<ProjectReference Include="..\Corsinvest.AppHero.HangFire\Corsinvest.AppHero.HangFire.csproj" />
 
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Discord\Corsinvest.AppHero.Notification.Discord.csproj" />
-
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Hangouts\Corsinvest.AppHero.Notification.Hangouts.csproj" />
-
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Pushover\Corsinvest.AppHero.Notification.Pushover.csproj" />
-
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Slack\Corsinvest.AppHero.Notification.Slack.csproj" />
-
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Teams\Corsinvest.AppHero.Notification.Teams.csproj" />
-
-		<ProjectReference Include="..\Corsinvest.AppHero.Notification.Telegram\Corsinvest.AppHero.Notification.Telegram.csproj" />
+		<ProjectReference Include="..\Corsinvest.AppHero.Notification\Corsinvest.AppHero.Notification.csproj" />
 		<ProjectReference Include="..\Corsinvest.AppHero.Serilog\Corsinvest.AppHero.Serilog.csproj" />
 		<ProjectReference Include="..\Corsinvest.AppHero.Translation\Corsinvest.AppHero.Translation.csproj" />
 		<ProjectReference Include="..\Corsinvest.AppHero.Authentication.MudBlazorUI\Corsinvest.AppHero.Authentication.MudBlazorUI.csproj" />

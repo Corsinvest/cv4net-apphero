@@ -211,8 +211,16 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
         }
         else
         {
+            var filterOptions = new FilterOptions
+            {
+                FilterCaseSensitivity = DataGrid?.FilterCaseSensitivity ?? DataGridFilterCaseSensitivity.Default,
+            };
+
             //row filter
-            foreach (var item in state.FilterDefinitions) { query = query.Where(((FilterDefinition<T>)item).GenerateFilterExpression()); }
+            foreach (var item in state.FilterDefinitions)
+            {
+                query = query.Where(FilterExpressionGenerator.GenerateExpression(item, filterOptions));
+            }
         }
 
         var count = query.Count();

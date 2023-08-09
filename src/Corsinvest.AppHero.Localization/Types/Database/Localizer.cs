@@ -33,7 +33,7 @@ public class Localizer : BaseStringLocalizer
                 .Select(a => new LocalizedString(a.Key, a.Value, false))
                 .ToArray();
 
-    protected override string GetStringImpl(string key)
+    protected override string GetStringImp(string key)
     {
         // Look in db source
         var value = _db.Localizations

@@ -65,7 +65,7 @@ public class Localizer : BaseStringLocalizer
         }
     }
 
-    protected override string GetStringImpl(string key)
+    protected override string GetStringImp(string key)
     {
         if (key == null) { throw new ArgumentNullException(nameof(key)); }
 

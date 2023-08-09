@@ -91,18 +91,15 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 
         foreach (var entry in context.ChangeTracker.Entries<IAuditingEnabled>())
         {
-            if (entry.Entity is AuditTrail ||
-                entry.State == EntityState.Detached ||
-                entry.State == EntityState.Unchanged) { continue; }
+            if (entry.Entity is AuditTrail
+                || entry.State == EntityState.Detached
+                || entry.State == EntityState.Unchanged) { continue; }
 
             var auditEntry = new AuditTrail()
             {
                 TableName = entry.Entity.GetType().Name,
                 UserId = userId,
                 DateTime = DateTime.Now,
-                AffectedColumns = new List<string>(),
-                NewValues = new(),
-                OldValues = new(),
             };
 
             foreach (var property in entry.Properties)

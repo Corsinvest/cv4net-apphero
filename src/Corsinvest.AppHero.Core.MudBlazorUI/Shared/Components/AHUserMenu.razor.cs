@@ -25,7 +25,7 @@ public partial class AHUserMenu
         var links = new ModuleLink[]
         {
             ModularityService.Get<Corsinvest.AppHero.Core.Options.Module>()!.Link!,                                //Options
-            ModularityService.Modules.Where(a=> typeof(Corsinvest.AppHero.Core.Security.Module).IsAssignableFrom(a.GetType()))
+            ModularityService.Modules.Where(a=> typeof(Security.Module).IsAssignableFrom(a.GetType()))
                                      .FirstOrDefault()!
                                      .Link!.Child.ToArray()[2]!    //profile
         };

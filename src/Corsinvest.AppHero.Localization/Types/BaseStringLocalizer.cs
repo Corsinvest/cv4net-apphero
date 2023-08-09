@@ -74,11 +74,11 @@ public abstract class BaseStringLocalizer : IStringLocalizer
         var cacheKey = GetCacheKey(Options.Value, CurrentCultureName, Context, key);
         var cacheValue = _cache.GetString(cacheKey);
         if (!string.IsNullOrEmpty(cacheValue)) { return cacheValue; }
-        var result = GetStringImpl(key);
+        var result = GetStringImp(key);
         if (string.IsNullOrEmpty(result) || string.IsNullOrWhiteSpace(result)) { result = key; }
         _cache.SetString(cacheKey, result);
         return result;
     }
 
-    protected abstract string GetStringImpl(string key);
+    protected abstract string GetStringImp(string key);
 }

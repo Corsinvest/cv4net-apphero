@@ -8,6 +8,7 @@
 using Corsinvest.AppHero.Core.Hubs;
 using Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components;
 using Corsinvest.AppHero.Core.MudBlazorUI.Style;
+using Corsinvest.AppHero.Core.Service;
 using Corsinvest.AppHero.Core.SoftwareUpdater;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
@@ -28,6 +29,7 @@ public partial class MainLayout : IAsyncDisposable
     [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IServiceScopeFactory ServiceScopeFactory { get; set; } = default!;
+    [Inject] private IBrowserService BrowserService { get; set; } = default!;
 
     private AppOptions AppOptions => SnapshotAppOptions.Value;
     private bool DrawerOpen { get; set; } = true;
@@ -145,9 +147,7 @@ public partial class MainLayout : IAsyncDisposable
     }
 
     private async Task ShowHelp()
-        => await JSRuntime.InvokeVoidAsync("open",
-                                           ModularityService.GetByUrl(NavigationManager.Uri)?.UrlHelp ?? ApplicationHelper.HelpUrl,
-                                           "_blank");
+        => await BrowserService.Open(ModularityService.GetByUrl(NavigationManager.Uri)?.UrlHelp ?? ApplicationHelper.HelpUrl, "_blank");
 }
 
 //public partial class MainLayout : INotificationHandler<EventNotification<NotifySnackBarEvent>>

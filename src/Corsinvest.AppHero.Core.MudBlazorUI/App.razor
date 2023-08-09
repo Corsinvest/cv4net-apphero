@@ -5,6 +5,7 @@
 @inherits AHComponentBase
 @inject IOptionsSnapshot<UIOptions> UIOptions
 @inject NavigationManager NavigationManager
+@inject IModularityService ModularityService
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@ModularityService.Assemblies">
