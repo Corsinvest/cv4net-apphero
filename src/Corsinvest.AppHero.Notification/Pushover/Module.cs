@@ -2,10 +2,8 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-using Corsinvest.AppHero.Core.Extensions;
 using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Notification;
-using Corsinvest.AppHero.Core.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +18,7 @@ public class Module : ModuleBase, IForceLoadModule, INotification
         Keywords = "Notification,Pushover";
         Category = IModularityService.AdministrationCategoryName;
         Type = ModuleType.Service;
-        Icon = UIIcon.Chat.GetName();
+        Icon = "fa-solid fa-p";
         Description = "Pushover";
     }
 
