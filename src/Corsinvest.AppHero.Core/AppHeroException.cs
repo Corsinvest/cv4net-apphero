@@ -11,5 +11,6 @@ public class AppHeroException : Exception
     public AppHeroException() { }
     public AppHeroException(string message) : base(message) { }
     public AppHeroException(string message, Exception innerException) : base(message, innerException) { }
-    public AppHeroException(SerializationInfo serializationInfo, StreamingContext context) : base(serializationInfo, context) { }
+    //public AppHeroException(SerializationInfo serializationInfo, StreamingContext context) : base(serializationInfo, context) { }
+    
 }

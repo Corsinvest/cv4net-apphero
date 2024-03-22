@@ -22,7 +22,7 @@ internal class WritableOptionsService<T> : IWritableOptionsService<T> where T : 
         _fileName = fileName;
 
         //not exists create
-        if (!File.Exists(_fileName) || new FileInfo(fileName).Length == 0) { Write(new JObject(), new T()); }
+        if (!File.Exists(_fileName) || new FileInfo(fileName).Length == 0) { Write([], new T()); }
     }
 
     public T Value => _options.CurrentValue;

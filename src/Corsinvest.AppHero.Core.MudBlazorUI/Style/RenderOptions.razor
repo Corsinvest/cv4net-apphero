@@ -11,7 +11,9 @@
                 <CardHeaderContent>
                     <div class="d-flex gap-4">
                         <MudIcon Icon="@Icons.Material.Filled.ColorLens" />
-                        <MudText>@L["Theme"]</MudText>
+                        <MudText>
+                            @L["Theme"]
+                        </MudText>
                     </div>
                 </CardHeaderContent>
             </MudCardHeader>
@@ -27,18 +29,25 @@
                     </MudItem>
 
                     <MudItem md="3">
-                        <MudSelectExtended @bind-Value="@LayoutService.DarkLightMode" ItemCollection="@(Enum.GetValues<DarkLightMode>())"
-                                           Label="@L["Dark Light Mode"]" Required="true"
+                        <MudSelectExtended @bind-Value="@LayoutService.DarkLightMode"
+                                           ItemCollection="@(Enum.GetValues<DarkLightMode>())"
+                                           Label="@L["Dark Light Mode"]"
+                                           Required="true"
                                            For="@(() => LayoutService.DarkLightMode)" />
                     </MudItem>
 
                     <MudItem md="3">
-                        <MudSwitch @bind-Checked="@LayoutService.IsRightToLeft" Label="@L["Right To Left"]" Color="Color.Primary" />
+                        <MudSwitch @bind-Value="@LayoutService.IsRightToLeft" Label="@L["Right To Left"]" Color="Color.Primary" />
                     </MudItem>
 
                     <MudItem md="3">
-                        <MudSlider ValueLabel @bind-Value="@LayoutService.DefaultBorderRadius"
-                                   Min="0" Max="32" Immediate Step="1" Color="Color.Primary">
+                        <MudSlider ValueLabel="true"
+                                   @bind-Value="@LayoutService.DefaultBorderRadius"
+                                   Min="0"
+                                   Max="32"
+                                   Immediate="true"
+                                   Step="1"
+                                   Color="Color.Primary">
                             @L["Border Radius:"] @LayoutService.DefaultBorderRadius
                         </MudSlider>
                     </MudItem>
@@ -60,28 +69,36 @@
                     <div class="d-flex gap-4">
                         <MudIcon Icon="@Icons.Material.Filled.List" />
                         <MudText>@L["Grid"]</MudText>
-                    </div>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudGrid>
-                    <MudItem md="3">
-                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsDense" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsDense)]" Color="Color.Primary" />
-                    </MudItem>
+                        </div>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudGrid>
+                        <MudItem md="3">
+                            <MudSwitch @bind-Value="@Options.Theme.Table.IsDense"
+                                       Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsDense)]"
+                                       Color="Color.Primary" />
+                        </MudItem>
 
-                    <MudItem md="3">
-                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsHoverable" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsHoverable)]" Color="Color.Primary" />
-                    </MudItem>
+                        <MudItem md="3">
+                            <MudSwitch @bind-Value="@Options.Theme.Table.IsHoverable"
+                                       Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsHoverable)]"
+                                       Color="Color.Primary" />
+                        </MudItem>
 
-                    <MudItem md="3">
-                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsStriped" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsStriped)]" Color="Color.Primary" />
-                    </MudItem>
+                        <MudItem md="3">
+                            <MudSwitch @bind-Value="@Options.Theme.Table.IsStriped"
+                                       Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsStriped)]"
+                                       Color="Color.Primary" />
+                        </MudItem>
 
-                    <MudItem md="3">
-                        <MudSwitch @bind-Checked="@Options.Theme.Table.IsBordered" Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsBordered)]" Color="Color.Primary" />
-                    </MudItem>
-                </MudGrid>
-            </MudCardContent>
-        </MudCard>
-    </MudItem>
-</MudGrid>
+                        <MudItem md="3">
+                            <MudSwitch @bind-Value="@Options.Theme.Table.IsBordered"
+                                       Label="@L[GetDescriptionProperty(a=> a.Theme.Table.IsBordered)]"
+                                       Color="Color.Primary" />
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>

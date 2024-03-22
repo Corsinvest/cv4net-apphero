@@ -42,7 +42,7 @@ public class Module : ModuleBase, IForceLoadModule
             {
                 Icon = UIIcon.Roles.GetName()
             },
-            new(Link, "Profile", "Profile")
+            new(Link, "Profile", "Profile",inBasicRole:true)
             {
                 Icon = UIIcon.Profile.GetName()
             }

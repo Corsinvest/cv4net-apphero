@@ -42,7 +42,7 @@ public class MemoryCacheTicketStore : ITicketStore
 
     public Task<AuthenticationTicket> RetrieveAsync(string key)
     {
-        _cache.TryGetValue(key, out AuthenticationTicket ticket);
+        _cache.TryGetValue(key, out AuthenticationTicket? ticket);
         return Task.FromResult(ticket);
     }
 

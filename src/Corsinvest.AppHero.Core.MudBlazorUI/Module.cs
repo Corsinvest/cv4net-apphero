@@ -10,9 +10,7 @@ using Corsinvest.AppHero.Core.MudBlazorUI.Style;
 using Corsinvest.AppHero.Core.Notification;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using MudBlazor.Extensions;
 using MudBlazor.Services;
-using MudExtensions.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI;
@@ -34,12 +32,13 @@ public class Module : ModuleBase, IForceLoadModule
     {
         ApplicationHelper.RootComponent = typeof(App);
         AddOptions<Style.UIOptions, Style.RenderOptions>(services, config);
-        services.AddLoadingBar();
+        services.AddLoadingBarService();
         services.AddBlazorDownloadFile();
         services.AddMudServices();
         services.AddScoped<IUINotifier, UINotifier>();
         services.AddScoped<IUIMessageBox, UIMessageBox>();
-        services.AddMudExtensions();
+        services.AddMudExtensionsCodeBeam();
+        services.AddMudExtensionsMudEx();
         services.AddScoped<LayoutService>();
         services.AddTransient(typeof(IDataGridManager<>), typeof(DataGridManager<>));
         services.AddTransient(typeof(IDataGridManagerRepository<>), typeof(DataGridManagerRepository<>));
@@ -65,11 +64,11 @@ public class Module : ModuleBase, IForceLoadModule
         foreach (var item in modularityService.Modules.Implements<INotification>().Where(a => a.Options != null && a.Options.Render == null))
         {
             item.Options!.Render = typeof(Shared.Notification.GenericRenderOptions<,>)
-                                        .MakeGenericType(new[]
-                                        {
+                                        .MakeGenericType(
+                                        [
                                             item.Options.Type,
                                             item.Options.Type.BaseType!.GetGenericArguments()[0],
-                                        });
+                                        ]);
         }
 
         //generic options editor

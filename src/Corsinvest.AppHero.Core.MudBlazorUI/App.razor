@@ -27,10 +27,10 @@
                             NavigationManager.NavigateTo("/auth/user/signin");
                         }
                         catch { }
-                        @*<Corsinvest.AppHero.Core.MudBlazorUI.Pages.Authentication.Login/>*@
                     }
                 </NotAuthorized>
             </AuthorizeRouteView>
+            @* <FocusOnNavigate RouteData="@routeData" Selector="h1" /> *@
         </Found>
         <NotFound>
             <PageTitle>@L["Not found"]</PageTitle>

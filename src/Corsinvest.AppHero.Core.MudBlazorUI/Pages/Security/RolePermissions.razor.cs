@@ -6,7 +6,7 @@ namespace Corsinvest.AppHero.Core.MudBlazorUI.Pages.Security;
 
 public partial class RolePermissions
 {
-    [EditorRequired][Parameter] public HashSet<string> Permissions { get; set; } = new();
+    [EditorRequired][Parameter] public HashSet<string> Permissions { get; set; } = [];
     [Parameter] public bool CanManagePermissions { get; set; }
     [Parameter] public EventCallback<string> PermissionGranted { get; set; }
     [Parameter] public EventCallback<string> PermissionDenied { get; set; }
@@ -24,10 +24,10 @@ public partial class RolePermissions
         public bool? IsChecked { get; set; } = false;
         public bool HasChild => Child.Count > 0;
         public TreeDataPermission? Parent { get; set; }
-        public HashSet<TreeDataPermission> Child { get; set; } = new();
+        public HashSet<TreeDataPermission> Child { get; set; } = [];
     }
 
-    private HashSet<TreeDataPermission> TreeData { get; set; } = new();
+    private HashSet<TreeDataPermission> TreeData { get; set; } = [];
     protected override void OnInitialized() => RefreshData();
 
     private void RefreshData()
@@ -165,7 +165,7 @@ public partial class RolePermissions
         }
     }
 
-    private async Task CheckedChangedAsync(TreeDataPermission item)
+    private async Task ValueChanged(TreeDataPermission item)
     {
         item.IsChecked = !(item.IsChecked ?? true);
         // checked status on any item items should mirror this parent item

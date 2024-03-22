@@ -1,11 +1,11 @@
 <Project>
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<LangVersion>latest</LangVersion>
-		<Version>0.0.112</Version>
+		<Version>0.1.2</Version>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<!--<NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>-->
 

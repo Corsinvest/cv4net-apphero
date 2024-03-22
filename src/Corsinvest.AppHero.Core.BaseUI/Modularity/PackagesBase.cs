@@ -13,7 +13,7 @@ public partial class PackagesBase : AHComponentBase
     [Inject] private IUIMessageBox UIMessageBox { get; set; } = default!;
 
     protected bool ShowWait { get; private set; }
-    protected List<string> Errors { get; } = new();
+    protected List<string> Errors { get; } = [];
 
     protected override void OnInitialized()
     {

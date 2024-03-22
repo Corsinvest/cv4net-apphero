@@ -10,26 +10,30 @@ namespace Corsinvest.AppHero.Core.Modularity;
 
 public abstract class ModuleLinkBase<T> where T : ModuleLinkBase<T>
 {
-    public ModuleLinkBase(ModuleBase module, string text, string url = "", bool isExternal = false)
+    public ModuleLinkBase(ModuleBase module,
+                          string text,
+                          string url = "",
+                          bool isExternal = false,
+                          bool inBasicRole = false)
     {
         Module = module;
         Text = text;
         Url = url;
         IsExternal = isExternal;
-        SetLink();
+        SetLink(inBasicRole);
     }
 
     virtual protected string GetPermissionKey() => Module.PermissionLinkBaseKey;
     virtual protected string GetBaseUrl() => Module.BaseUrl;
 
-    protected void SetLink()
+    protected void SetLink(bool inBasicRole)
     {
         var permissionKey = Module.PermissionLinkBaseKey;
         var baseUrl = Module.BaseUrl;
 
         if (!string.IsNullOrWhiteSpace(Url)) { permissionKey += $".{Url}"; }
 
-        Permission = new(permissionKey, $"{Name} {Text}", UIIcon.Link.GetName());
+        Permission = new(permissionKey, $"{Name} {Text}", UIIcon.Link.GetName(), UIColor.Default, inBasicRole);
 
         if (IsExternal)
         {

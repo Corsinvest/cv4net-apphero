@@ -55,7 +55,7 @@ public static class MudExObjectEditFormHelper
                 MaxWidth = MaxWidth.Medium,
                 FullWidth = true,
                 DragMode = MudDialogDragMode.Simple,
-                Animations = new[] { AnimationType.SlideIn },
+                Animations = [AnimationType.SlideIn],
                 Position = DialogPosition.Center,
                 DisableSizeMarginY = true,
                 DisablePositionMargin = true

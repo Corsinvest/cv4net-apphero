@@ -9,13 +9,13 @@
 
 <AHDataGrid T="T"
             Permissions="Permission.Notification.Data"
-            FixedHeader
-            FixedFooter
+            FixedHeader="true"
+            FixedFooter="true"
             DataGridManager="DataGridManager"
-            MultiSelection
-            Filterable
+            MultiSelection="true"
+            Filterable="true"
             FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
-            Groupable
+            Groupable="true"
             ShowFilterIcons="false">
     <ToolBarContent>
         <AHDataGridToolBarCrud T="T" DataGridManager="DataGridManager" />
@@ -41,7 +41,7 @@
     <EditTemplate>
         <MudGrid>
             <MudItem md="6">
-                <MudSwitch T="bool" @bind-Checked="context.Enabled"
+                <MudSwitch T="bool" @bind-Value="context.Enabled"
                            Label="@(L[GetDescriptionProperty<T>(a => a.Enabled)])"
                            Color="Color.Primary" For="@(() => context.Enabled)" />
             </MudItem>

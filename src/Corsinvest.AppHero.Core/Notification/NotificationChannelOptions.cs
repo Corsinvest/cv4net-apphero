@@ -36,7 +36,7 @@ public abstract class NotificationChannelOptions
         };
 
     public async Task SendTest()
-            => await SendImplAsync(new NotificationMessage
+            => await SendImpAsync(new NotificationMessage
             {
                 Subject = "Test message from your app",
                 Body = "Perfect!! Your app can!"
@@ -44,8 +44,8 @@ public abstract class NotificationChannelOptions
 
     public async Task SendAsync(NotificationMessage mailMessage)
     {
-        if (Enabled) { await SendImplAsync(mailMessage); }
+        if (Enabled) { await SendImpAsync(mailMessage); }
     }
 
-    protected abstract Task SendImplAsync(NotificationMessage message);
+    protected abstract Task SendImpAsync(NotificationMessage message);
 }

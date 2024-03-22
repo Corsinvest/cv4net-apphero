@@ -7,14 +7,14 @@ namespace Corsinvest.AppHero.Core.Modularity;
 public abstract class ModuleLinkTreeBase<T> : ModuleLinkBase<T>
     where T : ModuleLinkTreeBase<T>
 {
-    protected ModuleLinkTreeBase(ModuleBase module, string text, string url = "", bool isExternal = false)
-        : base(module, text, url, isExternal) { }
+    protected ModuleLinkTreeBase(ModuleBase module, string text, string url = "", bool isExternal = false, bool inBasicRole = false)
+        : base(module, text, url, isExternal, inBasicRole) { }
 
-    public ModuleLinkTreeBase(T parent, string text, string url = "", bool isExternal = false)
-         : base(parent.Module, text, url, isExternal)
+    public ModuleLinkTreeBase(T parent, string text, string url = "", bool isExternal = false, bool inBasicRole = false)
+         : base(parent.Module, text, url, isExternal, inBasicRole)
     {
         Parent = parent ?? throw new ArgumentNullException(nameof(parent));
-        SetLink();
+        SetLink(inBasicRole);
     }
 
     protected override string GetPermissionKey() => Parent == null ? base.GetPermissionKey() : Parent.Permission.Key;

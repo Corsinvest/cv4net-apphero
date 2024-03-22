@@ -6,11 +6,15 @@
 
 <MudGrid>
     <MudItem xs="12" md="@(ShowDescriptor ? Size : 12)">
-        <MudTextField @bind-Value="@Expression" Label="@L["Cron expression"]" For="@(() => Expression)"
-                      TextChanged="@TextChanged" Immediate Clearable
+        <MudTextField @bind-Value="@Expression"
+                      Label="@L["Cron expression"]"
+                      For="@(() => Expression)"
+                      TextChanged="@TextChanged"
+                      Immediate="true"
+                      Clearable="true"
                       AdornmentIcon="@Icons.Material.Filled.Timer"
                       Adornment="Adornment.End"
-                      AdornmentColor="Color.Info"           
+                      AdornmentColor="Color.Info"
                       AdornmentAriaLabel="@L["Cron configurator"]"
                       OnAdornmentClick="@OpenCrontabGuruAsync" />
     </MudItem>
@@ -18,7 +22,9 @@
     @if (ShowDescriptor)
     {
         <MudItem xs="12" md="@Size">
-            <MudField Label="@(L["Cron descriptor"])">@CronExpressionDescriptor</MudField>
+            <MudField Label="@(L["Cron descriptor"])">
+                @CronExpressionDescriptor
+            </MudField>
         </MudItem>
     }
 </MudGrid>

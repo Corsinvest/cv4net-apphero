@@ -7,8 +7,8 @@
         <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Child">
             <Content>
                 <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild" />
-                <MudCheckBox T="bool?" Checked="@context.IsChecked"
-                             CheckedChanged="@((e) => CheckedChangedAsync(context))"
+                <MudCheckBox T="bool?" Value="@context.IsChecked"
+                             ValueChanged="@((e) => ValueChanged(context))"
                              Color="@context.Color" Dense />
 
                 <div class="d-flex gap-2">

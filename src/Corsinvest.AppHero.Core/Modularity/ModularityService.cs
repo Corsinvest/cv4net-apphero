@@ -70,7 +70,7 @@ public class ModularityService : IModularityService
     public async Task<IEnumerable<ModuleMenuItem>> GetAuthorizedMenuItemssAsync(IPermissionService permissionService)
         => (await GetAuthorizationsAsync(permissionService)).SelectMany(a => a.MenuItems);
 
-    public List<ModuleCategory> Categories { get; } = new();
+    public List<ModuleCategory> Categories { get; } = [];
 
     public IEnumerable<Assembly> Assemblies
         => Modules.Select(a => a.GetType().Assembly)

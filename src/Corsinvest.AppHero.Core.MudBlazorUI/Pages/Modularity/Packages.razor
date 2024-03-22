@@ -20,29 +20,29 @@ else
     }
 
     <AHDataGrid T="PackageDto"
-            Permissions="Permissions.Data"
-                FixedHeader
-                FixedFooter
-            DataGridManager="DataGridManager"
-                Filterable
-                Groupable
-            FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
-            ShowFilterIcons="false"
-            Height="calc(100vh - 385px)">
-    <ToolBarContent>
-        <AHDataGridToolBarRead T="PackageDto" DataGridManager="DataGridManager" />
-    </ToolBarContent>
-    <Columns>
-        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Id" />
-        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Description" />
-        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Tags" />
-        <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Authors" />
-        <AHPropertyColumn T="PackageDto" TProperty="bool" Property="a => a.IsInstallated" />
+                Permissions="Permissions.Data"
+                FixedHeader="true"
+                FixedFooter="true"
+                DataGridManager="DataGridManager"
+                Filterable="true"
+                Groupable="true"
+                FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive"
+                ShowFilterIcons="false"
+                Height="calc(100vh - 385px)">
+        <ToolBarContent>
+            <AHDataGridToolBarRead T="PackageDto" DataGridManager="DataGridManager" />
+        </ToolBarContent>
+        <Columns>
+            <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Id" />
+            <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Description" />
+            <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Tags" />
+            <AHPropertyColumn T="PackageDto" TProperty="string" Property="a => a.Authors" />
+            <AHPropertyColumn T="PackageDto" TProperty="bool" Property="a => a.IsInstallated" />
 
-        <TemplateColumn T="PackageDto" Title="Owners">
-            <CellTemplate>
-                <div class="d-flex gap-2 flex-column align-center">
-                    @if (string.IsNullOrEmpty(context.Item.IconUrl))
+            <TemplateColumn T="PackageDto" Title="Owners">
+                <CellTemplate>
+                    <div class="d-flex gap-2 flex-column align-center">
+                        @if (string.IsNullOrEmpty(context.Item.IconUrl))
                         {
                             <MudImage Src="@context.Item.IconUrl" Style="height: 50px;" Elevation="25" Class="rounded-lg" />
                         }
@@ -84,7 +84,7 @@ else
             <TemplateColumn T="PackageDto" CellClass="justify-end">
                 <CellTemplate>
                     <MudSelect T="Version" @bind-Value="@context.Item.CurrentVersion" Clearable>
-                    @foreach (var item in context.Item.Versions)
+                     @foreach (var item in context.Item.Versions)
                         {
                             <MudSelectItem Value="item">@item.ToString()</MudSelectItem>
                         }
@@ -96,13 +96,13 @@ else
                                 @if (context.Item.CurrentVersion != null)
                                 {
                                     <MudIconButton Icon="@Icons.Material.Filled.FileDownload" Title="@L["Install"]"
-                                           Color="Color.Success" OnClick="@(async () => await InstallerAsync(context.Item,true))" />
+                                                   Color="Color.Success" OnClick="@(async () => await InstallerAsync(context.Item,true))" />
                                 }
 
                                 @if (context.Item.IsInstallated)
                                 {
                                     <MudIconButton Icon="@Icons.Material.Filled.DeleteForever" Title="@L["Uninstall"]"
-                                           Color="Color.Error" OnClick="@(async () => await InstallerAsync(context.Item,false))" />
+                                                   Color="Color.Error" OnClick="@(async () => await InstallerAsync(context.Item,false))" />
                                 }
                             </ChildContent>
                         </AHPermission>

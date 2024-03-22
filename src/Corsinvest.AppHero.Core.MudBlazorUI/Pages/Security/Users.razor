@@ -9,12 +9,12 @@
 
 <AHDataGrid T="ApplicationUser"
             Permissions="Permissions.Data"
-            FixedHeader
-            FixedFooter
+            FixedHeader="true"
+            FixedFooter="true"
             DataGridManager="DataGridManager"
-            MultiSelection
-            Filterable
-            Groupable
+            MultiSelection="true"
+            Filterable="true"
+            Groupable="true"
             ShowFilterIcons="false"
             Height="calc(100vh - 245px)">
     <ToolBarContent>
@@ -98,8 +98,8 @@
                             <td>
                                 @*Label="@role.Description"*@
                                 <MudSwitch T="bool"
-                                           Checked="@(CurrentUser.UserRoles.Any(a=> a.Role.Name == role.Name))"
-                                           CheckedChanged="@(async (e) => await AddRemoveRoleAsync(e, role.Name!))"
+                                           Value="@(CurrentUser.UserRoles.Any(a=> a.Role.Name == role.Name))"
+                                           ValueChanged="@(async (e) => await AddRemoveRoleAsync(e, role.Name!))"
                                            Color="Color.Primary" />
                             </td>
                             <td>@role.Name</td>
@@ -124,7 +124,7 @@
         </div>
     </TitleContent>
     <DialogContent>
-        <AHPasswordsInput @bind-Value="Password" PasswordOptions="IdentityOptions.Value.Password" Label="@CurrentUser.FullName" />
+        <AHPasswordsInput @bind-Password="Password" PasswordOptions="IdentityOptions.Value.Password" Label="@CurrentUser.FullName" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="@(() => ShowDialogResetPassword= false)">@L["Cancel"]</MudButton>

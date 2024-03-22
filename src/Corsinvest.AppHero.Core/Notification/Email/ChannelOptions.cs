@@ -45,7 +45,7 @@ public class ChannelOptions : NotificationChannelOptions
     public override string Info => $"Host: {Host}:{Port}, SSl: {SslOptions}," +
                                    $"User: {Credential.Username}, From {FromDisplayName}<{FromAddress}>, To: <{ToAddress}>";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         var email = new MimeMessage
         {

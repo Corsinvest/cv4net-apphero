@@ -4,7 +4,6 @@
  */
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using System.ComponentModel.DataAnnotations;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Shared.Components;
 
@@ -12,43 +11,39 @@ public partial class AHPasswordsInput
 {
     [Parameter] public bool IsValid { get; set; }
     [Parameter] public EventCallback<bool> IsValidChanged { get; set; }
+    [Parameter] public string Password { get; set; } = default!;
+    [Parameter] public EventCallback<string> PasswordChanged { get; set; }
+    [Parameter] public string Label { get; set; } = default!;
     [EditorRequired][Parameter] public PasswordOptions PasswordOptions { get; set; } = default!;
 
     [Inject] private IStringLocalizer<AHPasswordsInput> L { get; set; } = default!;
 
-    private PasswordModel Model { get; set; } = new();
+    private ChangePasswordModel Model { get; set; } = new();
     private ResetPasswordFormModelValidator ModelValidator { get; set; } = default!;
 
-    class PasswordModel
+    class ChangePasswordModel
     {
-        [Required]
-        public string Password { get; set; } = default!;
-
-        [Required]
-        public string ConfirmPassword { get; set; } = default!;
+        public string Password { get; set; } = string.Empty;
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 
-    class ResetPasswordFormModelValidator : AbstractModelValidator<PasswordModel>
+    class ResetPasswordFormModelValidator : AbstractModelValidator<ChangePasswordModel>
     {
         public ResetPasswordFormModelValidator(PasswordOptions passwordOptions)
         {
-            RuleFor(a => a.Password).MatchesPasswordOptions(passwordOptions);
-            RuleFor(a => a.ConfirmPassword).Equal(x => x.Password);
+            RuleFor(a => a.Password).NotEmpty().MatchesPasswordOptions(passwordOptions);
+            RuleFor(a => a.ConfirmPassword).NotEmpty().Equal(x => x.Password);
         }
     }
 
-    protected override void OnInitialized()
-    {
-        ModelValidator = new(PasswordOptions);
-        base.OnInitialized();
-    }
+    protected override void OnInitialized() => ModelValidator = new(PasswordOptions);
 
     private void IsValidChangedInt(bool isValid)
     {
         IsValid = ModelValidator.Validate(Model).IsValid;
-        if (IsValidChanged.HasDelegate) { IsValidChanged.InvokeAsync(isValid); }
+        if (IsValidChanged.HasDelegate) { IsValidChanged.InvokeAsync(IsValid); }
 
-        Value = IsValid ? Model.Password : string.Empty;
-        if (ValueChanged.HasDelegate) { ValueChanged.InvokeAsync(Value); }
+        Password = IsValid ? Model.Password : string.Empty;
+        if (PasswordChanged.HasDelegate) { PasswordChanged.InvokeAsync(Password); }
     }
 }

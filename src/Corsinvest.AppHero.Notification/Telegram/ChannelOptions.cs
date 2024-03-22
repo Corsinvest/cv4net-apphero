@@ -25,7 +25,7 @@ public class ChannelOptions : NotificationChannelOptions
     [JsonIgnore]
     public override string Info => $"ChatId: {ChatId}";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         var client = new TelegramBotClient(Token);
         var chatId = new ChatId(ChatId);

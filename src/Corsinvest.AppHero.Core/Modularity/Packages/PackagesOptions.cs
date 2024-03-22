@@ -6,8 +6,8 @@ namespace Corsinvest.AppHero.Core.Modularity.Packages;
 
 public class PackagesOptions
 {
-    public List<PackageOptions> Packages { get; set; } = new();
-    public List<PackageSourceOptions> Sources { get; set; } = new();
+    public List<PackageOptions> Packages { get; set; } = [];
+    public List<PackageSourceOptions> Sources { get; set; } = [];
 
     public void AddOrUpdateSource(PackageSourceOptions source)
     {

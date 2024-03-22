@@ -48,7 +48,7 @@ public class CryptographyHelper
             resultArray = cTransform.TransformFinalBlock(dataArray, 0, dataArray.Length);
             tDes.Clear();
         }
-        catch (Exception ex) { }
+        catch { }
         return Encoding.UTF8.GetString(resultArray);
     }
 }

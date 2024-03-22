@@ -13,7 +13,7 @@ namespace Corsinvest.AppHero.Auditing.Persistence.Interceptors;
 public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 {
     private readonly ICurrentUserService _currentUserService;
-    private List<AuditTrail> _temporaryAuditTrailList = new();
+    private List<AuditTrail> _temporaryAuditTrailList = [];
 
     public AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUserService)
     {
@@ -83,7 +83,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 
     private List<AuditTrail> TryInsertTemporaryAuditTrail(DbContext? context)
     {
-        if (context is null) return new List<AuditTrail>();
+        if (context is null) return [];
         var userId = _currentUserService.UserName;
         context.ChangeTracker.DetectChanges();
 
@@ -150,7 +150,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
     {
         if (context is null) { return; }
 
-        if (_temporaryAuditTrailList.Any())
+        if (_temporaryAuditTrailList.Count != 0)
         {
             foreach (var auditEntry in _temporaryAuditTrailList)
             {

@@ -16,6 +16,6 @@
 
     private RenderFragment RenderBool(CellContext<T> context) => __builder =>
     {
-        <MudCheckBox Checked="@(GetValue<bool>(context.Item!))" ReadOnly />
+        <MudCheckBox Value="@(GetValue<bool>(context.Item!))" ReadOnly="true" />
     };
 }

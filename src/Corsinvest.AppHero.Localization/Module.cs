@@ -77,7 +77,7 @@ public class Module : ModuleBase, IForceLoadModule
         services.Configure<RequestLocalizationOptions>(configureOptions =>
         {
             var supportedCultures = options.SupportedCultures.Select(a => new CultureInfo(a)).ToList();
-            if (!supportedCultures.Any()) { throw new InvalidOperationException("SupportedCultures is not configured."); }
+            if (supportedCultures.Count == 0) { throw new InvalidOperationException("SupportedCultures is not configured."); }
             if (string.IsNullOrWhiteSpace(options.DefaultCulture)) { throw new InvalidOperationException("DefaultCulture is not configured."); }
 
             configureOptions.SupportedCultures = supportedCultures;

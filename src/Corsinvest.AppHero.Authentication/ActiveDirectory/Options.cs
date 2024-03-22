@@ -6,5 +6,5 @@ namespace Corsinvest.AppHero.Authentication.ActiveDirectory;
 
 public class Options
 {
-    public List<SettingDomain> Domains { get; set; } = new();
+    public List<SettingDomain> Domains { get; set; } = [];
 }

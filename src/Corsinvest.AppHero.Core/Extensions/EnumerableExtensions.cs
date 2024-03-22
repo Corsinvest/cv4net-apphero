@@ -9,7 +9,7 @@ public static class EnumerableExtensions
     public static IEnumerable<T> Traverse<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> childSelector)
     {
         var stack = new Stack<T>(items);
-        while (stack.Any())
+        while (stack.Count != 0)
         {
             var next = stack.Pop();
             yield return next;

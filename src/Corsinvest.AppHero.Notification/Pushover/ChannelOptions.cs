@@ -22,7 +22,7 @@ public class ChannelOptions : NotificationChannelOptions
     [JsonIgnore]
     public override string Info => $"{Name}";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         using var client = new HttpClient();
         var ret = await client.PostAsync("https://api.pushover.net/1/messages.json",

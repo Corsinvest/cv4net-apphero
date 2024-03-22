@@ -9,14 +9,14 @@
         <MudContainer>
             <MudTextField @bind-Value="@Search"
                           Class="mb-3"
-                          Clearable
+                          Clearable="true"
                           Placeholder="@L["Search..."]"
-                          Immediate />
+                          Immediate="true" />
             <MudList Clickable Style="height: 300px; overflow-y: auto">
-                @foreach (var item in Links.Where(a => string.IsNullOrWhiteSpace(Search) || a.Module.Search(Search)))
+                 @foreach (var item in Links.Where(a => string.IsNullOrWhiteSpace(Search) || a.Module.Search(Search)))
                 {
                     <MudListItem Icon="@item.ToMBIcon()" IconColor="@item.IconColor.ToMBColor()" OnClick="@(() => NavigationManager.NavigateTo(item.RealUrl))">
-                        <MudHighlighter  HighlightedText="@Search" Text="@item.Text" CaseSensitive="false"/>
+                        <MudHighlighter HighlightedText="@Search" Text="@item.Text" CaseSensitive="false" />
                     </MudListItem>
                 }
             </MudList>

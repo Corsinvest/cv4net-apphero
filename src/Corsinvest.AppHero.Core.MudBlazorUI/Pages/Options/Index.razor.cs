@@ -14,7 +14,7 @@ public partial class Index
 
     private bool IsValid { get; set; }
     private string[] Errors { get; set; } = default!;
-    private Dictionary<string, DynamicComponent> OptionsComponents { get; } = new();
+    private Dictionary<string, DynamicComponent> OptionsComponents { get; } = [];
     private IEnumerable<ModuleBase> Modules { get; set; } = default!;
     private bool InSaving { get; set; }
 

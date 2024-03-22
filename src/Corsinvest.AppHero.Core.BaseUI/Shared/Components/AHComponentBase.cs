@@ -20,7 +20,7 @@ public abstract class AHComponentBase : ComponentBase
 
     [Parameter(CaptureUnmatchedValues = true)]
     [Category("Common")]
-    public Dictionary<string, object> UserAttributes { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> UserAttributes { get; set; } = [];
 
     [Inject] private IStringLocalizerFactory LocalizerFactory { get; set; } = default!;
     [Inject] private ILoggerFactory LoggerFactory { get; set; } = default!;
@@ -31,5 +31,5 @@ public abstract class AHComponentBase : ComponentBase
     private IStringLocalizer _l = default!;
     protected IStringLocalizer L => _l ??= LocalizerFactory.Create(GetType());
 
-    public string GetDescriptionProperty<T>(Expression<Func<T, object>> expression) => ClassHelper.GetDescriptionProperty(expression);
+    public static string GetDescriptionProperty<T>(Expression<Func<T, object>> expression) => ClassHelper.GetDescriptionProperty(expression);
 }

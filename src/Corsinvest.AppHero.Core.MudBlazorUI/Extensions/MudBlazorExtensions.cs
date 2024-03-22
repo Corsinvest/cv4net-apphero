@@ -124,6 +124,6 @@ public static class MudBlazorExtensions
                                                DisableBackdropClick = true,
                                                MaxWidth = MaxWidth.ExtraSmall,
                                                FullWidth = true,
-                                               Animations = new[] { AnimationType.FlipX }
+                                               Animations = [AnimationType.FlipX]
                                            });
 }

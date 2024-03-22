@@ -17,7 +17,7 @@ public partial class AHWidgets
         => Authorizations = (await ModularityService.GetAuthorizationsAsync(PermissionService))
                                 .Where(a => a.GetWidgets().Any());
 
-    private string GetWidgetUrl(ModuleWidget widget)
+    private static string GetWidgetUrl(ModuleWidget widget)
         => widget.RefLink != null && widget.RefLink.Enabled && !string.IsNullOrWhiteSpace(widget.RefLink.RealUrl)
             ? widget.RefLink.RealUrl
             : "#";

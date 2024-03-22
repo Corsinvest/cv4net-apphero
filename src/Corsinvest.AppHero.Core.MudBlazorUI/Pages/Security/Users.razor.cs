@@ -41,8 +41,11 @@ public partial class Users
         DataGridManager.SaveAsync = async (item, isNew) =>
         {
             var result = isNew
-                       ? await UserManager.CreateAsync(item, Password)
-                       : await UserManager.UpdateAsync(item);
+                           ? await UserManager.CreateAsync(item, Password)
+                           : await UserManager.UpdateAsync(item);
+
+            //add role base
+            await UserManager.AddRolesToUserAsync(item, [RoleConstants.BasicRole]);
 
             UINotifier.Show(result.Succeeded, L["Saved successfully."], result.ToStringErrors());
             return result.Succeeded;
@@ -101,9 +104,6 @@ public partial class Users
 
     private void ResetPassword(ApplicationUser user)
     {
-        //send email reset password
-        //IdentityService.SendEmailResetPasswordAsync(user);  
-
         Password = "";
         CurrentUser = user;
         ShowDialogResetPassword = true;

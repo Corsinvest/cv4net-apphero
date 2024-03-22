@@ -41,7 +41,7 @@ public class ChannelOptions : NotificationChannelOptions
         }
         """;
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         using var handler = new HttpClientHandler();
         if (!string.IsNullOrEmpty(Credential.Username))

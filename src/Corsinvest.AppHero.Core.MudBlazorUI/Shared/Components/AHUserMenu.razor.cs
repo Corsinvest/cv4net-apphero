@@ -15,7 +15,7 @@ public partial class AHUserMenu
     [Inject] private UserManager<ApplicationUser> UserManager { get; set; } = default!;
 
     private ApplicationUser User { get; set; } = default!;
-    private List<ModuleLink> Links { get; } = new();
+    private List<ModuleLink> Links { get; } = [];
 
     protected override async Task OnInitializedAsync()
     {

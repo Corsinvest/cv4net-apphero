@@ -6,12 +6,12 @@
 
 <AHDataGrid T="DomainLocalization"
             Permissions="Localization.Module.Permissions.Data"
-            FixedHeader
-            FixedFooter
+            FixedHeader="true"
+            FixedFooter="true"
             DataGridManager="DataGridManager"
-            MultiSelection
-            Filterable
-            Groupable
+            MultiSelection="true"
+            Filterable="true"
+            Groupable="true"
             ShowFilterIcons="false"
             Height="calc(100vh - 315px)">
     <ToolBarContent>
@@ -75,8 +75,10 @@
     <EditTemplate>
         <MudGrid>
             <MudItem md="6">
-                <MudSwitch @bind-Checked="context.Enabled" Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Enabled)])"
-                           For="@(() => context.Enabled)" Color="Color.Primary" />
+                <MudSwitch @bind-Value="context.Enabled"
+                           Label="@(L[GetDescriptionProperty<DomainLocalization>(a => a.Enabled)])"
+                           For="@(() => context.Enabled)" 
+                           Color="Color.Primary" />
             </MudItem>
 
             <MudItem md="6">

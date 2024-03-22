@@ -33,7 +33,7 @@ public class ChannelOptions : NotificationChannelOptions
     [JsonIgnore]
     public override string Info => $"{Username}";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         using var client = new DiscordWebhookClient(Id, Token);
 

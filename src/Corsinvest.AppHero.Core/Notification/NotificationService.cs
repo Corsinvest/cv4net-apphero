@@ -19,7 +19,7 @@ public class NotificationService : INotificationService
 
     public IEnumerable<NotificationChannelOptions> GetNotificationChannels(IServiceScope scope, ModuleBase module)
     {
-        var type = typeof(IOptionsSnapshot<>).MakeGenericType(new[] { module.Options!.Type });
+        var type = typeof(IOptionsSnapshot<>).MakeGenericType([module.Options!.Type]);
         dynamic options = ((IOptionsSnapshot<object>)scope.ServiceProvider.GetRequiredService(type)).Value;
         return options.Channels;
     }

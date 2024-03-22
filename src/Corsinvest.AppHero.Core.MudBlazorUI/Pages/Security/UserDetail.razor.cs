@@ -5,6 +5,8 @@
 using Corsinvest.AppHero.Core.Service;
 using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System.ComponentModel.DataAnnotations;
 
 namespace Corsinvest.AppHero.Core.MudBlazorUI.Pages.Security;
@@ -15,21 +17,6 @@ public partial class UserDetail
     [Parameter] public bool ManageAccount { get; set; }
     [Parameter] public bool Creation { get; set; }
     [Parameter] public string Password { get; set; } = default!;
-
-    [Required]
-    private string PasswordInt
-    {
-        get => Password;
-        set
-        {
-            Password = value;
-            if (PasswordChanged.HasDelegate)
-            {
-                PasswordChanged.InvokeAsync(value);
-            }
-        }
-    }
-
     [Parameter] public EventCallback<string> PasswordChanged { get; set; } = default!;
 
     [Inject] private IOptionsSnapshot<Core.Security.Identity.Options> IdentityOptions { get; set; } = default!;
@@ -42,6 +29,17 @@ public partial class UserDetail
     //    Model = User.Adapt<ApplicationUserDto>();
     //    Model.Password = string.Empty;
     //}
+
+    [Required]
+    private string PasswordInt
+    {
+        get => Password;
+        set
+        {
+            Password = value;
+            if (PasswordChanged.HasDelegate) { PasswordChanged.InvokeAsync(value); }
+        }
+    }
 
     private void ClearPhoto()
     {
@@ -58,7 +56,6 @@ public partial class UserDetail
 
         using var image = Image.Load(imgStream);
         //var format = await Image.DetectFormatAsync(imgStream);
-
         image.Mutate(i => i.Resize(new ResizeOptions()
         {
             Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop,

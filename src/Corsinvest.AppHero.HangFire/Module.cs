@@ -7,7 +7,6 @@ using Corsinvest.AppHero.Core.Extensions;
 using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.UI;
 using Hangfire;
-using Hangfire.Console;
 using Hangfire.Console.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +53,7 @@ public class Module : ModuleBase, IForceLoadModule
             //configuration.UseStorage(storage);
             configuration.UseFilter(new JobFilter(provider));
             configuration.UseFilter(new LogJobFilter());
-            configuration.UseConsole();
+            configuration.UseColouredConsoleLogProvider();
         });
     }
 

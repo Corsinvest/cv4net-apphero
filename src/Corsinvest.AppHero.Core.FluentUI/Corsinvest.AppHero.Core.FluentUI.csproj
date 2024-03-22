@@ -7,7 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Fast.Components.FluentUI" Version="2.4.1" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.5.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.DataGrid.EntityFrameworkAdapter" Version="4.5.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Emoji" Version="4.5.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>

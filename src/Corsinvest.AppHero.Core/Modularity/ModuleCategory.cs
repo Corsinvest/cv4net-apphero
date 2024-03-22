@@ -4,16 +4,9 @@
  */
 namespace Corsinvest.AppHero.Core.Modularity;
 
-public class ModuleCategory
+public class ModuleCategory(string name, string icon, int order)
 {
-    public ModuleCategory(string name, string icon, int order)
-    {
-        Name = name;
-        Icon = icon;
-        Order = order;
-    }
-
-    public string Name { get; }
-    public string Icon { get; set; }
-    public int Order { get; set; }
+    public string Name { get; } = name;
+    public string Icon { get; set; } = icon;
+    public int Order { get; set; } = order;
 }

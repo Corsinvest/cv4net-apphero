@@ -6,6 +6,9 @@ namespace Corsinvest.AppHero.Core.Extensions;
 
 public static class CollectionExtensions
 {
+    public static int IndexOf<T>(this T[] array, T obj) => Array.IndexOf(array, obj);
+
+
     public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source) => source.Select((item, index) => (item, index));
 
     public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)

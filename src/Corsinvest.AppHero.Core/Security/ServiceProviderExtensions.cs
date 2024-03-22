@@ -2,6 +2,7 @@
  * SPDX-FileCopyrightText: Copyright Corsinvest Srl
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+using Corsinvest.AppHero.Core.Extensions;
 using Corsinvest.AppHero.Core.Modularity;
 using Corsinvest.AppHero.Core.Security.Auth;
 using Corsinvest.AppHero.Core.Security.Identity;
@@ -22,7 +23,6 @@ public static class ServiceProviderExtensions
         var modularityService = services.GetRequiredService<IModularityService>();
 
         var adminRole = await roleManager.CreateRoleAsync(RoleConstants.AdministratorRole, "Admin Group");
-        _ = await roleManager.CreateRoleAsync(RoleConstants.BasicRole, "Basic Group");
 
         var userName = "admin@local";
         var adminUser = await userManager.FindByNameAsync(userName);
@@ -40,7 +40,7 @@ public static class ServiceProviderExtensions
             };
 
             //default password
-            await userManager.CreateAsync(adminUser, "Password123!");
+            await userManager.CreateAsync(adminUser, UserConstants.PasswordDefault);
         }
 
         await userManager.AddRolesToUserAsync(adminUser, new List<string>() { adminRole.Name! });
@@ -64,5 +64,13 @@ public static class ServiceProviderExtensions
                                                       item.Permissions.Select(a => a.Key));
             }
         }
+
+        //basic role create and add basic
+        await roleManager.AddPermissionsAsync(await roleManager.CreateRoleAsync(RoleConstants.BasicRole, "Basic Group"), 
+                                              modularityService.Modules
+                                                               .SelectMany(a => a.GetAllRoles().SelectMany(a => a.Permissions))
+                                                               .Where(a => a.InBasicRole)
+                                                               .Select(a => a.Key)
+                                                               .ToList());
     }
 }

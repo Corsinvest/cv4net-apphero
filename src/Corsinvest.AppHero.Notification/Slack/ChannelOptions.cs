@@ -32,7 +32,7 @@ public class ChannelOptions : NotificationChannelOptions
     [JsonIgnore]
     public override string Info => $"{Username} - {Channels}";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         var slackMessage = new SlackMessage
         {
@@ -47,8 +47,8 @@ public class ChannelOptions : NotificationChannelOptions
                 _ => string.Empty
             },
             Username = Username,
-            Attachments = new()
-            {
+            Attachments =
+            [
                 new ()
                 {
                     AuthorName = message.Context,
@@ -57,7 +57,7 @@ public class ChannelOptions : NotificationChannelOptions
                     AuthorIcon= GetSeverityIcon(message.Severity),
                     Color = message.ColorSeverity,
                 }
-            },
+            ],
         };
 
         //TODO how to send Data?

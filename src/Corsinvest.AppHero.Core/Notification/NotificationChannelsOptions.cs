@@ -6,5 +6,5 @@ namespace Corsinvest.AppHero.Core.Notification;
 
 public class NotificationChannelsOptions<T> where T : NotificationChannelOptions
 {
-    public List<T> Channels { get; } = new();
+    public List<T> Channels { get; } = [];
 }

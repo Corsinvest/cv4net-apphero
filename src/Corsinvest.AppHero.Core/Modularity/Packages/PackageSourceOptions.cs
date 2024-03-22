@@ -11,7 +11,7 @@ public class PackageSourceOptions : Credential
 {
     public string Name { get; set; } = default!;
     public string Feed { get; set; } = default!;
-    public List<string> Packages { get; } = new();
+    public List<string> Packages { get; } = [];
 
     [JsonIgnore]
     public string PackagesToString

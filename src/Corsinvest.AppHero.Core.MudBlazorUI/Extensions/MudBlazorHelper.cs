@@ -17,7 +17,7 @@ public static class MudBlazorHelper
 
     public static void InitializeIcons()
     {
-        IconConvert = new Dictionary<string, string>();
+        IconConvert = [];
 
         foreach (var item in Enum.GetValues<UIIcon>())
         {

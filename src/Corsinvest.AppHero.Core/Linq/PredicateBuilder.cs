@@ -38,8 +38,7 @@ public static class PredicateBuilder
     {
         private readonly Dictionary<ParameterExpression, ParameterExpression> _map;
 
-        ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map)
-            => _map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
+        ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map) => _map = map ?? [];
 
         public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map, Expression exp)
             => new ParameterRebinder(map).Visit(exp);

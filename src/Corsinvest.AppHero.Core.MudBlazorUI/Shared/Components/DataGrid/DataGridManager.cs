@@ -116,7 +116,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
     #endregion
 
     public string Title { get; set; } = default!;
-    public Dictionary<string, bool> DefaultSort { get; set; } = new();
+    public Dictionary<string, bool> DefaultSort { get; set; } = [];
     public Func<Task<IEnumerable<T>>> QueryAsync { get; set; } = default!;
     public MudDataGrid<T>? DataGrid { get; set; } = default!;
 
@@ -131,7 +131,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
         }
     }
 
-    public bool ExistsSelection => DataGrid!.SelectedItems.Any();
+    public bool ExistsSelection => DataGrid!.SelectedItems.Count != 0;
 
     public async Task ExportToExcel()
     {
@@ -226,7 +226,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
         var count = query.Count();
 
         //order
-        if (state.SortDefinitions.Any())
+        if (state.SortDefinitions.Count != 0)
         {
             var orderBy = state.SortDefinitions.OrderBy(a => a.Index)
                                                .Select(a => $"@{a.SortBy} {(a.Descending ? "desc" : "asc")}")

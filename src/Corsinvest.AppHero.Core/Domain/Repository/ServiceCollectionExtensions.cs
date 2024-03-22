@@ -10,10 +10,10 @@ public static class ServiceCollectionExtensions
         => services.AddRepository(typeof(TContext), typeof(TEntity));
 
     public static IServiceCollection AddRepository(this IServiceCollection services, Type dbContext, Type entity)
-        => services.AddScoped(typeof(IReadRepository<>).MakeGenericType(new[] { entity }),
-                              sp => sp.GetRequiredService(typeof(IRepository<>).MakeGenericType(new[] { entity })))
-                   .AddScoped(typeof(IRepository<>).MakeGenericType(new[] { entity }),
-                              typeof(BaseDbRepository<,>).MakeGenericType(new[] { dbContext, entity }));
+        => services.AddScoped(typeof(IReadRepository<>).MakeGenericType([entity]),
+                              sp => sp.GetRequiredService(typeof(IRepository<>).MakeGenericType([entity])))
+                   .AddScoped(typeof(IRepository<>).MakeGenericType([entity]),
+                              typeof(BaseDbRepository<,>).MakeGenericType([dbContext, entity]));
 
     public static IServiceCollection AddRepositories(this IServiceCollection services, Type dbContext, IEnumerable<Type> entities)
     {

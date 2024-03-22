@@ -46,7 +46,7 @@ public class ChannelOptions : NotificationChannelOptions
     [JsonIgnore]
     public override string Info => $"{Name}";
 
-    protected override async Task SendImplAsync(NotificationMessage message)
+    protected override async Task SendImpAsync(NotificationMessage message)
     {
         var data = Model.Replace("{Subject}", message.Subject)
                         .Replace("{ColorSeverity}", message.ColorSeverity)
