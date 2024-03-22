@@ -21,7 +21,7 @@
 		<PackageReference Include="CronExpressionDescriptor" Version="2.21.0" />
 		<PackageReference Include="cronos" Version="0.7.1" />
 		<PackageReference Include="Semver" Version="2.3.0" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
 
 		<PackageReference Include="Weikio.PluginFramework.Catalogs.NuGet" Version="1.5.1" />
 
