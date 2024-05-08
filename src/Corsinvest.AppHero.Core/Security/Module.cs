@@ -48,23 +48,23 @@ public class Module : ModuleBase, IForceLoadModule
             }
         };
 
-        Roles = new Role[]
-        {
+        Roles =
+        [
             new("",
                 "",
                 Permissions.Role.Data.Permissions
-                .Union(new[]
-                {
+                .Union(
+                [
                     Permissions.Role.ViewPermissions,
                     Permissions.Role.ManagePermissions
-                })
+                ])
                 .Union(Permissions.User.Data.Permissions)
-                .Union(new[]
-                {
+                .Union(
+                [
                     Permissions.User.ManageRoles,
                     Permissions.User.ResetPassword
-                }))
-        };
+                ]))
+        ];
     }
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)

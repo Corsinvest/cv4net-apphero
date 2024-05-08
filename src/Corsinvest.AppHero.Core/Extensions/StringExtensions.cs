@@ -8,7 +8,9 @@ namespace Corsinvest.AppHero.Core.Extensions;
 
 public static partial class StringExtensions
 {
-    public static string[] SplitNewLine(this string value) => value.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+    private static readonly string[] separator = ["\r\n", "\r", "\n"];
+
+    public static string[] SplitNewLine(this string value) => value.Split(separator, StringSplitOptions.None);
     public static bool IsNumeric(this string value) => decimal.TryParse(value, out _);
     public static string ToCamelCaseWithSpace(this string value) => CamelCaseWithSpaceRegex().Replace(value + "", " $1");
 

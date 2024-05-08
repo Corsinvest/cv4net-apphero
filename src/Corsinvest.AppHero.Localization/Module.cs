@@ -35,13 +35,13 @@ public class Module : ModuleBase, IForceLoadModule
             Icon = UIIcon.Translate.GetName(),
         };
 
-        Roles = new Role[]
-        {
-            new("", "", Permissions.Data.Permissions.Union(new []
-            {
+        Roles =
+        [
+            new("", "", Permissions.Data.Permissions.Union(
+            [
                 Permissions.Translate
-            }))
-        };
+            ]))
+        ];
     }
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)

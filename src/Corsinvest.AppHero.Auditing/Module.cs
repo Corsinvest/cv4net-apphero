@@ -29,10 +29,10 @@ public class Module : ModuleBase, IForceLoadModule
             Icon = UIIcon.PersonSearch.GetName(),
         };
 
-        Roles = new Role[]
-        {
+        Roles =
+        [
             new("","", Permissions.Data.Permissions)
-        };
+        ];
     }
 
     public override void ConfigureServices(IServiceCollection services, IConfiguration config)

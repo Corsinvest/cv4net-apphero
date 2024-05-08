@@ -87,11 +87,11 @@ public partial class Users
     {
         if (addOrRemove)
         {
-            await UserManager.AddRolesToUserAsync(CurrentUser, new[] { role });
+            await UserManager.AddRolesToUserAsync(CurrentUser, [role]);
         }
         else
         {
-            await UserManager.RemoveRolesToUserAsync(CurrentUser, new[] { role });
+            await UserManager.RemoveRolesToUserAsync(CurrentUser, [role]);
         }
     }
 

@@ -37,7 +37,7 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
     {
         if (_useToken)
         {
-            _httpContextAccessor.HttpContext.User = await _tokenProvider.GetClaimsPrincipal();
+            _httpContextAccessor.HttpContext.User = await _tokenProvider.GetClaimsPrincipalAsync();
             return new AuthenticationState(_httpContextAccessor.HttpContext.User);
         }
         else
@@ -63,7 +63,7 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
         {
             if (_useToken)
             {
-                await _tokenProvider.GenerateJwt(user!);
+                await _tokenProvider.GenerateJwtAsync(user!);
                 _navigationManager.NavigateTo("/", true);
             }
             else
@@ -84,7 +84,7 @@ public class AuthenticationService : AuthenticationStateProvider, IAuthenticatio
     {
         if (_useToken)
         {
-            await _tokenProvider.RemoveAuthDataFromStorage();
+            await _tokenProvider.RemoveAuthDataFromStorageAsync();
             _navigationManager.NavigateTo("/", true);
         }
         else

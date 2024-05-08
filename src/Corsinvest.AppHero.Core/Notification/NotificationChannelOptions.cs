@@ -35,7 +35,7 @@ public abstract class NotificationChannelOptions
             _ => string.Empty
         };
 
-    public async Task SendTest()
+    public async Task SendTestAsync()
             => await SendImpAsync(new NotificationMessage
             {
                 Subject = "Test message from your app",

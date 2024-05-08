@@ -19,7 +19,7 @@ public partial class Module
     public DynamicComponent? DCRender { get; set; }
     private bool Authorized { get; set; }
     private bool CanOptions { get; set; }
-    private IEnumerable<ModuleMenuItem> MenuItems { get; set; } = Enumerable.Empty<ModuleMenuItem>();
+    private IEnumerable<ModuleMenuItem> MenuItems { get; set; } = [];
     private ModuleBase? CurrentModule { get; set; }
     private Type? Render { get; set; }
     private List<BreadcrumbItem> BreadcrumbsItems { get; set; } = new()!;
@@ -94,5 +94,5 @@ public partial class Module
     }
 
     private async Task ShowOptionsAsync() => await CurrentModule!.ShowDialogOptionsAsync(DialogService);
-    private async Task RefreshAsync() => await ((IRefreshable)DCRender!.Instance!).Refresh();
+    private async Task RefreshAsync() => await ((IRefreshable)DCRender!.Instance!).RefreshAsync();
 }

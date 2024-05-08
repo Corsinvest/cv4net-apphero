@@ -6,5 +6,5 @@ namespace Corsinvest.AppHero.Core.Domain.Contracts;
 
 public interface IRefreshable
 {
-    Task Refresh();
+    Task RefreshAsync();
 }

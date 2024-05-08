@@ -22,7 +22,7 @@ public abstract class ModuleLinkTreeBase<T> : ModuleLinkBase<T>
 
     public T? Parent { get; }
 
-    public IEnumerable<T> Child { get; set; } = Array.Empty<T>();
+    public IEnumerable<T> Child { get; set; } = [];
     public IEnumerable<T> GetFlatLinks() => new[] { this }.Union(Child.Traverse(a => a.Child)).Cast<T>().ToList().AsReadOnly();
 }
 

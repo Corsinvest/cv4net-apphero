@@ -19,5 +19,5 @@ public partial class AHCronScheduler
     private string CronExpressionDescriptor => CronHelper.GetDescription(Expression);
     private void TextChanged(string value) => ExpressionChanged.InvokeAsync(value);
     private async Task OpenCrontabGuruAsync()
-        => await BrowserService.Open($"https://crontab.guru/#{(Expression + "").Replace(" ", "_")}", "_blank");
+        => await BrowserService.OpenAsync($"https://crontab.guru/#{(Expression + "").Replace(" ", "_")}", "_blank");
 }

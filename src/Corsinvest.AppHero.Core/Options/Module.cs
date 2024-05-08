@@ -26,10 +26,10 @@ public class Module : ModuleBase, IForceLoadModule
             Icon = UIIcon.Settings.GetName()
         };
 
-        Roles = new Role[]
-        {
-            new("","",new[] { Permissions.Save })
-        };
+        Roles =
+        [
+            new("","",[Permissions.Save])
+        ];
     }
 
     public static class Permissions

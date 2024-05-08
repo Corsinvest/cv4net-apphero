@@ -8,6 +8,6 @@ namespace Corsinvest.AppHero.Core.Service;
 
 public interface IBrowserService : IScopedDependency
 {
-    Task CopyToClipboard(string text);
-    Task Open(string url, string target);
+    Task CopyToClipboardAsync(string text);
+    Task OpenAsync(string url, string target);
 }

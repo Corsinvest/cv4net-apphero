@@ -20,6 +20,6 @@ public class NotificationMessage
         _ => string.Empty
     };
 
-    public IEnumerable<Attachment> Attachments { get; set; } = Array.Empty<Attachment>();
+    public IEnumerable<Attachment> Attachments { get; set; } = [];
     public Dictionary<string, object> Data { get; set; } = new()!;
 }

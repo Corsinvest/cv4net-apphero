@@ -61,7 +61,7 @@ public partial class Signup
             {
                 UserName = Model.UserName,
                 Email = Model.Email,
-            }, Model.Password, new[] { RoleConstants.BasicRole });
+            }, Model.Password, [RoleConstants.BasicRole]);
 
             if (result.Succeeded)
             {

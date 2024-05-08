@@ -28,8 +28,8 @@ public class MailRequest
         DisplayName = displayName;
         ReplyTo = replyTo;
         ReplyToName = replyToName;
-        Bcc = bcc ?? new List<string>();
-        Cc = cc ?? new List<string>();
+        Bcc = bcc ?? [];
+        Cc = cc ?? [];
         AttachmentData = attachmentData ?? new Dictionary<string, byte[]>();
         Headers = headers ?? new Dictionary<string, string>();
     }

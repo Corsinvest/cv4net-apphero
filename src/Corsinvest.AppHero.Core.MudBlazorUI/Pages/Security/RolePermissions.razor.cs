@@ -165,7 +165,7 @@ public partial class RolePermissions
         }
     }
 
-    private async Task ValueChanged(TreeDataPermission item)
+    private async Task ValueChangedAsync(TreeDataPermission item)
     {
         item.IsChecked = !(item.IsChecked ?? true);
         // checked status on any item items should mirror this parent item

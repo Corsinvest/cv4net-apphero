@@ -71,6 +71,6 @@ public partial class RolesBase : AHComponentBase
         ShowPermissionsDialog = true;
     }
 
-    protected async Task PermissionGrantedAsync(string key) => await RoleManager.AddPermissionsAsync(CurrentRole, new[] { key });
-    protected async Task PermissionDeniedAsync(string key) => await RoleManager.RemovePermissionsAsync(CurrentRole, new[] { key });
+    protected async Task PermissionGrantedAsync(string key) => await RoleManager.AddPermissionsAsync(CurrentRole, [key]);
+    protected async Task PermissionDeniedAsync(string key) => await RoleManager.RemovePermissionsAsync(CurrentRole, [key]);
 }

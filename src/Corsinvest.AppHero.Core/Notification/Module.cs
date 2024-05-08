@@ -19,13 +19,13 @@ public class Module : ModuleBase, IForceLoadModule
         Type = ModuleType.Service;
         Description = "Notifications";
 
-        Roles = new Role[]
-        {
+        Roles =
+        [
             new("",
                 "",
                 Permissions.Notification.Data.Permissions
-                    .Union(new[] { Permissions.Notification.Test }))
-        };
+                    .Union([Permissions.Notification.Test]))
+        ];
     }
 
     public static class Permissions

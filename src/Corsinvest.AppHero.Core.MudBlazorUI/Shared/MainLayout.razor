@@ -53,10 +53,10 @@
                                  <MudIconButton Color="Color.Inherit"
                                                 Edge="Edge.Start"
                                                 Icon="@Icons.Material.Filled.Search"
-                                                OnClick="OpenFinder" />
+                                                OnClick="OpenFinderAsync" />
                              </MudTooltip>
 
-                             <MudIconButton Icon="@Icons.Material.Filled.Help" Color="Color.Inherit" OnClick="ShowHelp" />
+                             <MudIconButton Icon="@Icons.Material.Filled.Help" Color="Color.Inherit" OnClick="ShowHelpAsync" />
 
                              <AHAppMenu />
                              @*  <NotificationMenu Class="mx-3" />*@
@@ -72,7 +72,7 @@
 
                              @if (ReleaseInfo != null)
                             {
-                                <MudBadge Content="@L["New version: {0}",ReleaseInfo.Version]" Color="Color.Primary" OnClick="OpenRelease"
+                                <MudBadge Content="@L["New version: {0}",ReleaseInfo.Version]" Color="Color.Primary" OnClick="OpenReleaseAsync"
                                           Origin="Origin.TopCenter" Style="cursor:pointer">
 
                                     <div class="d-flex justify-space-between pa-4">

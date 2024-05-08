@@ -12,7 +12,7 @@ public abstract class AbstractModelValidator<TModel> : AbstractValidator<TModel>
     {
         var result = await ValidateAsync(ValidationContext<TModel>.CreateWithOptions((TModel)model, x => x.IncludeProperties(propertyName)));
         return result.IsValid
-                ? Array.Empty<string>()
+                ? []
                 : result.Errors.Select(e => e.ErrorMessage);
     };
 }

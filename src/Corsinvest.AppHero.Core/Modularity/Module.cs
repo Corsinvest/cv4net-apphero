@@ -25,25 +25,22 @@ public class Module : ModuleBase, IForceLoadModule
             Icon = UIIcon.Extension.GetName(),
         };
 
-        Roles = new Role[]
-        {
+        Roles =
+        [
             new("",
                 "",
                 Permissions.Module.Data.Permissions
-                .Union(new[]
-                {
+                .Union(
+                [
                     Permissions.Module.Save,
                     Permissions.Module.Info,
                     Permissions.Module.Options,
                     Permissions.Module.EnableDisable,
-                })
+                ])
                 .Union(Permissions.Package.Data.Permissions)
-                .Union(new[]
-                {
-                    Permissions.Package.InstallUninstall
-                })
+                .Union([Permissions.Package.InstallUninstall])
                 .Union(Permissions.PackagesSource.Data.Permissions))
-        };
+        ];
     }
 
     public class Permissions

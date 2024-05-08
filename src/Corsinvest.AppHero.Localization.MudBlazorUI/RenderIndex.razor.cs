@@ -76,7 +76,7 @@ public partial class RenderIndex
             }
 
             DataGridManager.SelectedItems.Clear();
-            await DataGridManager.Refresh();
+            await DataGridManager.RefreshAsync();
             LoadingLocalization = false;
             StateHasChanged();
 

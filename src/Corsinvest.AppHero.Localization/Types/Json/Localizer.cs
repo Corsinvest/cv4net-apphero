@@ -67,7 +67,7 @@ public class Localizer : BaseStringLocalizer
 
     protected override string GetStringImp(string key)
     {
-        if (key == null) { throw new ArgumentNullException(nameof(key)); }
+        ArgumentNullException.ThrowIfNull(key);
 
         using var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.Read);
         using var sr = new StreamReader(fs);

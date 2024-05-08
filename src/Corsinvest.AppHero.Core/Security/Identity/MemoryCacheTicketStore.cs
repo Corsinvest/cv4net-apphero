@@ -12,7 +12,7 @@ public class MemoryCacheTicketStore : ITicketStore
 {
     private const string KeyPrefix = "AuthSessionStore-";
     private readonly int _loginCookieExpirationHours;
-    private readonly IMemoryCache _cache;
+    private readonly MemoryCache _cache;
 
     public MemoryCacheTicketStore(int loginCookieExpirationHours)
     {

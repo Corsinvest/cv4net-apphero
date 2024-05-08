@@ -51,7 +51,7 @@ public class Module : ModuleBase, IForceLoadModule
         modularityService.SetRenderIndex<Modularity.Module, Pages.Modularity.Index>();
         modularityService.SetRenderIndex<Options.Module, Pages.Options.Index>();
         //modularityService.SetRenderOptions<Notification.Email.Module, MudBlazorUI.Shared.Notification.Email.RenderOptions>();
-        modularityService.SetRenderIndex<Session.Module, Pages.Session.Index>();
+        //modularityService.SetRenderIndex<Session.Module, Pages.Session.Index>();
 
         //security
         modularityService.SetRenderOptions<Security.Module, Pages.Security.RenderOptions>();

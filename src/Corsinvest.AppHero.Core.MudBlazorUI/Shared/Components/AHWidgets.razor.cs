@@ -11,7 +11,7 @@ public partial class AHWidgets
     [Inject] private IPermissionService PermissionService { get; set; } = default!;
     [Inject] private IModularityService ModularityService { get; set; } = default!;
 
-    private IEnumerable<ModuleAuthorization> Authorizations { get; set; } = Array.Empty<ModuleAuthorization>();
+    private IEnumerable<ModuleAuthorization> Authorizations { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
         => Authorizations = (await ModularityService.GetAuthorizationsAsync(PermissionService))

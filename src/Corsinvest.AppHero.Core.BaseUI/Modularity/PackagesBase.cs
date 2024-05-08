@@ -64,7 +64,7 @@ public partial class PackagesBase : AHComponentBase
 
             WritablePackagesOptions.Update(packagesOptions);
             ShowWait = false;
-            await DataGridManager.Refresh();
+            await DataGridManager.RefreshAsync();
 
             UINotifier.Show(L["Package configuration updated. Restart application!"], UINotifierSeverity.Success);
         }

@@ -41,8 +41,8 @@ public class ChannelOptions : NotificationChannelOptions
                                       username: Username,
                                       avatarUrl: AvatarUrl,
                                       isTTS: IsTTS,
-                                      embeds: new[]
-                                      {
+                                      embeds:
+                                      [
                                             new EmbedBuilder
                                             {
                                                 Title = message.Subject,
@@ -64,7 +64,7 @@ public class ChannelOptions : NotificationChannelOptions
                                                     Value = a.Value
                                                 }))
                                             }.Build()
-                                      });
+                                      ]);
 
         foreach (var item in message.Attachments)
         {

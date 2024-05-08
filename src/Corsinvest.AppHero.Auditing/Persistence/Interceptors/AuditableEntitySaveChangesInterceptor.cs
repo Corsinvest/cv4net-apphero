@@ -34,7 +34,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
                                                            CancellationToken cancellationToken = default)
     {
         var resultvalueTask = await base.SavedChangesAsync(eventData, result, cancellationToken);
-        await TryUpdateTemporaryPropertiesForAuditTrail(eventData.Context, cancellationToken);
+        await TryUpdateTemporaryPropertiesForAuditTrailAsync(eventData.Context, cancellationToken);
         return resultvalueTask;
     }
 
@@ -146,7 +146,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
         return temporaryAuditEntries;
     }
 
-    private async Task TryUpdateTemporaryPropertiesForAuditTrail(DbContext? context, CancellationToken cancellationToken = default)
+    private async Task TryUpdateTemporaryPropertiesForAuditTrailAsync(DbContext? context, CancellationToken cancellationToken = default)
     {
         if (context is null) { return; }
 

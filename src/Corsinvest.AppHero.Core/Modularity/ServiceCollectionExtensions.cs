@@ -60,16 +60,16 @@ public static class ServiceCollectionExtensions
                 Directory.CreateDirectory(pathPluginsNuGet);
 
                 //in folder execution
-                plugins.AddRange(await LoadPluginFolder(logger, AppContext.BaseDirectory, false));
+                plugins.AddRange(await LoadPluginFolderAsync(logger, AppContext.BaseDirectory, false));
 
                 //in folder 'plugins'
                 foreach (var item in Directory.GetDirectories(pathPluginsFolder))
                 {
-                    plugins.AddRange(await LoadPluginFolder(logger, item, true));
+                    plugins.AddRange(await LoadPluginFolderAsync(logger, item, true));
                 }
 
                 //NuGet
-                plugins.AddRange(await LoadPluginNuGet(services, logger, pathPluginsNuGet));
+                plugins.AddRange(await LoadPluginNuGetAsync(services, logger, pathPluginsNuGet));
 
             }).Wait();
 
@@ -81,7 +81,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static async Task<List<Plugin>> LoadPluginNuGet(IServiceCollection services, ILogger logger, string path)
+    private static async Task<List<Plugin>> LoadPluginNuGetAsync(IServiceCollection services, ILogger logger, string path)
     {
         //load form NuGet
         var packagesOptions = services.GetOptionsSnapshot<PackagesOptions>().Value;
@@ -129,7 +129,7 @@ public static class ServiceCollectionExtensions
         return plugins;
     }
 
-    private static async Task<List<Plugin>> LoadPluginFolder(ILogger logger, string folder, bool includeSubfolders)
+    private static async Task<List<Plugin>> LoadPluginFolderAsync(ILogger logger, string folder, bool includeSubfolders)
     {
         using (logger.LogTimeOperation(LogLevel.Information, false, "Add Plugin from Folder {folder}", folder))
         {

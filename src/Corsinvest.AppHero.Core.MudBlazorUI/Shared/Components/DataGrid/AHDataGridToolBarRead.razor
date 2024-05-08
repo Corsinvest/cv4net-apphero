@@ -11,12 +11,12 @@
     @ToolBarContentBefore
 }
 
-<MudIconButton Title="@L["Refresh"]" Icon="@Icons.Material.Filled.Refresh" OnClick="@DataGridManager.Refresh"
+<MudIconButton Title="@L["Refresh"]" Icon="@Icons.Material.Filled.Refresh" OnClick="@DataGridManager.RefreshAsync"
                Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
 
 @if (PermissionExport != null)
 {
-    <AHPermissionButtonIcon Permission="PermissionExport" OnClick="@DataGridManager.ExportToExcel"
+    <AHPermissionButtonIcon Permission="PermissionExport" OnClick="@DataGridManager.ExportToExcelAsync"
                         Disabled="@DataGridManager.ToDataGridManager().DataGrid!.Loading" />
 }
 

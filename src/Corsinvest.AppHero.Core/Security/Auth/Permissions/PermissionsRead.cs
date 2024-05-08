@@ -19,5 +19,5 @@ public class PermissionsRead
     public string Prefix { get; }
     public Permission Search { get; }
     public Permission Export { get; }
-    public virtual IEnumerable<Permission> Permissions => new[] { Search, Export };
+    public virtual IEnumerable<Permission> Permissions => [Search, Export];
 }

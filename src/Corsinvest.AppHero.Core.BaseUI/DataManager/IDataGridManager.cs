@@ -25,7 +25,7 @@ public interface IDataGridManager<T> : IRefreshable where T : class
     PermissionsRead? Permissions { get; set; }
     Func<Task<IEnumerable<T>>> QueryAsync { get; set; }
     string Title { get; set; }
-    Task ExportToExcel();
+    Task ExportToExcelAsync();
     bool ExistsSelection { get; }
     Dictionary<string, bool> DefaultSort { get; set; }
     HashSet<T> SelectedItems { get; }

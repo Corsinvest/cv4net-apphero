@@ -11,13 +11,13 @@ public partial class NavMenu
     [Inject] private IModularityService ModularityService { get; set; } = default!;
     [Inject] private IPermissionService PermissionService { get; set; } = default!;
 
-    private IEnumerable<ModuleAuthorization> Authorizations { get; set; } = Array.Empty<ModuleAuthorization>();
+    private IEnumerable<ModuleAuthorization> Authorizations { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
         => Authorizations = (await ModularityService.GetAuthorizationsAsync(PermissionService))
                                 .Where(a => a.Links.Any());
 
-    private IEnumerable<IGrouping<ModuleBase, ModuleAuthorization>> GetByCategory(string category)
+    private List<IGrouping<ModuleBase, ModuleAuthorization>> GetByCategory(string category)
         => Authorizations.Where(a => a.Module.Category == category && a.Module.Link!.Enabled)
                          .GroupBy(a => a.Module)
                          .OrderBy(a => a.Key.Link!.Order)

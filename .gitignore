@@ -398,6 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 nupkgs/
+artifacts_nupkg/
 
 /src/Corsinvest.AppHero.AppBss/wwwroot/lib
 /src/Corsinvest.AppHero.AppBss/data

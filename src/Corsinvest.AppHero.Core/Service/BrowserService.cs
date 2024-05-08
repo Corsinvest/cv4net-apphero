@@ -10,6 +10,6 @@ public class BrowserService : IBrowserService
 {
     private readonly IJSRuntime _jSRuntime;
     public BrowserService(IJSRuntime jSRuntime) => _jSRuntime = jSRuntime;
-    public async Task CopyToClipboard(string text) => await _jSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", text);
-    public async Task Open(string url, string target) => await _jSRuntime.InvokeVoidAsync("open", url, target);
+    public async Task CopyToClipboardAsync(string text) => await _jSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", text);
+    public async Task OpenAsync(string url, string target) => await _jSRuntime.InvokeVoidAsync("open", url, target);
 }

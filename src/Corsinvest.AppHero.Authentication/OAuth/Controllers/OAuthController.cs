@@ -41,7 +41,7 @@ public class OAuthController : ControllerBase
     public IActionResult Challenge(string provider)
         => Challenge(new AuthenticationProperties
         {
-            RedirectUri = Url.Action(nameof(ExternalSignIn)),
+            RedirectUri = Url.Action(nameof(ExternalSignInAsync)),
             Items =
             {
                 ["returnUrl"] = "/" ,
@@ -53,7 +53,7 @@ public class OAuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpGet("ExternalSignIn")]
-    public async Task<IActionResult> ExternalSignIn()
+    public async Task<IActionResult> ExternalSignInAsync()
     {
         try
         {

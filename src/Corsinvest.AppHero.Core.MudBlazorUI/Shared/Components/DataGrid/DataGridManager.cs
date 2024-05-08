@@ -42,7 +42,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
                 if (DeleteAfterAsync != null) { await DeleteAfterAsync.Invoke(items); }
 
                 ret = true;
-                await Refresh();
+                await RefreshAsync();
             }
         }
 
@@ -53,7 +53,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
     public Func<IEnumerable<T>, Task> DeleteAfterAsync { get; set; } = default!;
     #endregion
 
-    public async Task Refresh()
+    public async Task RefreshAsync()
     {
         if (QueryAsync != null) { await DataGrid!.ReloadServerData(); }
     }
@@ -90,7 +90,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
                                                         "Cancel",
                                                         "Save");
 
-        if (ret) { await Refresh(); }
+        if (ret) { await RefreshAsync(); }
         return ret;
     }
 
@@ -133,7 +133,7 @@ public class DataGridManager<T> : IDataGridManager<T> where T : class
 
     public bool ExistsSelection => DataGrid!.SelectedItems.Count != 0;
 
-    public async Task ExportToExcel()
+    public async Task ExportToExcelAsync()
     {
         var table = new DataTable();
         var columns = DataGrid!.RenderedColumns.Where(a => !string.IsNullOrEmpty(a.PropertyName) && !string.IsNullOrEmpty(a.Title))

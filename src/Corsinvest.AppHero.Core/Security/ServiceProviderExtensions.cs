@@ -54,7 +54,7 @@ public static class ServiceProviderExtensions
             await roleManager.AddPermissionsAsync(moduleAdminRole, module.GetPermissions().Select(a => a.Key));
 
             //admin application
-            await userManager.AddRolesToUserAsync(adminUser, new[] { module.RoleAdminKey });
+            await userManager.AddRolesToUserAsync(adminUser, [module.RoleAdminKey]);
 
             //role and permission specific module
             foreach (var item in module.GetAllRoles().Where(a => !string.IsNullOrWhiteSpace(a.Key)))

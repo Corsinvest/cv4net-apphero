@@ -17,7 +17,7 @@ public abstract class ModuleBase
 
     public ModuleLink? Link { get; set; }
     public IEnumerable<ModuleLink> GetFlatLinks() => Link?.GetFlatLinks() ?? new List<ModuleLink>().AsReadOnly();
-    public IEnumerable<ModuleMenuItem> MenuItems { get; set; } = Enumerable.Empty<ModuleMenuItem>();
+    public IEnumerable<ModuleMenuItem> MenuItems { get; set; } = [];
     public string? InfoText { get; set; }
 
     private string _icon = default!;
@@ -54,7 +54,7 @@ public abstract class ModuleBase
     public virtual Version Version => GetType().Assembly.GetName().Version!;
 
     #region Authorization
-    protected IEnumerable<Role> Roles { get; set; } = Array.Empty<Role>();
+    protected IEnumerable<Role> Roles { get; set; } = [];
     public string PermissionLinkBaseKey => $"{Class}.{ActionConstants.Link}";
     public string PermissionWidgetBaseKey => $"{Class}.{ActionConstants.Widget}";
     public Permission PermissionEditOptions => new($"{Class}.{ActionConstants.EditOptions}", "Edit Options", UIIcon.Settings.GetName());
@@ -75,17 +75,17 @@ public abstract class ModuleBase
             var roles = new List<Role>();
 
             //options
-            if (HasOptions) { roles.Add(new(RoleAdminKey, RoleAdminDescription, new[] { PermissionEditOptions })); }
+            if (HasOptions) { roles.Add(new(RoleAdminKey, RoleAdminDescription, [PermissionEditOptions])); }
 
             //links
             roles.AddRange(GetFlatLinks().Where(a => !a.Child.Any())
-                                         .Select(a => new Role(RoleAdminKey, RoleAdminDescription, new[] { a.Permission })));
+                                         .Select(a => new Role(RoleAdminKey, RoleAdminDescription, [a.Permission])));
 
             //menu items
-            roles.AddRange(MenuItems.Select(a => new Role(RoleAdminKey, RoleAdminDescription, new[] { a.Permission })));
+            roles.AddRange(MenuItems.Select(a => new Role(RoleAdminKey, RoleAdminDescription, [a.Permission])));
 
             //widgets
-            roles.AddRange(Widgets.Select(a => new Role(RoleAdminKey, RoleAdminDescription, new[] { a.Permission })));
+            roles.AddRange(Widgets.Select(a => new Role(RoleAdminKey, RoleAdminDescription, [a.Permission])));
 
             roles.AddRange(Roles);
             _roles = roles.AsReadOnly();
@@ -94,7 +94,7 @@ public abstract class ModuleBase
     }
     #endregion
 
-    public IEnumerable<ModuleWidget> Widgets { get; init; } = Array.Empty<ModuleWidget>();
+    public IEnumerable<ModuleWidget> Widgets { get; init; } = [];
     public bool Enabled { get; set; }
     public string BaseUrl => $"{ApplicationHelper.ModuleComponentUrl}/{Slug}";
     public bool ForceLoad => this is IForceLoadModule;

@@ -47,7 +47,7 @@ public class NotificationChannelsOptionsGridBase<T> : AHComponentBase where T : 
         {
             try
             {
-                await channel.SendTest();
+                await channel.SendTestAsync();
                 UINotifier.Show(L["Test done successfully!!"], UINotifierSeverity.Success);
             }
             catch (Exception ex) { await UIMessageBox.ShowInfoAsync(L["Error"], ex.Message); }

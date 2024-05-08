@@ -27,10 +27,10 @@ public class AccessTokenProvider
         _identityService = identityService;
     }
 
-    public async Task GenerateJwt(ApplicationUser applicationUser)
+    public async Task GenerateJwtAsync(ApplicationUser applicationUser)
         => await _localStorage.SetAsync(_tokenKey, await _identityService.GenerateJwtAsync(applicationUser));
 
-    public async Task<ClaimsPrincipal> GetClaimsPrincipal()
+    public async Task<ClaimsPrincipal> GetClaimsPrincipalAsync()
     {
         try
         {
@@ -41,12 +41,12 @@ public class AccessTokenProvider
                 if (principal?.Identity?.IsAuthenticated ?? false) { return principal!; }
             }
         }
-        catch (CryptographicException) { await RemoveAuthDataFromStorage(); }
+        catch (CryptographicException) { await RemoveAuthDataFromStorageAsync(); }
         catch (Exception) { return new ClaimsPrincipal(new ClaimsIdentity()); }
         return new ClaimsPrincipal(new ClaimsIdentity());
     }
 
-    public async Task RemoveAuthDataFromStorage()
+    public async Task RemoveAuthDataFromStorageAsync()
     {
         await _localStorage.DeleteAsync(_tokenKey);
         _navigation.NavigateTo("/", true);
