@@ -18,7 +18,7 @@ public class AuditTrail : IAggregateRoot<int>
     public DateTime DateTime { get; set; }
     public Dictionary<string, object> OldValues { get; } = [];
     public Dictionary<string, object> NewValues { get; } = [];
-    public ICollection<string>? AffectedColumns { get; } = new List<string>();
+    public ICollection<string>? AffectedColumns { get; } = [];
     public Dictionary<string, object> PrimaryKey { get; } = [];
     [NotMapped] public List<PropertyEntry> TemporaryProperties { get; } = [];
 }

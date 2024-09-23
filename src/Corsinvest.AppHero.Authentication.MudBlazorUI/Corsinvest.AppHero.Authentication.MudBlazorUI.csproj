@@ -4,6 +4,8 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<AssemblyVersion>0.24.0923.1423</AssemblyVersion>
+		<FileVersion>0.24.0923.1423</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

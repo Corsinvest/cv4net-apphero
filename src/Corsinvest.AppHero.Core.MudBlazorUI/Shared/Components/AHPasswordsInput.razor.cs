@@ -18,6 +18,8 @@ public partial class AHPasswordsInput
 
     [Inject] private IStringLocalizer<AHPasswordsInput> L { get; set; } = default!;
 
+    private MudForm RefForm { get; set; } = default!;
+
     private ChangePasswordModel Model { get; set; } = new();
     private ResetPasswordFormModelValidator ModelValidator { get; set; } = default!;
 
@@ -32,11 +34,16 @@ public partial class AHPasswordsInput
         public ResetPasswordFormModelValidator(PasswordOptions passwordOptions)
         {
             RuleFor(a => a.Password).NotEmpty().MatchesPasswordOptions(passwordOptions);
-            RuleFor(a => a.ConfirmPassword).NotEmpty().Equal(x => x.Password);
+            RuleFor(a => a.ConfirmPassword).Equal(x => x.Password);
         }
     }
 
     protected override void OnInitialized() => ModelValidator = new(PasswordOptions);
+
+    private async Task FieldChanged() 
+    {
+        await RefForm.Validate();
+    }
 
     private void IsValidChangedInt(bool isValid)
     {

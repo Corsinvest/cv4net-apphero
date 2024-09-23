@@ -4,13 +4,15 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<AssemblyVersion>0.24.0923.1423</AssemblyVersion>
+		<FileVersion>0.24.0923.1423</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.7.1" />
-	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.DataGrid.EntityFrameworkAdapter" Version="4.7.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.10.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.DataGrid.EntityFrameworkAdapter" Version="4.10.0" />
 	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Emoji" Version="4.6.0" />
-	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.7.0" />
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.10.0" />
 	</ItemGroup>
 
 	<ItemGroup>

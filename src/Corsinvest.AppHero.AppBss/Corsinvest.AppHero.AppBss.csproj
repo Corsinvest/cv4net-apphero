@@ -3,19 +3,21 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyVersion>1.24.0923.1423</AssemblyVersion>
+		<FileVersion>1.24.0923.1423</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Hangfire.EntityFrameworkCore" Version="0.6.0" />
 		<PackageReference Include="Serilog.Sinks.SQLite" Version="6.0.0" />
-		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.1" />
 
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
 		
 		<PackageReference Include="Hangfire.Storage.SQLite" Version="0.4.2" />
 		
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

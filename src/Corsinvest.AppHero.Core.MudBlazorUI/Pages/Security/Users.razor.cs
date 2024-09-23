@@ -44,8 +44,11 @@ public partial class Users
                            ? await UserManager.CreateAsync(item, Password)
                            : await UserManager.UpdateAsync(item);
 
-            //add role base
-            await UserManager.AddRolesToUserAsync(item, [RoleConstants.BasicRole]);
+            if (result.Succeeded)
+            {
+                //add role base
+                await UserManager.AddRolesToUserAsync(item, [RoleConstants.BasicRole]);
+            }
 
             UINotifier.Show(result.Succeeded, L["Saved successfully."], result.ToStringErrors());
             return result.Succeeded;

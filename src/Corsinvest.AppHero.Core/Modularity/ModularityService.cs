@@ -6,11 +6,10 @@ using Corsinvest.AppHero.Core.Modularity.Packages;
 using Corsinvest.AppHero.Core.Security.Auth.Permissions;
 using Corsinvest.AppHero.Core.UI;
 using FluentResults;
-using NuGet.Configuration;
-using NuGet.Protocol;
-using NuGet.Protocol.Core.Types;
+//using NuGet.Configuration;
+//using NuGet.Protocol;
+//using NuGet.Protocol.Core.Types;
 using System.Reflection;
-using System.Text;
 
 namespace Corsinvest.AppHero.Core.Modularity;
 
@@ -94,99 +93,99 @@ public class ModularityService : IModularityService
         {
             foreach (var item in source.Packages)
             {
-                try
-                {
-                    //decode packageid!version  
-                    //     The version string is either a simple version or an arithmetic range e.g. 1.0
-                    //     --> 1.0 ≤ x (,1.0] --> x ≤ 1.0 (,1.0) --> x < 1.0 [1.0] --> x == 1.0 (1.0,) -->
-                    //     1.0 < x (1.0, 2.0) --> 1.0 < x < 2.0 [1.0, 2.0] --> 1.0 ≤ x ≤ 2.0
+                //try
+                //{
+                //    //decode packageid!version  
+                //    //     The version string is either a simple version or an arithmetic range e.g. 1.0
+                //    //     --> 1.0 ≤ x (,1.0] --> x ≤ 1.0 (,1.0) --> x < 1.0 [1.0] --> x == 1.0 (1.0,) -->
+                //    //     1.0 < x (1.0, 2.0) --> 1.0 < x < 2.0 [1.0, 2.0] --> 1.0 ≤ x ≤ 2.0
 
-                    var idAndVer = item.Split("|");
-                    var id = idAndVer[0];
-                    var version = idAndVer.Length == 2
-                                    ? idAndVer[1]
-                                    : string.Empty;
+                //    var idAndVer = item.Split("|");
+                //    var id = idAndVer[0];
+                //    var version = idAndVer.Length == 2
+                //                    ? idAndVer[1]
+                //                    : string.Empty;
 
-                    var result = await SearchAsync(source, id);
-                    if (result != null)
-                    {
-                        var versions = (await result.GetVersionsAsync())
-                                        .Select(a => a.Version.Version)
-                                        .OrderByDescending(a => a)
-                                        .ToList();
+                //    var result = await SearchAsync(source, id);
+                //    if (result != null)
+                //    {
+                //        var versions = (await result.GetVersionsAsync())
+                //                        .Select(a => a.Version.Version)
+                //                        .OrderByDescending(a => a)
+                //                        .ToList();
 
-                        if (!string.IsNullOrEmpty(version))
-                        {
-                            var versionRange = NuGet.Versioning.VersionRange.Parse(version);
+                //        if (!string.IsNullOrEmpty(version))
+                //        {
+                //            var versionRange = NuGet.Versioning.VersionRange.Parse(version);
 
-                            versions = versions.Where(a => a >= versionRange.MinVersion.Version
-                                                        && a <= versionRange.MaxVersion.Version)
-                                               .ToList();
-                        }
+                //            versions = versions.Where(a => a >= versionRange.MinVersion.Version
+                //                                        && a <= versionRange.MaxVersion.Version)
+                //                               .ToList();
+                //        }
 
-                        var data = new PackageDto
-                        {
-                            Id = result.Identity.Id,
-                            IconUrl = result.IconUrl + "",
-                            Versions = versions,
-                            Feed = $"{source.Name} - {source.Feed}",
-                            Owners = result.Owners,
-                            DownloadCount = result.DownloadCount ?? 0,
-                            IsInstallated = packagesOptions.Packages.Any(a => a.Id == result.Identity.Id
-                                                                                && a.IsNuGetPackage
-                                                                                && a.Version == result.Identity.Version.Version),
-                        };
+                //        var data = new PackageDto
+                //        {
+                //            Id = result.Identity.Id,
+                //            IconUrl = result.IconUrl + "",
+                //            Versions = versions,
+                //            Feed = $"{source.Name} - {source.Feed}",
+                //            Owners = result.Owners,
+                //            DownloadCount = result.DownloadCount ?? 0,
+                //            IsInstallated = packagesOptions.Packages.Any(a => a.Id == result.Identity.Id
+                //                                                                && a.IsNuGetPackage
+                //                                                                && a.Version == result.Identity.Version.Version),
+                //        };
 
-                        data.CurrentVersion = data.IsInstallated
-                                                ? data.Versions.First(a => a == result.Identity.Version.Version)
-                                                : data.Versions.First();
+                //        data.CurrentVersion = data.IsInstallated
+                //                                ? data.Versions.First(a => a == result.Identity.Version.Version)
+                //                                : data.Versions.First();
 
-                        data.Url = string.IsNullOrWhiteSpace(result.ProjectUrl + "")
-                                    ? "#"
-                                    : result.ProjectUrl.ToString();
+                //        data.Url = string.IsNullOrWhiteSpace(result.ProjectUrl + "")
+                //                    ? "#"
+                //                    : result.ProjectUrl.ToString();
 
-                        ret.Add(data);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var message = new StringBuilder();
-                    var exTmp = ex;
-                    while (exTmp != null)
-                    {
-                        if (message.ToString().Length > 0) { message.Append("<br/>"); }
-                        message.Append(exTmp.Message);
-                        exTmp = exTmp.InnerException;
-                    }
-                    errors.Add(message.ToString());
-                    break;
-                }
+                //        ret.Add(data);
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    var message = new StringBuilder();
+                //    var exTmp = ex;
+                //    while (exTmp != null)
+                //    {
+                //        if (message.ToString().Length > 0) { message.Append("<br/>"); }
+                //        message.Append(exTmp.Message);
+                //        exTmp = exTmp.InnerException;
+                //    }
+                //    errors.Add(message.ToString());
+                //    break;
+                //}
             }
         }
 
         return Result.Ok(ret.OrderBy(a => a.IsInstallated)).WithErrors(errors);
     }
 
-    private static async Task<IPackageSearchMetadata?> SearchAsync(PackageSourceOptions source, string packageId)
-    {
-        var sourceRepository = Repository.Factory.GetCoreV3(new PackageSource(source.Feed)
-        {
-            Credentials = new PackageSourceCredential(source.Feed,
-                                                      source.Username,
-                                                      source.Password,
-                                                      true,
-                                                      null)
-        });
+    //private static async Task<IPackageSearchMetadata?> SearchAsync(PackageSourceOptions source, string packageId)
+    //{
+    //    var sourceRepository = Repository.Factory.GetCoreV3(new PackageSource(source.Feed)
+    //    {
+    //        Credentials = new PackageSourceCredential(source.Feed,
+    //                                                  source.Username,
+    //                                                  source.Password,
+    //                                                  true,
+    //                                                  null)
+    //    });
 
-        var packageSearchResource = await sourceRepository.GetResourceAsync<PackageSearchResource>();
+    //    var packageSearchResource = await sourceRepository.GetResourceAsync<PackageSearchResource>();
 
-        var data = await packageSearchResource.SearchAsync(packageId,
-                                                           new SearchFilter(includePrerelease: true),
-                                                           skip: 0,
-                                                           take: 32,
-                                                           NuGet.Common.NullLogger.Instance,
-                                                           CancellationToken.None);
+    //    var data = await packageSearchResource.SearchAsync(packageId,
+    //                                                       new SearchFilter(includePrerelease: true),
+    //                                                       skip: 0,
+    //                                                       take: 32,
+    //                                                       NuGet.Common.NullLogger.Instance,
+    //                                                       CancellationToken.None);
 
-        return data.FirstOrDefault(a => a.Identity.Id == packageId);
-    }
+    //    return data.FirstOrDefault(a => a.Identity.Id == packageId);
+    //}
 }

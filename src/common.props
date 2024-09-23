@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<LangVersion>latest</LangVersion>
-		<Version>0.1.14</Version>
+		<Version>0.1.15</Version>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<!--<NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>-->
 
@@ -21,14 +21,14 @@
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(BUILD_FOR_DOCKER)' == ''">
+	<PropertyGroup Condition="'$(DOTNET_RUNNING_IN_CONTAINER)' == ''">
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageOutputPath>..\..\nupkgs\</PackageOutputPath>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(BUILD_FOR_DOCKER)' == ''">
+	<ItemGroup Condition="'$(DOTNET_RUNNING_IN_CONTAINER)' == ''">
 		<None Include="..\..\icon.png" Pack="true" PackagePath="" />
 		<None Include="..\..\LICENSE" Pack="true" PackagePath="" />
 	</ItemGroup>

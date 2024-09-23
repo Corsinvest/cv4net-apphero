@@ -35,14 +35,15 @@ public static class ServiceCollectionExtensions
                 .AddAppHeroServices(typeof(ISingletonDependency), ServiceLifetime.Singleton, logger)
 
                 .AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters()
-                .AddDetection();
+                //.AddDetection()
+                ;
 
         return services;
     }
 
     public static async Task OnPreApplicationInitializationAsync(this WebApplication app)
     {
-        app.UseDetection();
+        //app.UseDetection();
 
         await app.OnPreApplicationInitializationModulesAsync();
     }

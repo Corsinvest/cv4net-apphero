@@ -4,10 +4,10 @@
  */
 using Corsinvest.AppHero.Core.Modularity.Packages;
 using Microsoft.Extensions.Hosting;
-using Weikio.NugetDownloader;
+//using Weikio.NugetDownloader;
 using Weikio.PluginFramework.Abstractions;
 using Weikio.PluginFramework.Catalogs;
-using Weikio.PluginFramework.Catalogs.NuGet;
+//using Weikio.PluginFramework.Catalogs.NuGet;
 
 namespace Corsinvest.AppHero.Core.Modularity;
 
@@ -69,7 +69,7 @@ public static class ServiceCollectionExtensions
                 }
 
                 //NuGet
-                plugins.AddRange(await LoadPluginNuGetAsync(services, logger, pathPluginsNuGet));
+                //plugins.AddRange(await LoadPluginNuGetAsync(services, logger, pathPluginsNuGet));
 
             }).Wait();
 
@@ -81,53 +81,53 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static async Task<List<Plugin>> LoadPluginNuGetAsync(IServiceCollection services, ILogger logger, string path)
-    {
-        //load form NuGet
-        var packagesOptions = services.GetOptionsSnapshot<PackagesOptions>().Value;
-        var plugins = new List<Plugin>();
+    //private static async Task<List<Plugin>> LoadPluginNuGetAsync(IServiceCollection services, ILogger logger, string path)
+    //{
+    //    //load form NuGet
+    //    var packagesOptions = services.GetOptionsSnapshot<PackagesOptions>().Value;
+    //    var plugins = new List<Plugin>();
 
-        foreach (var item in packagesOptions.Packages.Where(a => a.IsNuGetPackage))
-        {
-            var feed = packagesOptions.Sources.FirstOrDefault(a => a.Packages.Contains(item.Id));
-            if (feed != null)
-            {
-                using (logger.LogTimeOperation(LogLevel.Information,
-                                               false,
-                                               "Add Plugin from NuGet {name} {version}",
-                                               item.Id,
-                                               item.Version.ToString()))
-                {
-                    var plugin = new NugetPackagePluginCatalog(item.Id,
-                                                               packageVersion: item.Version.ToString(),
-                                                               includePrerelease: true,
-                                                               packageFeed: new NuGetFeed(feed.Name, feed.Feed)
-                                                               {
-                                                                   Username = feed.Username,
-                                                                   Password = feed.Password
-                                                               },
-                                                               packagesFolder: Path.Combine(path, feed.Name, item.Id, item.Version.ToString()),
-                                                               configureFinder: finder => finder.Implements<ModuleBase>(),
-                                                               options: new NugetPluginCatalogOptions()
-                                                               {
-                                                                   IncludeSystemFeedsAsSecondary = true
-                                                               });
+    //    foreach (var item in packagesOptions.Packages.Where(a => a.IsNuGetPackage))
+    //    {
+    //        var feed = packagesOptions.Sources.FirstOrDefault(a => a.Packages.Contains(item.Id));
+    //        if (feed != null)
+    //        {
+    //            using (logger.LogTimeOperation(LogLevel.Information,
+    //                                           false,
+    //                                           "Add Plugin from NuGet {name} {version}",
+    //                                           item.Id,
+    //                                           item.Version.ToString()))
+    //            {
+    //                var plugin = new NugetPackagePluginCatalog(item.Id,
+    //                                                           packageVersion: item.Version.ToString(),
+    //                                                           includePrerelease: true,
+    //                                                           packageFeed: new NuGetFeed(feed.Name, feed.Feed)
+    //                                                           {
+    //                                                               Username = feed.Username,
+    //                                                               Password = feed.Password
+    //                                                           },
+    //                                                           packagesFolder: Path.Combine(path, feed.Name, item.Id, item.Version.ToString()),
+    //                                                           configureFinder: finder => finder.Implements<ModuleBase>(),
+    //                                                           options: new NugetPluginCatalogOptions()
+    //                                                           {
+    //                                                               IncludeSystemFeedsAsSecondary = true
+    //                                                           });
 
-                    try
-                    {
-                        await plugin.Initialize();
-                        plugins.AddRange(plugin.GetPlugins());
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.LogError(ex, ex.Message);
-                    }
-                }
-            }
-        }
+    //                try
+    //                {
+    //                    await plugin.Initialize();
+    //                    plugins.AddRange(plugin.GetPlugins());
+    //                }
+    //                catch (Exception ex)
+    //                {
+    //                    logger.LogError(ex, ex.Message);
+    //                }
+    //            }
+    //        }
+    //    }
 
-        return plugins;
-    }
+    //    return plugins;
+    //}
 
     private static async Task<List<Plugin>> LoadPluginFolderAsync(ILogger logger, string folder, bool includeSubfolders)
     {

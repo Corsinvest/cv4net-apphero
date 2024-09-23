@@ -4,11 +4,13 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<OutputType>Library</OutputType>
+		<AssemblyVersion>0.24.0923.1423</AssemblyVersion>
+		<FileVersion>0.24.0923.1423</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
-		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.1" />
 		<PackageReference Include="Serilog.Enrichers.Context" Version="4.6.5" />
 	</ItemGroup>
 
